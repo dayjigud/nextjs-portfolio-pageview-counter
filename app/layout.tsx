@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     default: "ayodeji.xyz",
     template: "%s | ayodeji.xyz",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description: "Co-founder of Brightyield Golden Resources",
   openGraph: {
-    title: "chronark.com",
+    title: "ayodeji.xyz",
     description:
-      "Co-founder of unkey.dev and founder of planetfall.io",
+      "Co-founder of Brightyield Golden Resources",
     url: "https://ayodeji.xyz",
     siteName: "ayodeji.xyz",
     images: [
