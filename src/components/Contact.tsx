@@ -26,9 +26,9 @@ const Contact = () => {
         
         <div className="flex justify-center gap-8">
           {[
-            { icon: Mail, href: "#" },
-            { icon: Github, href: "#" },
-            { icon: Linkedin, href: "#" }
+            { icon: Mail, href: "mailto:ayodeji@ayodeji.xyz" },
+            { icon: Github, href: "https://github.com/dayjigud" },
+            { icon: Linkedin, href: "https://linkedin.com/in/dayjigud" },
           ].map((item, index) => (
             <motion.a 
               key={index}
