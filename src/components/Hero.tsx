@@ -28,7 +28,7 @@ const Hero = () => {
             <div 
               className="w-full h-full rounded-full bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: "url('https://imgur/a/ieu1DUr')" // Replace with your actual portrait URL
+                backgroundImage: "url('https://imgur.com/z5dzRlj.jpg')" // Replace with your actual portrait URL
               }}
             />
           </motion.div>
