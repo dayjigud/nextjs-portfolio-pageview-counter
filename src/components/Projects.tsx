@@ -7,7 +7,7 @@ const projects = [
     href: "https://aimagine.lovable.app/",
     tags: ["AI", "React", "Hugging Face", "Next.js"],
     color: "from-purple-500 to-pink-500",
-    image: "src/assets/Gemini_Generated_Image_e9r0jue9r0jue9r0 (1).jpeg"
+    image: "src/images/image1.jpeg"
   },
   {
     title: "Cloud Dashboard",
