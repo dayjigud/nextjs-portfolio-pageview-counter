@@ -2,10 +2,12 @@ import { motion } from 'framer-motion'
 
 const projects = [
   {
-    title: "E-Commerce Redesign",
-    description: "Complete redesign of an e-commerce platform with cloud-native architecture",
-    tags: ["UI/UX", "AWS", "React"],
-    color: "from-purple-500 to-pink-500"
+    title: 'Aimagine',
+    description: 'AI Image generator using hugginface API',
+    href: "https://aimagine.lovable.app/",
+    tags: ["AI", "React", "Hugging Face", "Next.js"],
+    color: "from-purple-500 to-pink-500",
+    image: "src/assets/Gemini_Generated_Image_e9r0jue9r0jue9r0.jpeg"
   },
   {
     title: "Cloud Dashboard",
@@ -37,36 +39,44 @@ const Projects = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
-            >
+            <a href={project.href} key={index} target="_blank" rel="noopener noreferrer"> 
               <motion.div 
-                className={`h-48 bg-gradient-to-r ${project.color}`}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIndex) => (
-                    <motion.span 
-                      key={tagIndex}
-                      whileHover={{ scale: 1.05 }}
-                      className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+              >
+                <motion.div 
+                  style={{
+                    backgroundImage: project.image ? `url(${project.image})` : `linear-gradient(to right, ${project.color})`,
+                    backgroundSize: 'cover',
+                    height: '12rem' // Equivalent to h-48
+                  }}
+                  className={`
+                    ${project.image ? '' : `bg-gradient-to-r ${project.color}`}
+                  `}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags?.map((tag, tagIndex) => (
+                      <motion.span 
+                        key={tagIndex}
+                        whileHover={{ scale: 1.05 }}
+                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </a>
           ))}
         </div>
       </div>
