@@ -7,7 +7,7 @@ const projects = [
     href: "https://aimagine.lovable.app/",
     tags: ["AI", "React", "Hugging Face", "Next.js"],
     color: "from-purple-500 to-pink-500",
-    image: "src/images/image1.jpeg"
+    image: "/images/image1.jpeg"
   },
   {
     title: "Cloud Dashboard",
@@ -46,20 +46,14 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 relative"
               >
-                <motion.div 
-                  style={{
-                    backgroundImage: project.image ? `url(${project.image})` : `linear-gradient(to right, ${project.color})`,
-                    backgroundSize: 'cover',
-                    height: '12rem' // Equivalent to h-48
-                  }}
-                  className={`
-                    ${project.image ? '' : `bg-gradient-to-r ${project.color}`}
-                  `}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                />
+                {project.image && (
+                  <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+                )}
+                {!project.image && (
+                  <div className={`w-full h-48 bg-gradient-to-r ${project.color}`} />
+                )}
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                   <p className="text-gray-600 mb-4">{project.description}</p>
