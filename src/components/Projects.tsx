@@ -4,7 +4,7 @@ const projects = [
   {
     title: 'Aimagine',
     description: 'AI Image generator using hugginface API',
-    href: "https://aimagine.lovable.app/",
+    href: "https://aimagine-eta.vercel.app/",
     tags: ["AI", "React", "Hugging Face", "Next.js"],
     color: "from-purple-500 to-pink-500",
     image: "/images/image1.jpeg"
