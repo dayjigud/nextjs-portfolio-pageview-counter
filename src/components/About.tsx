@@ -3,10 +3,24 @@ import { motion } from 'framer-motion'
 
 const About = () => {
   return (
-    <div className="py-20 bg-white">
+    <div className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
-        <motion.h2 
-          className="text-4xl font-bold text-center mb-16 text-gray-800"
+        <motion.h2
+          className="text-4xl font-bold text-center mb-8 text-gray-800"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Who I am
+        </motion.h2>
+        <motion.p
+          className="text-gray-700 text-center mb-16 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -14,7 +28,23 @@ const About = () => {
         >
           About Me
         </motion.h2>
-        
+        <motion.p
+          className="text-gray-700 text-center mb-16 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Hey there! I'm a passionate individual with a diverse background, bridging the worlds of engineering and finance with a strong tech focus. My journey began in the field of Mechanical Engineering with ShellNG, where I honed my analytical and problem-solving skills. Branching out, I founded "Brightyield," a finance firm where I gained first-hand experience in the financial world. On the technical front, I have expertise in Software Engineering, encompassing Frontend and Backend Development. My interest doesn't stop there, as I'm also deeply involved in the cutting-edge fields of AI Engineering and Cybersecurity. I believe in blending technical prowess with strategic thinking to build innovative solutions.
+        </motion.p>
+        <motion.h2
+          className="text-4xl font-bold text-center mb-16 text-gray-800"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Skills
         <div className="grid md:grid-cols-2 gap-12">
           <motion.div 
             className="space-y-6"
