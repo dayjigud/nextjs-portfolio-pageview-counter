@@ -12,32 +12,32 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Who I am
+          About Me
         </motion.h2>
-        <motion.p
-          className="text-gray-700 text-center mb-16 leading-relaxed"
+        <motion.div
+          className="text-gray-700 text-center mb-8 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          
-        </motion.p> 
-        <motion.div
+            <p>
+            As a product manager with a unique background in Mechanical Engineering and Finance, I bridge the gap between technical innovation and strategic business growth. My journey, starting at ShellNG and expanding into founding "Brightyield," has equipped me with a diverse skill set that spans from hands-on engineering to navigating the complexities of financial markets. I'm passionate about leveraging my experience in Software Engineering, AI Engineering, and Cybersecurity to drive product development.
+            </p>
+            </motion.div>
+            <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }} 
           viewport={{ once: true }} 
           transition={{ duration: 0.5 }}>
-        <motion.p className="text-gray-700 text-center mb-16 leading-relaxed">
-          Hey there! I'm a passionate individual with a diverse background, bridging the worlds of engineering and finance with a strong tech focus. My journey began in the field of Mechanical Engineering with ShellNG, where I honed my analytical and problem-solving skills. Branching out, I founded "Brightyield," a finance firm where I gained first-hand experience in the financial world. On the technical front, I have expertise in Software Engineering, encompassing Frontend and Backend Development. My interest doesn't stop there, as I'm also deeply involved in the cutting-edge fields of AI Engineering and Cybersecurity. I believe in blending technical prowess with strategic thinking to build innovative solutions.
-        </motion.p>
+
         <motion.h2
           className="text-4xl font-bold text-center mb-16 text-gray-800"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-        >
+        > 
           
           Skills
           </motion.h2>
@@ -61,9 +61,11 @@ const About = () => {
             </h3>
             <ul className="space-y-3 text-gray-700">
               <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Product Strategy</motion.li>
-              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• User Research</motion.li>
-              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Roadmap Planning</motion.li>
-              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Agile Development</motion.li>
+              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• User Research </motion.li>
+              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Roadmap Planning </motion.li>
+              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Agile Development </motion.li>
+              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Data Analysis </motion.li>
+              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Stakeholder Management </motion.li>
             </ul>
           </motion.div>
 
