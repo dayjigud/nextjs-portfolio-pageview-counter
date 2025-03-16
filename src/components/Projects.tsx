@@ -2,27 +2,20 @@ import { motion } from 'framer-motion'
 
 const projects = [
   {
-    title: 'Aimagine',
-    description: 'AI Image generator using hugginface API',
-    href: "https://aimagine-eta.vercel.app/",
-    tags: ["AI", "React", "Hugging Face", "Next.js"],
-    color: "from-purple-500 to-pink-500",
-    image: "/images/image1.jpeg"
+    title: 'HealthTrackNG',
+    description: 'A health app aimed at helping users manage and improve their health, with features like tracking vital signs, fitness goals, and nutritional intake.',
+    href: "https://healthtrackng.com",
+    tags: ["Product Management", "HealthTech", "Mobile App", "Data Analysis"],
+    color: "from-green-500 to-teal-500",
   },
   {
-    title: "Cloud Dashboard",
-    description: "Monitoring dashboard for cloud resources with real-time updates",
-    tags: ["Design System", "Cloud", "Analytics"],
-    color: "from-blue-500 to-cyan-500"
-  },
-  {
-    title: "Mobile App Design",
-    description: "User-centric mobile application with serverless backend",
-    tags: ["Mobile", "Lambda", "UI Design"],
-    color: "from-green-500 to-teal-500"
+    title: 'TechiesMatch',
+    description: 'A dating app designed specifically for individuals in the tech industry, aiming to connect users based on shared interests in technology and career paths.',
+    href: "https://techie.love",
+    tags: ["Product Strategy", "Social Networking", "Mobile App", "User Engagement"],
+    color: "from-blue-500 to-cyan-500",
   }
 ]
-
 const Projects = () => {
   return (
     <div className="py-20 bg-gray-50">
