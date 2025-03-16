@@ -1,6 +1,7 @@
 import { Target, Server } from 'lucide-react'
 import { motion } from 'framer-motion'
 
+import { BarChart, PieChart, LineChart } from './charts'
 const About = () => {
   return (
     <div className="py-20 bg-gray-50">
@@ -59,6 +60,26 @@ const About = () => {
           Market Research
           </motion.h2>
            <div className='mb-16'>
+              {/* Simulated Charts */}
+              <div className="grid md:grid-cols-3 gap-8 mb-8">
+                {/* Bar Chart for User Preference */}
+                <div className="bg-white p-4 rounded-lg shadow">
+                  <h4 className="font-semibold mb-2">User Preference</h4>
+                  <BarChart />
+                </div>
+                {/* Pie Chart for Market Opportunities */}
+                <div className="bg-white p-4 rounded-lg shadow">
+                  <h4 className="font-semibold mb-2">Market Opportunities</h4>
+                  <PieChart />
+                </div>
+                {/* Line Graph for Demand Trends */}
+                <div className="bg-white p-4 rounded-lg shadow">
+                  <h4 className="font-semibold mb-2">Demand Trends</h4>
+                  <LineChart />
+                </div>
+              </div>
+
+
               <ul className='text-gray-700'>
                 <li>- Demand Trends: The market is showing increasing demand for AI-driven product solutions.</li>
                 <li>- User Preferences: Users are prioritizing user-friendly interfaces and personalized experiences.</li>
