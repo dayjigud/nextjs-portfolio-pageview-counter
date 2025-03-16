@@ -42,6 +42,32 @@ const About = () => {
           Skills
           </motion.h2>
         </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true }} 
+          transition={{ duration: 0.5 }}>
+
+        <motion.h2
+          className="text-4xl font-bold text-center mb-8 text-gray-800"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        > 
+          
+          Market Research
+          </motion.h2>
+           <div className='mb-16'>
+              <ul className='text-gray-700'>
+                <li>- Demand Trends: The market is showing increasing demand for AI-driven product solutions.</li>
+                <li>- User Preferences: Users are prioritizing user-friendly interfaces and personalized experiences.</li>
+                <li>- Competitive Analysis: Competitors are focusing on cloud-based solutions and data analytics.</li>
+                <li>- Emerging Technologies: There's a rising interest in blockchain integration for security and transparency.</li>
+                <li>- Market Opportunities: Significant opportunities exist in the fintech and healthcare sectors for innovative AI applications.</li>
+              </ul>
+            </div>
+        </motion.div>
         <div className="grid md:grid-cols-2 gap-12">
           <motion.div
             className="space-y-6"
