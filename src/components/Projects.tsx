@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 interface Project {
   title: string;
   description: string;
-  href: string;
+  href?: string;
   tags: string[];
   color: string;
   image?: string; 
@@ -12,7 +12,6 @@ interface Project {
 const projects: Project[] = [{
   title: 'HealthTrackNG',
   description: 'A health app aimed at helping users manage and improve their health, with features like tracking vital signs, fitness goals, and nutritional intake.',
-  href: "https://healthtrackng.com",
   tags: ["Product Management", "HealthTech", "Mobile App", "Data Analysis"],
   color: "from-green-500 to-teal-500",
   image: "/images/HealthTrack Logo.png",
@@ -42,7 +41,7 @@ const Projects = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <a href={project.href} key={index} target="_blank" rel="noopener noreferrer"> 
+            <div key={index}> 
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +72,11 @@ const Projects = () => {
                   </div>
                 </div>
               </motion.div>
-            </a>
+               {project.href && (
+              <a href={project.href} target="_blank" rel="noopener noreferrer"> 
+              </a>
+              )}
+            </div>
           ))}
         </div>
       </div>
