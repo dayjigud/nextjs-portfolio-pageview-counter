@@ -41,42 +41,48 @@ const Projects = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <div key={index}> 
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 relative"
-              >
-                {project.image && (
-                  <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
-                )}
-                {!project.image && (
-                  <div className={`w-full h-48 bg-gradient-to-r ${project.color}`} />
-                )}
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags?.map((tag, tagIndex) => (
-                      <motion.span 
-                        key={tagIndex}
-                        whileHover={{ scale: 1.05 }}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-               {project.href && (
-              <a href={project.href} target="_blank" rel="noopener noreferrer"> 
-              </a>
+            <div key={index}>
+              {project.href ? (
+                <a href={project.href} target="_blank" rel="noopener noreferrer">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ y: -10 }}
+                    className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 relative"
+                  >
+                    {project.image && (
+                      <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+                    )}
+                    {!project.image && (
+                      <div className={`w-full h-48 bg-gradient-to-r ${project.color}`} />
+                    )}
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                      <p className="text-gray-600 mb-4">{project.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags?.map((tag, tagIndex) => (
+                          <motion.span
+                            key={tagIndex}
+                            whileHover={{ scale: 1.05 }}
+                            className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                          >
+                            {tag}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </a>
+              ) : (
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }} whileHover={{ y: -10 }} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 relative">
+                  {project.image && <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />}
+                  {!project.image && <div className={`w-full h-48 bg-gradient-to-r ${project.color}`} />}
+                  <div className="p-6"> <h3 className="text-xl font-semibold mb-2">{project.title}</h3> <p className="text-gray-600 mb-4">{project.description}</p> <div className="flex flex-wrap gap-2"> {project.tags?.map((tag, tagIndex) => <motion.span key={tagIndex} whileHover={{ scale: 1.05 }} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"> {tag} </motion.span>)} </div> </div>
+                </motion.div>
               )}
-            </div>
+                  </div>
           ))}
         </div>
       </div>
