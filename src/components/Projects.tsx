@@ -1,7 +1,14 @@
 import { motion } from 'framer-motion'
 
-const projects = [
-  {
+interface Project {
+  title: string;
+  description: string;
+  href: string;
+  tags: string[];
+  color: string;
+  image?: string; 
+}
+const projects: Project[] = [{
     title: 'HealthTrackNG',
     description: 'A health app aimed at helping users manage and improve their health, with features like tracking vital signs, fitness goals, and nutritional intake.',
     href: "https://healthtrackng.com",
@@ -14,7 +21,7 @@ const projects = [
     href: "https://techie.love",
     tags: ["Product Strategy", "Social Networking", "Mobile App", "User Engagement"],
     color: "from-blue-500 to-cyan-500",
-  }
+  },
 ]
 const Projects = () => {
   return (
