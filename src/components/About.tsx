@@ -24,10 +24,10 @@ const About = () => {
           About Me
         </motion.p>
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true }} 
+          transition={{ duration: 0.5 }}>
+        <motion.p className="text-gray-700 text-center mb-16 leading-relaxed">
           Hey there! I'm a passionate individual with a diverse background, bridging the worlds of engineering and finance with a strong tech focus. My journey began in the field of Mechanical Engineering with ShellNG, where I honed my analytical and problem-solving skills. Branching out, I founded "Brightyield," a finance firm where I gained first-hand experience in the financial world. On the technical front, I have expertise in Software Engineering, encompassing Frontend and Backend Development. My interest doesn't stop there, as I'm also deeply involved in the cutting-edge fields of AI Engineering and Cybersecurity. I believe in blending technical prowess with strategic thinking to build innovative solutions.
         </motion.p>
         <motion.h2
@@ -39,8 +39,9 @@ const About = () => {
         >
           
           Skills
+          </motion.h2>
         <div className="grid md:grid-cols-2 gap-12">
-          <motion.div 
+          <motion.div
             className="space-y-6"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -63,8 +64,8 @@ const About = () => {
               <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Agile Development</motion.li>
             </ul>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="space-y-6"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -87,13 +88,10 @@ const About = () => {
               <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Infrastructure as Code</motion.li>
             </ul>
           </motion.div>
+          </div>
         </div>
-        </motion.h2>
-      </div>
     </div>
   )
 }
 
 
-
-export default About
