@@ -65,11 +65,20 @@ const About = () => {
                   <h4 className="font-semibold mb-2">User Preferences</h4>
                   <div className="bg-gray-100 h-32 relative overflow-hidden">
                     {/* Simulate Bar Chart with simple divs */}
-                    <div className="absolute bottom-0 left-0 bg-blue-500" style={{ width: '80%', height: '80%' }}></div>
-                    <div className="absolute bottom-0 left-1/4 bg-blue-400" style={{ width: '20%', height: '60%' }}></div>
-                    <div className="absolute bottom-0 left-1/2 bg-blue-300" style={{ width: '20%', height: '50%' }}></div>
-                    <div className="absolute bottom-0 left-3/4 bg-blue-200" style={{ width: '20%', height: '40%' }}></div>
-                    <div className="absolute bottom-0 left-full bg-blue-100" style={{ width: '20%', height: '20%' }}></div>
+                    <div className="absolute bottom-0 left-0 bg-blue-500" style={{ width: '15%', height: '80%' }}>
+                      <span className="absolute -top-6 left-0 text-xs text-gray-700">UI/UX Design</span>
+                    </div>
+                    <div className="absolute bottom-0 left-[16%] bg-blue-400" style={{ width: '15%', height: '70%' }}>
+                      <span className="absolute -top-6 left-0 text-xs text-gray-700">Ease of use</span>
+                    </div>
+                    <div className="absolute bottom-0 left-[32%] bg-blue-300" style={{ width: '15%', height: '60%' }}>
+                      <span className="absolute -top-6 left-0 text-xs text-gray-700">Feature Richness</span>
+                    </div>
+                    <div className="absolute bottom-0 left-[48%] bg-blue-200" style={{ width: '15%', height: '50%' }}>
+                       <span className="absolute -top-6 left-0 text-xs text-gray-700">Performance</span>
+                    </div>
+                    <div className="absolute bottom-0 left-[64%] bg-blue-100" style={{ width: '15%', height: '40%' }}> <span className="absolute -top-6 left-0 text-xs text-gray-700">Price</span></div>
+                    
                   </div>
                 </div>
                 {/* Pie Chart for Market Opportunities */}
@@ -77,7 +86,9 @@ const About = () => {
                   <h4 className="font-semibold mb-2">Market Opportunities</h4>
                    <div className="bg-gray-100 h-32 w-32 rounded-full mx-auto relative">
                       {/* Simulate Pie Chart */}
-                      <div className="absolute top-0 left-0 w-full h-full rounded-full" style={{ background: 'conic-gradient(blue 0% 30%, gray 30% 100%)' }}></div>
+                      <div className="absolute top-0 left-0 w-full h-full rounded-full" style={{ background: 'conic-gradient(#007bff 0% 40%, #6610f2 40% 70%, #dc3545 70% 90%, #fd7e14 90% 100%)' }}></div>
+                      <div className="absolute -top-6 left-[25%] text-xs text-gray-700">Fintech </div>
+                      <div className="absolute top-[40%] left-[4%] text-xs text-gray-700">Healthcare</div>
                     </div>
 
                 </div>
@@ -85,13 +96,15 @@ const About = () => {
                 <div className="bg-white p-4 rounded-lg shadow">
                   <h4 className="font-semibold mb-2">Demand Trends</h4>
                    <div className="bg-gray-100 h-32 relative overflow-hidden">
-                    {/* Simulate Line Chart with simple divs and positioning */}
-                    <div className="absolute bottom-1/4 left-0 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 1 */}
-                    <div className="absolute bottom-1/2 left-1/4 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 2 */}
-                    <div className="absolute top-1/4 left-1/2 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 3 */}
-                    <div className="absolute top-1/2 left-3/4 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 4 */}
-                    <div className="absolute bottom-0 left-full w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 5 */}
-                    <div className="absolute bottom-1/4 left-0 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(30deg)' }}></div> {/* Line 1-2 */}
+                    {/* Simulate Line Chart with more points */}
+                    <div className="absolute bottom-[25%] left-0 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 1 */}
+                    <div className="absolute bottom-[50%] left-[20%] w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 2 */}
+                    <div className="absolute bottom-[75%] left-[40%] w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 3 */}
+                    <div className="absolute bottom-[95%] left-[60%] w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 4 */}
+                    <div className="absolute bottom-[75%] left-[80%] w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 5 */}
+                    <div className="absolute bottom-[25%] left-full w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 6 */}
+                    <div className="absolute bottom-[25%] left-0 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(30deg)' }}></div>
+                     {/* Line 1-2 */}
                     <div className="absolute bottom-1/2 left-1/4 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(-60deg)' }}></div> {/* Line 2-3 */}
                     <div className="absolute top-1/4 left-1/2 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(-30deg)' }}></div> {/* Line 3-4 */}
                     <div className="absolute top-1/2 left-3/4 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(15deg)' }}></div> {/* Line 4-5 */}
