@@ -8,13 +8,15 @@ interface Project {
   color: string;
   image?: string; 
 }
+
 const projects: Project[] = [{
-    title: 'HealthTrackNG',
-    description: 'A health app aimed at helping users manage and improve their health, with features like tracking vital signs, fitness goals, and nutritional intake.',
-    href: "https://healthtrackng.com",
-    tags: ["Product Management", "HealthTech", "Mobile App", "Data Analysis"],
-    color: "from-green-500 to-teal-500",
-  },
+  title: 'HealthTrackNG',
+  description: 'A health app aimed at helping users manage and improve their health, with features like tracking vital signs, fitness goals, and nutritional intake.',
+  href: "https://healthtrackng.com",
+  tags: ["Product Management", "HealthTech", "Mobile App", "Data Analysis"],
+  color: "from-green-500 to-teal-500",
+  image: "/images/HealthTrack Logo.png",
+},
   {
     title: 'TechiesMatch',
     description: 'A dating app designed specifically for individuals in the tech industry, aiming to connect users based on shared interests in technology and career paths.',
