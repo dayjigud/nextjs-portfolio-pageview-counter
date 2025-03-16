@@ -59,36 +59,77 @@ const About = () => {
           </motion.h2>
            <div className='mb-16'>
               {/* Simulated Charts */}
-              <div className="grid md:grid-cols-3 gap-8 mb-8">
+              <div className="grid md:grid-cols-3 gap-16 mb-8">
                 {/* Bar Chart for User Preference */}
                 <div className="bg-white p-4 rounded-lg shadow">
-                  <h4 className="font-semibold mb-2">User Preferences</h4>
-                  <div className="bg-gray-100 h-32 relative overflow-hidden">
+                  <h4 className="font-semibold mb-4 text-center">User Preferences</h4>
+                  <div className="bg-gray-100 h-64 relative overflow-hidden">
+                     {/* Horizontal grid lines */}
+                     <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gray-300"></div>
+                    <div className="absolute top-[40%] left-0 w-full h-[1px] bg-gray-300"></div>
+                    <div className="absolute top-[60%] left-0 w-full h-[1px] bg-gray-300"></div>
+                    <div className="absolute top-[80%] left-0 w-full h-[1px] bg-gray-300"></div>
+                    <div className="absolute top-[100%] left-0 w-full h-[1px] bg-gray-300"></div>
                     {/* Simulate Bar Chart with simple divs */}
-                    <div className="absolute bottom-0 left-0 bg-blue-500" style={{ width: '15%', height: '80%' }}>
-                      <span className="absolute -top-6 left-0 text-xs text-gray-700">UI/UX Design</span>
+                    {/* UI/UX Design */}
+                    <div className="absolute bottom-0 left-[5%] bg-blue-500 w-[12%] h-[80%] flex flex-col justify-end items-center">
+                      <span className="text-white text-xs absolute top-[-20px]">80%</span>
                     </div>
-                    <div className="absolute bottom-0 left-[16%] bg-blue-400" style={{ width: '15%', height: '70%' }}>
-                      <span className="absolute -top-6 left-0 text-xs text-gray-700">Ease of use</span>
+                    <div className="absolute bottom-[-25px] left-[5%] w-[12%] text-center text-gray-700">UI/UX</div>
+                    {/* Ease of use */}
+                    <div className="absolute bottom-0 left-[22%] bg-blue-400 w-[12%] h-[70%] flex flex-col justify-end items-center">
+                    <span className="text-white text-xs absolute top-[-20px]">70%</span>
                     </div>
-                    <div className="absolute bottom-0 left-[32%] bg-blue-300" style={{ width: '15%', height: '60%' }}>
-                      <span className="absolute -top-6 left-0 text-xs text-gray-700">Feature Richness</span>
+                    <div className="absolute bottom-[-25px] left-[22%] w-[12%] text-center text-gray-700">Ease of use</div>
+                    {/* Feature Richness */}
+                    <div className="absolute bottom-0 left-[39%] bg-blue-300 w-[12%] h-[60%] flex flex-col justify-end items-center">
+                    <span className="text-white text-xs absolute top-[-20px]">60%</span>
                     </div>
-                    <div className="absolute bottom-0 left-[48%] bg-blue-200" style={{ width: '15%', height: '50%' }}>
-                       <span className="absolute -top-6 left-0 text-xs text-gray-700">Performance</span>
+                    <div className="absolute bottom-[-25px] left-[39%] w-[12%] text-center text-gray-700">Features</div>
+                    {/* Performance */}
+                    <div className="absolute bottom-0 left-[56%] bg-blue-200 w-[12%] h-[50%] flex flex-col justify-end items-center">
+                    <span className="text-white text-xs absolute top-[-20px]">50%</span>
                     </div>
-                    <div className="absolute bottom-0 left-[64%] bg-blue-100" style={{ width: '15%', height: '40%' }}> <span className="absolute -top-6 left-0 text-xs text-gray-700">Price</span></div>
+                    <div className="absolute bottom-[-25px] left-[56%] w-[12%] text-center text-gray-700">Performance</div>
+                    {/* Price */}
+                    <div className="absolute bottom-0 left-[73%] bg-blue-100 w-[12%] h-[40%] flex flex-col justify-end items-center">
+                    <span className="text-gray-700 text-xs absolute top-[-20px]">40%</span>
+                    </div>
+                    <div className="absolute bottom-[-25px] left-[73%] w-[12%] text-center text-gray-700">Price</div>
                     
                   </div>
                 </div>
                 {/* Pie Chart for Market Opportunities */}
                 <div className="bg-white p-4 rounded-lg shadow">
-                  <h4 className="font-semibold mb-2">Market Opportunities</h4>
-                   <div className="bg-gray-100 h-32 w-32 rounded-full mx-auto relative">
+                  <h4 className="font-semibold mb-4 text-center">Market Opportunities</h4>
+                   <div className="bg-gray-100 h-52 w-52 rounded-full mx-auto relative">
                       {/* Simulate Pie Chart */}
-                      <div className="absolute top-0 left-0 w-full h-full rounded-full" style={{ background: 'conic-gradient(#007bff 0% 40%, #6610f2 40% 70%, #dc3545 70% 90%, #fd7e14 90% 100%)' }}></div>
-                      <div className="absolute -top-6 left-[25%] text-xs text-gray-700">Fintech </div>
-                      <div className="absolute top-[40%] left-[4%] text-xs text-gray-700">Healthcare</div>
+                      <div className="absolute top-0 left-0 w-full h-full rounded-full" style={{ background: 'conic-gradient(#007bff 0% 40%, #6610f2 40% 70%, #dc3545 70% 90%, #fd7e14 90% 100%)' }}>
+                      </div>
+                        <div className="absolute top-[10%] right-[10%] w-[100px] text-center text-xs text-gray-700">
+                        <div className="flex items-center justify-center">
+                          <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                          Fintech 40%
+                        </div>
+                      </div>
+                      <div className="absolute bottom-[10%] left-[5%] w-[100px] text-center text-xs text-gray-700">
+                        <div className="flex items-center justify-center">
+                          <div className="w-3 h-3 rounded-full bg-purple-700 mr-2"></div>
+                          Healthcare 30%
+                        </div>
+                      </div>
+                      <div className="absolute top-[40%] left-[-20%] w-[100px] text-center text-xs text-gray-700">
+                        <div className="flex items-center justify-center">
+                        <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                          EdTech 20%
+                        </div>
+                      </div>
+                      <div className="absolute bottom-[15%] right-[-10%] w-[100px] text-center text-xs text-gray-700">
+                        <div className="flex items-center justify-center">
+                          <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                           Others 10%
+                        </div>
+                      </div>
                     </div>
 
                 </div>
@@ -96,18 +137,30 @@ const About = () => {
                 <div className="bg-white p-4 rounded-lg shadow">
                   <h4 className="font-semibold mb-2">Demand Trends</h4>
                    <div className="bg-gray-100 h-32 relative overflow-hidden">
-                    {/* Simulate Line Chart with more points */}
-                    <div className="absolute bottom-[25%] left-0 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 1 */}
-                    <div className="absolute bottom-[50%] left-[20%] w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 2 */}
-                    <div className="absolute bottom-[75%] left-[40%] w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 3 */}
-                    <div className="absolute bottom-[95%] left-[60%] w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 4 */}
-                    <div className="absolute bottom-[75%] left-[80%] w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 5 */}
-                    <div className="absolute bottom-[25%] left-full w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 6 */}
-                    <div className="absolute bottom-[25%] left-0 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(30deg)' }}></div>
-                     {/* Line 1-2 */}
-                    <div className="absolute bottom-1/2 left-1/4 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(-60deg)' }}></div> {/* Line 2-3 */}
-                    <div className="absolute top-1/4 left-1/2 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(-30deg)' }}></div> {/* Line 3-4 */}
-                    <div className="absolute top-1/2 left-3/4 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(15deg)' }}></div> {/* Line 4-5 */}
+                       {/* Grid lines */}
+                     <div className="absolute top-1/4 left-0 w-full h-[1px] bg-gray-300"></div>
+                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-300"></div>
+                    <div className="absolute top-3/4 left-0 w-full h-[1px] bg-gray-300"></div>
+                    <div className="absolute top-0 left-[20%] h-full w-[1px] bg-gray-300"></div>
+                    <div className="absolute top-0 left-[40%] h-full w-[1px] bg-gray-300"></div>
+                    <div className="absolute top-0 left-[60%] h-full w-[1px] bg-gray-300"></div>
+                    <div className="absolute top-0 left-[80%] h-full w-[1px] bg-gray-300"></div>
+                    <div className="absolute top-0 left-[100%] h-full w-[1px] bg-gray-300"></div>
+                    {/* Simulate Line Chart with more points - red-500 */}
+                    <div className="absolute bottom-[25%] left-0 w-2 h-2 bg-green-500 rounded-full"></div> {/* Point 1 */}
+                    <div className="absolute bottom-[50%] left-[10%] w-2 h-2 bg-green-500 rounded-full"></div> {/* Point 2 */}
+                    <div className="absolute bottom-[75%] left-[20%] w-2 h-2 bg-green-500 rounded-full"></div> {/* Point 3 */}
+                    <div className="absolute bottom-[95%] left-[40%] w-2 h-2 bg-green-500 rounded-full"></div> {/* Point 4 */}
+                    <div className="absolute bottom-[75%] left-[60%] w-2 h-2 bg-green-500 rounded-full"></div> {/* Point 5 */}
+                    <div className="absolute bottom-[50%] left-[80%] w-2 h-2 bg-green-500 rounded-full"></div> {/* Point 6 */}
+                    <div className="absolute bottom-[30%] left-[100%] w-2 h-2 bg-green-500 rounded-full"></div> {/* Point 7 */}
+                    {/* Connecting lines */}
+                    <div className="absolute bottom-[25%] left-0 w-[10%] h-0.5 bg-green-300 transform origin-left" style={{ transform: 'rotate(-45deg)' }}></div>{/* Line 1-2 */}
+                    <div className="absolute bottom-[50%] left-[10%] w-[10%] h-0.5 bg-green-300 transform origin-left" style={{ transform: 'rotate(-45deg)' }}></div> {/* Line 2-3 */}
+                    <div className="absolute bottom-[75%] left-[20%] w-[20%] h-0.5 bg-green-300 transform origin-left" style={{ transform: 'rotate(-30deg)' }}></div> {/* Line 3-4 */}
+                    <div className="absolute top-[5%] left-[40%] w-[20%] h-0.5 bg-green-300 transform origin-left" style={{ transform: 'rotate(30deg)' }}></div>{/* Line 4-5 */}
+                    <div className="absolute bottom-[75%] left-[60%] w-[20%] h-0.5 bg-green-300 transform origin-left" style={{ transform: 'rotate(30deg)' }}></div> {/* Line 5-6 */}
+                    <div className="absolute bottom-[50%] left-[80%] w-[20%] h-0.5 bg-green-300 transform origin-left" style={{ transform: 'rotate(15deg)' }}></div> {/* Line 6-7 */}
                   </div>
                 </div>
               </div>
