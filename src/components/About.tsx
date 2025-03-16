@@ -89,7 +89,7 @@ const About = () => {
               <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Product Strategy</motion.li>
               <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• User Research </motion.li>
               <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Roadmap Planning </motion.li>
-              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Agile Development </motion.li>
+              <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Agile Project Management </motion.li>
               <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Data Analysis </motion.li>
               <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Stakeholder Management </motion.li>
             </ul>
