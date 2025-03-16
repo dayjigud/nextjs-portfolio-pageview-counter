@@ -21,15 +21,8 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
           About Me
-        </motion.h2>
-        <motion.p
-          className="text-gray-700 text-center mb-16 leading-relaxed"
+        </motion.p>
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -44,6 +37,7 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
+          
           Skills
         <div className="grid md:grid-cols-2 gap-12">
           <motion.div 
@@ -94,9 +88,12 @@ const About = () => {
             </ul>
           </motion.div>
         </div>
+        </motion.h2>
       </div>
     </div>
   )
 }
+
+
 
 export default About
