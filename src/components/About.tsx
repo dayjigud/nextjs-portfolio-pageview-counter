@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 const About = () => {
   return (
-    <div className="py-20 bg-gray-50">
+    <div className="py-20 bg-gray-50 px-4">
         <motion.h2
           className="text-4xl font-bold text-center mb-8 text-gray-800"
           initial={{ opacity: 0, y: 20 }}
@@ -57,7 +57,7 @@ const About = () => {
           
           Market Research
           </motion.h2>
-           <div className='mb-16 px-4'>
+           <div className='mb-16'>
               {/* Simulated Charts */}
               <div className="grid md:grid-cols-3 gap-16 mb-8">
                 {/* Bar Chart for User Preference */}
