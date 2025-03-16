@@ -1,11 +1,9 @@
 import { Target, Server } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-import { BarChart, PieChart, LineChart } from './charts'
 const About = () => {
   return (
     <div className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4">
         <motion.h2
           className="text-4xl font-bold text-center mb-8 text-gray-800"
           initial={{ opacity: 0, y: 20 }}
@@ -64,18 +62,40 @@ const About = () => {
               <div className="grid md:grid-cols-3 gap-8 mb-8">
                 {/* Bar Chart for User Preference */}
                 <div className="bg-white p-4 rounded-lg shadow">
-                  <h4 className="font-semibold mb-2">User Preference</h4>
-                  <BarChart />
+                  <h4 className="font-semibold mb-2">User Preferences</h4>
+                  <div className="bg-gray-100 h-32 relative overflow-hidden">
+                    {/* Simulate Bar Chart with simple divs */}
+                    <div className="absolute bottom-0 left-0 bg-blue-500" style={{ width: '80%', height: '80%' }}></div>
+                    <div className="absolute bottom-0 left-1/4 bg-blue-400" style={{ width: '20%', height: '60%' }}></div>
+                    <div className="absolute bottom-0 left-1/2 bg-blue-300" style={{ width: '20%', height: '50%' }}></div>
+                    <div className="absolute bottom-0 left-3/4 bg-blue-200" style={{ width: '20%', height: '40%' }}></div>
+                    <div className="absolute bottom-0 left-full bg-blue-100" style={{ width: '20%', height: '20%' }}></div>
+                  </div>
                 </div>
                 {/* Pie Chart for Market Opportunities */}
                 <div className="bg-white p-4 rounded-lg shadow">
                   <h4 className="font-semibold mb-2">Market Opportunities</h4>
-                  <PieChart />
+                   <div className="bg-gray-100 h-32 w-32 rounded-full mx-auto relative">
+                      {/* Simulate Pie Chart */}
+                      <div className="absolute top-0 left-0 w-full h-full rounded-full" style={{ background: 'conic-gradient(blue 0% 30%, gray 30% 100%)' }}></div>
+                    </div>
+
                 </div>
                 {/* Line Graph for Demand Trends */}
                 <div className="bg-white p-4 rounded-lg shadow">
                   <h4 className="font-semibold mb-2">Demand Trends</h4>
-                  <LineChart />
+                   <div className="bg-gray-100 h-32 relative overflow-hidden">
+                    {/* Simulate Line Chart with simple divs and positioning */}
+                    <div className="absolute bottom-1/4 left-0 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 1 */}
+                    <div className="absolute bottom-1/2 left-1/4 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 2 */}
+                    <div className="absolute top-1/4 left-1/2 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 3 */}
+                    <div className="absolute top-1/2 left-3/4 w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 4 */}
+                    <div className="absolute bottom-0 left-full w-2 h-2 bg-red-500 rounded-full"></div> {/* Point 5 */}
+                    <div className="absolute bottom-1/4 left-0 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(30deg)' }}></div> {/* Line 1-2 */}
+                    <div className="absolute bottom-1/2 left-1/4 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(-60deg)' }}></div> {/* Line 2-3 */}
+                    <div className="absolute top-1/4 left-1/2 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(-30deg)' }}></div> {/* Line 3-4 */}
+                    <div className="absolute top-1/2 left-3/4 w-full h-0.5 bg-red-300 transform origin-left" style={{ transform: 'rotate(15deg)' }}></div> {/* Line 4-5 */}
+                  </div>
                 </div>
               </div>
 
@@ -115,7 +135,6 @@ const About = () => {
               <motion.li whileHover={{ x: 10 }} transition={{ duration: 0.2 }}>• Stakeholder Management </motion.li>
             </ul>
           </motion.div>
-
           <motion.div
             className="space-y-6"
             initial={{ opacity: 0, x: 20 }}
@@ -140,7 +159,6 @@ const About = () => {
             </ul>
           </motion.div>
           </div>
-        </div>
     </div>
   )
 }
