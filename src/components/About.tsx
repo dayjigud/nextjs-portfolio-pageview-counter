@@ -57,11 +57,11 @@ const About = () => {
           
           Market Research
           </motion.h2>
-           <div className='mb-16'>
+           <div className='mb-16 px-4'>
               {/* Simulated Charts */}
               <div className="grid md:grid-cols-3 gap-16 mb-8">
                 {/* Bar Chart for User Preference */}
-                <div className="bg-white p-4 rounded-lg shadow">
+                <div className="bg-white p-4 rounded-lg shadow ">
                   <h4 className="font-semibold mb-4 text-center">User Preferences</h4>
                   <div className="bg-gray-100 h-64 relative overflow-hidden">
                      {/* Horizontal grid lines */}
