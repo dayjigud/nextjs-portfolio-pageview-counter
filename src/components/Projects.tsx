@@ -20,6 +20,7 @@ const projects: Project[] = [{
     description: 'A dating app designed specifically for individuals in the tech industry, aiming to connect users based on shared interests in technology and career paths.',
     href: "https://techie.love",
     tags: ["Product Strategy", "Social Networking", "Mobile App", "User Engagement"],
+    image: "/images/Social medial Logo 3.png",
     color: "from-blue-500 to-cyan-500",
   },
 ]
