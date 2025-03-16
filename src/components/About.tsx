@@ -21,8 +21,9 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          About Me
-        </motion.p>
+          
+        </motion.p> 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }} 
           viewport={{ once: true }} 
@@ -40,6 +41,7 @@ const About = () => {
           
           Skills
           </motion.h2>
+        </motion.div>
         <div className="grid md:grid-cols-2 gap-12">
           <motion.div
             className="space-y-6"
