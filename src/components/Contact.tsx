@@ -6,7 +6,7 @@ const Contact = () => {
     <div className="py-20 bg-gradient-to-br from-purple-500 via-blue-500 to-cyan-500 text-white">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <motion.h2 
-          className="text-4xl font-bold mb-8"
+          className="text-3xl sm:text-4xl font-bold mb-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -15,7 +15,7 @@ const Contact = () => {
           Let's Connect
         </motion.h2>
         <motion.p 
-          className="text-xl mb-12 opacity-90"
+          className="text-lg sm:text-xl mb-12 opacity-90"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
