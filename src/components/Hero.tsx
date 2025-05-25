@@ -23,7 +23,7 @@ const Hero = () => {
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="relative w-20 h-20 rounded-full overflow-hidden bg-white p-1"
+            className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden bg-white p-1"
           >
             <div 
               className="w-full h-full rounded-full bg-cover bg-center bg-no-repeat"
@@ -56,7 +56,7 @@ const Hero = () => {
           </motion.div>
         </motion.div>
         <motion.h1 
-          className="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 text-transparent bg-clip-text"
+          className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 text-transparent bg-clip-text"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -64,7 +64,7 @@ const Hero = () => {
           Cloud-Powered Product Mastery
         </motion.h1>
         <motion.p 
-          className="text-xl text-gray-700 max-w-2xl mx-auto"
+          className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}

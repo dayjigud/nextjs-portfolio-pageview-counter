@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div className="py-20 bg-gray-50 px-4">
         <motion.h2
-          className="text-4xl font-bold text-center mb-8 text-gray-800"
+          className="text-3xl sm:text-4xl font-bold text-center mb-8 text-gray-800"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -31,7 +31,7 @@ const About = () => {
           transition={{ duration: 0.5 }}>
 
         <motion.h2
-          className="text-4xl font-bold text-center mb-16 text-gray-800"
+          className="text-3xl sm:text-4xl font-bold text-center mb-16 text-gray-800"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -48,7 +48,7 @@ const About = () => {
           transition={{ duration: 0.5 }}>
 
         <motion.h2
-          className="text-4xl font-bold text-center mb-8 text-gray-800"
+          className="text-3xl sm:text-4xl font-bold text-center mb-8 text-gray-800"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -59,7 +59,7 @@ const About = () => {
           </motion.h2>
            <div className='mb-16'>
               {/* Simulated Charts */}
-              <div className="grid md:grid-cols-3 gap-16 mb-8">
+              <div className="grid md:grid-cols-3 gap-8 sm:gap-12 md:gap-8 mb-8">
                 {/* Bar Chart for User Preference */}
                 <div className="bg-white p-4 rounded-lg shadow ">
                   <h4 className="font-semibold mb-4 text-center">User Preferences</h4>
@@ -73,29 +73,29 @@ const About = () => {
                     {/* Simulate Bar Chart with simple divs */}
                     {/* UI/UX Design */}
                     <div className="absolute bottom-0 left-[5%] bg-blue-500 w-[12%] h-[80%] flex flex-col justify-end items-center">
-                      <span className="text-white text-xs absolute top-[-20px]">80%</span>
+                      <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">80%</span>
                     </div>
-                    <div className="absolute bottom-[-25px] left-[5%] w-[12%] text-center text-gray-700">UI/UX</div>
+                    <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[5%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">UI/UX</div>
                     {/* Ease of use */}
                     <div className="absolute bottom-0 left-[22%] bg-blue-400 w-[12%] h-[70%] flex flex-col justify-end items-center">
-                    <span className="text-white text-xs absolute top-[-20px]">70%</span>
+                    <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">70%</span>
                     </div>
-                    <div className="absolute bottom-[-25px] left-[22%] w-[12%] text-center text-gray-700">Ease of use</div>
+                    <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[22%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">Ease of use</div>
                     {/* Feature Richness */}
                     <div className="absolute bottom-0 left-[39%] bg-blue-300 w-[12%] h-[60%] flex flex-col justify-end items-center">
-                    <span className="text-white text-xs absolute top-[-20px]">60%</span>
+                    <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">60%</span>
                     </div>
-                    <div className="absolute bottom-[-25px] left-[39%] w-[12%] text-center text-gray-700">Features</div>
+                    <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[39%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">Features</div>
                     {/* Performance */}
                     <div className="absolute bottom-0 left-[56%] bg-blue-200 w-[12%] h-[50%] flex flex-col justify-end items-center">
-                    <span className="text-white text-xs absolute top-[-20px]">50%</span>
+                    <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">50%</span>
                     </div>
-                    <div className="absolute bottom-[-25px] left-[56%] w-[12%] text-center text-gray-700">Performance</div>
+                    <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[56%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">Performance</div>
                     {/* Price */}
                     <div className="absolute bottom-0 left-[73%] bg-blue-100 w-[12%] h-[40%] flex flex-col justify-end items-center">
-                    <span className="text-gray-700 text-xs absolute top-[-20px]">40%</span>
+                    <span className="text-gray-700 text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">40%</span>
                     </div>
-                    <div className="absolute bottom-[-25px] left-[73%] w-[12%] text-center text-gray-700">Price</div>
+                    <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[73%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">Price</div>
                     
                   </div>
                 </div>
@@ -106,27 +106,27 @@ const About = () => {
                       {/* Simulate Pie Chart */}
                       <div className="absolute top-0 left-0 w-full h-full rounded-full" style={{ background: 'conic-gradient(#007bff 0% 40%, #6610f2 40% 70%, #dc3545 70% 90%, #fd7e14 90% 100%)' }}>
                       </div>
-                        <div className="absolute top-[10%] right-[10%] w-[100px] text-center text-xs text-gray-700">
+                        <div className="absolute top-[5%] sm:top-[10%] right-[5%] sm:right-[10%] w-[80px] xs:w-[100px] text-center text-[9px] xs:text-[10px] sm:text-xs text-gray-700">
                         <div className="flex items-center justify-center">
-                          <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                          <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-blue-500 mr-1 xs:mr-2"></div>
                           Fintech 40%
                         </div>
                       </div>
-                      <div className="absolute bottom-[10%] left-[5%] w-[100px] text-center text-xs text-gray-700">
+                      <div className="absolute bottom-[5%] sm:bottom-[10%] left-[2%] sm:left-[5%] w-[80px] xs:w-[100px] text-center text-[9px] xs:text-[10px] sm:text-xs text-gray-700">
                         <div className="flex items-center justify-center">
-                          <div className="w-3 h-3 rounded-full bg-purple-700 mr-2"></div>
+                          <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-purple-700 mr-1 xs:mr-2"></div>
                           Healthcare 30%
                         </div>
                       </div>
-                      <div className="absolute top-[40%] left-[-20%] w-[100px] text-center text-xs text-gray-700">
+                      <div className="absolute top-[35%] sm:top-[40%] left-[-15%] sm:left-[-20%] w-[80px] xs:w-[100px] text-center text-[9px] xs:text-[10px] sm:text-xs text-gray-700">
                         <div className="flex items-center justify-center">
-                        <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                        <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-red-500 mr-1 xs:mr-2"></div>
                           EdTech 20%
                         </div>
                       </div>
-                      <div className="absolute bottom-[15%] right-[-10%] w-[100px] text-center text-xs text-gray-700">
+                      <div className="absolute bottom-[10%] sm:bottom-[15%] right-[-10%] sm:right-[-10%] w-[80px] xs:w-[100px] text-center text-[9px] xs:text-[10px] sm:text-xs text-gray-700">
                         <div className="flex items-center justify-center">
-                          <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                          <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-yellow-500 mr-1 xs:mr-2"></div>
                            Others 10%
                         </div>
                       </div>
