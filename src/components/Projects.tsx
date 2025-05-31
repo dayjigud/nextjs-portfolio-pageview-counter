@@ -14,7 +14,7 @@ const projects: Project[] = [{
   description: 'A health app aimed at helping users manage and improve their health, with features like tracking vital signs, fitness goals, and nutritional intake.',
   tags: ["Product Management", "HealthTech", "Mobile App", "Data Analysis"],
   color: "from-green-500 to-teal-500",
-  image: "/images/HealthTrack Logo.png",
+  image: "/images/HealthTrack Logo.jpeg",
 },
   {
     title: 'TechiesMatch',
