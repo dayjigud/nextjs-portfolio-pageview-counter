@@ -72,28 +72,28 @@ const About = () => {
                     <div className="absolute top-[100%] left-0 w-full h-[1px] bg-gray-300"></div>
                     {/* Simulate Bar Chart with simple divs */}
                     {/* UI/UX Design */}
-                    <div className="absolute bottom-0 left-[5%] bg-blue-500 w-[12%] h-[80%] flex flex-col justify-end items-center">
-                      <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">80%</span>
+                    <div className="absolute bottom-0 left-[5%] bg-blue-500 w-[12%] h-[80%]">
+                      <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px] left-1/2 -translate-x-1/2">80%</span>
                     </div>
                     <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[5%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">UI/UX</div>
                     {/* Ease of use */}
-                    <div className="absolute bottom-0 left-[22%] bg-blue-400 w-[12%] h-[70%] flex flex-col justify-end items-center">
-                    <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">70%</span>
+                    <div className="absolute bottom-0 left-[22%] bg-blue-400 w-[12%] h-[70%]">
+                    <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px] left-1/2 -translate-x-1/2">70%</span>
                     </div>
                     <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[22%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">Ease of use</div>
                     {/* Feature Richness */}
-                    <div className="absolute bottom-0 left-[39%] bg-blue-300 w-[12%] h-[60%] flex flex-col justify-end items-center">
-                    <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">60%</span>
+                    <div className="absolute bottom-0 left-[39%] bg-blue-300 w-[12%] h-[60%]">
+                    <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px] left-1/2 -translate-x-1/2">60%</span>
                     </div>
                     <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[39%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">Features</div>
                     {/* Performance */}
-                    <div className="absolute bottom-0 left-[56%] bg-blue-200 w-[12%] h-[50%] flex flex-col justify-end items-center">
-                    <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">50%</span>
+                    <div className="absolute bottom-0 left-[56%] bg-blue-200 w-[12%] h-[50%]">
+                    <span className="text-white text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px] left-1/2 -translate-x-1/2">50%</span>
                     </div>
                     <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[56%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">Performance</div>
                     {/* Price */}
-                    <div className="absolute bottom-0 left-[73%] bg-blue-100 w-[12%] h-[40%] flex flex-col justify-end items-center">
-                    <span className="text-gray-700 text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px]">40%</span>
+                    <div className="absolute bottom-0 left-[73%] bg-blue-100 w-[12%] h-[40%]">
+                    <span className="text-gray-700 text-[9px] xs:text-[10px] sm:text-xs absolute top-[-18px] sm:top-[-20px] left-1/2 -translate-x-1/2">40%</span>
                     </div>
                     <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-[73%] w-[12%] text-center text-gray-700 text-[9px] xs:text-[10px] sm:text-xs">Price</div>
                     
@@ -106,29 +106,21 @@ const About = () => {
                       {/* Simulate Pie Chart */}
                       <div className="absolute top-0 left-0 w-full h-full rounded-full" style={{ background: 'conic-gradient(#007bff 0% 40%, #6610f2 40% 70%, #dc3545 70% 90%, #fd7e14 90% 100%)' }}>
                       </div>
-                        <div className="absolute top-[5%] sm:top-[10%] right-[5%] sm:right-[10%] w-[80px] xs:w-[100px] text-center text-[9px] xs:text-[10px] sm:text-xs text-gray-700">
-                        <div className="flex items-center justify-center">
-                          <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-blue-500 mr-1 xs:mr-2"></div>
-                          Fintech 40%
-                        </div>
+                      <div className="absolute top-[5%] sm:top-[10%] right-[5%] sm:right-[10%] w-[80px] xs:w-[100px] text-[9px] xs:text-[10px] sm:text-xs text-gray-700 flex items-center justify-center">
+                        <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-blue-500 mr-1 xs:mr-2"></div>
+                        Fintech 40%
                       </div>
-                      <div className="absolute bottom-[5%] sm:bottom-[10%] left-[2%] sm:left-[5%] w-[80px] xs:w-[100px] text-center text-[9px] xs:text-[10px] sm:text-xs text-gray-700">
-                        <div className="flex items-center justify-center">
-                          <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-purple-700 mr-1 xs:mr-2"></div>
-                          Healthcare 30%
-                        </div>
+                      <div className="absolute bottom-[5%] sm:bottom-[10%] left-[2%] sm:left-[5%] w-[80px] xs:w-[100px] text-[9px] xs:text-[10px] sm:text-xs text-gray-700 flex items-center justify-center">
+                        <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-purple-700 mr-1 xs:mr-2"></div>
+                        Healthcare 30%
                       </div>
-                      <div className="absolute top-[35%] sm:top-[40%] left-[-15%] sm:left-[-20%] w-[80px] xs:w-[100px] text-center text-[9px] xs:text-[10px] sm:text-xs text-gray-700">
-                        <div className="flex items-center justify-center">
+                      <div className="absolute top-[35%] sm:top-[40%] left-[-15%] sm:left-[-20%] w-[80px] xs:w-[100px] text-[9px] xs:text-[10px] sm:text-xs text-gray-700 flex items-center justify-center">
                         <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-red-500 mr-1 xs:mr-2"></div>
-                          EdTech 20%
-                        </div>
+                        EdTech 20%
                       </div>
-                      <div className="absolute bottom-[10%] sm:bottom-[15%] right-[-10%] sm:right-[-10%] w-[80px] xs:w-[100px] text-center text-[9px] xs:text-[10px] sm:text-xs text-gray-700">
-                        <div className="flex items-center justify-center">
-                          <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-yellow-500 mr-1 xs:mr-2"></div>
-                           Others 10%
-                        </div>
+                      <div className="absolute bottom-[10%] sm:bottom-[15%] right-[-10%] sm:right-[-10%] w-[80px] xs:w-[100px] text-[9px] xs:text-[10px] sm:text-xs text-gray-700 flex items-center justify-center">
+                        <div className="w-2 h-2 xs:w-3 xs:h-3 rounded-full bg-yellow-500 mr-1 xs:mr-2"></div>
+                        Others 10%
                       </div>
                     </div>
 
