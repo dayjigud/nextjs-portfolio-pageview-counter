@@ -1,4 +1,3 @@
-import { Target, Server } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const About = () => {

@@ -1,4 +1,4 @@
-import { Cloud, Briefcase } from 'lucide-react'
+import { Briefcase } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Hero = () => {
