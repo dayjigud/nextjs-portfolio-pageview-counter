@@ -15,6 +15,7 @@ const projects: Project[] = [
   {
     title: 'HealthTrackNG',
     description: 'A health app aimed at helping users manage and improve their health, with features like tracking vital signs, fitness goals, and nutritional intake.',
+    href: "https://healthtrack-ng-connect.vercel.app",
     tags: ["Product Management", "HealthTech", "Mobile App", "Data Analysis"],
     image: "/images/HealthTrack Logo.png",
   },
