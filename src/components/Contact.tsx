@@ -21,7 +21,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Open for collaborations and opportunities
+          I'm always interested in discussing AI innovation, product management opportunities, and the future of technology in Africa. Let's start a conversation.
         </motion.p>
         
         <div className="flex justify-center gap-8">
@@ -44,6 +44,9 @@ const Contact = () => {
               <item.icon className="w-6 h-6" />
             </motion.a>
           ))}
+        </div>
+        <div className="mt-12 text-center text-sm opacity-70">
+            © 2024 Ayodeji Adeniyi. Building the future of AI in Africa.
         </div>
       </div>
     </div>

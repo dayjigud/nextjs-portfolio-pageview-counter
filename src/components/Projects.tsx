@@ -48,6 +48,24 @@ const projects: Project[] = [{
     image: "/images/Social medial Logo 3.png",
     color: "from-blue-500 to-cyan-500",
   },
+  {
+    title: 'AI Product Innovation',
+    description: 'Spearheaded the development of cutting-edge AI products at Brightyield, focusing on practical applications that address real-world challenges in the Nigerian market.',
+    tags: ["AI", "Product Management", "Innovation"],
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    title: 'HNG Internship Finalist',
+    description: 'Active participation in the HNG internship program, demonstrating commitment to continuous learning and community engagement in Nigeria\'s tech ecosystem.',
+    tags: ["Community", "Internship", "Tech"],
+    color: "from-yellow-500 to-orange-500",
+  },
+  {
+    title: 'Data Analytics Excellence',
+    description: 'Developed comprehensive data analysis solutions that transformed raw data into actionable business insights, forming the foundation for AI-driven decision making.',
+    tags: ["Data Analysis", "Business Intelligence", "AI"],
+    color: "from-red-500 to-pink-500",
+  },
 ]
 const Projects = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

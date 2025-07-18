@@ -48,20 +48,14 @@ const Hero = () => {
           >
             <Briefcase className="w-8 h-8 text-purple-600" />
           </motion.div>
-          <motion.div
-            whileHover={{ rotate: 180 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Cloud className="w-8 h-8 text-blue-600" />
           </motion.div>
-        </motion.div>
         <motion.h1 
           className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 text-transparent bg-clip-text"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          Cloud-Powered Product Mastery
+          Ayodeji Adeniyi
         </motion.h1>
         <motion.p 
           className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto"
@@ -69,7 +63,15 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          Product Manager & Cloud Engineering Enthusiast
+          AI Product Manager | Technology Innovator | Data Analyst
+        </motion.p>
+        <motion.p
+            className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+        >
+            The Technological Polymath bridging mechanical engineering foundations with cutting-edge AI innovation in Nigeria's evolving tech landscape
         </motion.p>
       </div>
     </div>

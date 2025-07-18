@@ -8,6 +8,7 @@ import Hero from './components/Hero'
 const About = lazy(() => import('./components/About'))
 const Projects = lazy(() => import('./components/Projects'))
 const Contact = lazy(() => import('./components/Contact'))
+const TechnologyLeadership = lazy(() => import('./components/TechnologyLeadership'))
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <About />
         <Projects />
+        <TechnologyLeadership />
         <Contact />
       </Suspense>
     </div>
