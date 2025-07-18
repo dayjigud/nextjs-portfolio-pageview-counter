@@ -1,56 +1,48 @@
-import { Github, Linkedin, Mail } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <div className="py-20 bg-gradient-to-br from-purple-500 via-blue-500 to-cyan-500 text-white">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <motion.h2 
-          className="text-3xl sm:text-4xl font-bold mb-8"
+    <section className="section bg-secondary" id="contact">
+      <div className="container text-center">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Let's Connect
+          Get in Touch
         </motion.h2>
-        <motion.p 
-          className="text-lg sm:text-xl mb-12 opacity-90"
+        <motion.p
+          className="max-w-xl mx-auto mb-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          I'm always interested in discussing AI innovation, product management opportunities, and the future of technology in Africa. Let's start a conversation.
+          I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision.
         </motion.p>
-        
-        <div className="flex justify-center gap-8">
-          {[
-            { icon: Mail, href: "mailto:dayjigud@gmail.com" },
-            { icon: Github, href: "https://github.com/dayjigud" },
-            { icon: Linkedin, href: "https://linkedin.com/in/dayjigud" },
-          ].map((item, index) => (
-            <motion.a 
-              key={index}
-              href={item.href}
-              className="p-4 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-all duration-300"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <item.icon className="w-6 h-6" />
-            </motion.a>
-          ))}
-        </div>
-        <div className="mt-12 text-center text-sm opacity-70">
-            © 2024 Ayodeji Adeniyi. Building the future of AI in Africa.
-        </div>
+        <motion.div
+          className="flex justify-center gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <a href="mailto:dayjigud@gmail.com" className="text-accent hover:text-white transition-colors">
+            <Mail size={32} />
+          </a>
+          <a href="https://github.com/dayjigud" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-white transition-colors">
+            <Github size={32} />
+          </a>
+          <a href="https://linkedin.com/in/dayjigud" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-white transition-colors">
+            <Linkedin size={32} />
+          </a>
+        </motion.div>
       </div>
-    </div>
-  )
-}
+    </section>
+  );
+};
 
-export default Contact
+export default Contact;
