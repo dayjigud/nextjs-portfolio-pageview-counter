@@ -27,16 +27,6 @@ const projects: Project[] = [
     tags: ["Product Strategy", "Social Networking", "Mobile App", "User Engagement"],
     image: "/images/Social medial Logo 3.png",
   },
-  {
-    title: 'AI Product Innovation',
-    description: 'Spearheaded the development of cutting-edge AI products at Brightyield, focusing on practical applications that address real-world challenges in the Nigerian market.',
-    tags: ["AI", "Product Management", "Innovation"],
-  },
-  {
-    title: 'HNG Internship Finalist',
-    description: 'Active participation in the HNG internship program, demonstrating commitment to continuous learning and community engagement in Nigeria\'s tech ecosystem.',
-    tags: ["Community", "Internship", "Tech"],
-  },
 ];
 
 const Projects = () => {
