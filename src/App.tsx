@@ -3,12 +3,12 @@ import './index.css'
 import Hero from './components/Hero'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Experience from './components/Experience'
-import Skills from './components/Skills'
 
 const About = lazy(() => import('./components/About'))
 const Projects = lazy(() => import('./components/Projects'))
 const Contact = lazy(() => import('./components/Contact'))
+const Experience = lazy(() => import('./components/Experience'))
+const Skills = lazy(() => import('./components/Skills'))
 
 function App() {
   return (
