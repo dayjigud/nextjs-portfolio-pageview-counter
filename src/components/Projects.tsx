@@ -15,6 +15,7 @@ const projects: Project[] = [
   {
     title: 'HealthTrackNG',
     description: 'A health app aimed at helping users manage and improve their health, with features like tracking vital signs, fitness goals, and nutritional intake.',
+    href: "https://healthtrack-ng-connect.vercel.app",
     tags: ["Product Management", "HealthTech", "Mobile App", "Data Analysis"],
     image: "/images/HealthTrack Logo.png",
   },
@@ -25,16 +26,6 @@ const projects: Project[] = [
     href: "https://techie.love",
     tags: ["Product Strategy", "Social Networking", "Mobile App", "User Engagement"],
     image: "/images/Social medial Logo 3.png",
-  },
-  {
-    title: 'AI Product Innovation',
-    description: 'Spearheaded the development of cutting-edge AI products at Brightyield, focusing on practical applications that address real-world challenges in the Nigerian market.',
-    tags: ["AI", "Product Management", "Innovation"],
-  },
-  {
-    title: 'HNG Internship Finalist',
-    description: 'Active participation in the HNG internship program, demonstrating commitment to continuous learning and community engagement in Nigeria\'s tech ecosystem.',
-    tags: ["Community", "Internship", "Tech"],
   },
 ];
 
