@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import GlassmorphicCard from './GlassmorphicCard';
 
