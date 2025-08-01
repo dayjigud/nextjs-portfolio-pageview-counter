@@ -28,6 +28,13 @@ const projects: Project[] = [
     tags: ["Product Strategy", "Social Networking", "Mobile App", "User Engagement"],
     image: "/images/Social medial Logo 3.png",
   },
+  {
+    title: 'StudyZen',
+    description: 'A productivity app to help students focus on their studies with features for concentration, task management, progress tracking, and schedule optimization.',
+    href: "https://studyzen-phi.vercel.app/",
+    tags: ["Productivity", "EdTech", "Web App", "Task Management"],
+    image: "/images/StudyZen Logo.svg",
+  },
 ];
 
 const sectionAnimation = {
