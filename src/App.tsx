@@ -18,9 +18,9 @@ function App() {
         <Hero />
         <Suspense fallback={<div>Loading...</div>}>
           <About />
+          <Projects />
           <Experience />
           <Skills />
-          <Projects />
           <Contact />
         </Suspense>
       </main>
