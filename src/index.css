@@ -1,15 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+/* Import the Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply bg-primary text-text-dark font-sans;
+  /* Set new background and text colors */
+  @apply bg-black text-gray-300 font-sans;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-display text-text-light;
+  @apply font-display text-white;
 }
 
 .section {

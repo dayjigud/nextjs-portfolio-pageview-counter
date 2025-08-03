@@ -7,25 +7,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary': '#1D2430',
-        'secondary': '#2A323F',
-        'accent': '#3A8DFF',
-        'text-light': '#FFFFFF',
-        'text-dark': '#B0B5B3',
+        'primary': '#1D2430', // Existing color
+        'secondary': '#2A323F', // Existing color
+        'accent': '#3A8DFF', // Existing color
+        'text-light': '#FFFFFF', // Existing color
+        'text-dark': '#B0B5B3', // Existing color
+        // Add new brand colors
+        'brand-yellow': '#FFFF00',
+        'brand-purple': '#8A2BE2',
+        'brand-green': '#32CD32',
       },
       fontFamily: {
-        'sans': ['Poppins', 'sans-serif'],
+        'sans': ['Inter', 'sans-serif'], // Change font
         'display': ['Montserrat', 'sans-serif'],
       },
-      animation: {
-        'gradient': 'gradient 15s ease infinite',
-      },
-      keyframes: {
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
-      },
+      // ... rest of the config
     },
   },
   plugins: [],

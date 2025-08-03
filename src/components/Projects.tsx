@@ -1,18 +1,9 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { ExternalLink, X } from 'lucide-react';
-import GlassmorphicCard from './GlassmorphicCard';
+import { ArrowUpRight } from 'lucide-react';
 
-interface Project {
-  title: string;
-  description: string;
-  href?: string;
-  detailedDescription?: string;
-  tags: string[];
-  image?: string;
-}
+// Assuming the Project interface and projects array are defined in this file as before
 
-const projects: Project[] = [
+const projects = [
   {
     title: 'HealthTrackNG',
     description: 'A health app aimed at helping users manage and improve their health, with features like tracking vital signs, fitness goals, and nutritional intake.',
@@ -37,95 +28,50 @@ const projects: Project[] = [
   },
 ];
 
-const sectionAnimation = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      type: 'spring',
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-};
-
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
   return (
     <section className="section" id="projects">
       <div className="container">
-        <GlassmorphicCard
-          variants={sectionAnimation}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <h2
-            className="text-3xl md:text-4xl font-bold text-center mb-12"
-          >
-            My Projects
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <motion.div
-                key={project.title}
-                className="card cursor-pointer bg-primary"
-                onClick={() => setSelectedProject(project)}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ scale: 1.05, y: -5, transition: { type: 'spring', stiffness: 300 } }}
-              >
-                {project.image && <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-text-dark mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 bg-secondary text-text-dark rounded-full text-sm">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </GlassmorphicCard>
-      </div>
-
-      {selectedProject && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
-          <motion.div
-            className="bg-secondary p-8 rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-          >
-            <button onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 text-text-dark hover:text-white">
-              <X size={24} />
-            </button>
-            <h3 className="text-3xl font-bold mb-4">{selectedProject.title}</h3>
-            <p className="text-text-dark mb-6">{selectedProject.detailedDescription || selectedProject.description}</p>
-            {selectedProject.href && (
-              <a
-                href={selectedProject.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary inline-flex items-center gap-2"
-              >
-                Visit Project <ExternalLink size={18} />
-              </a>
-            )}
-          </motion.div>
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+          My Projects
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              className="group relative flex flex-col bg-gray-900 border border-gray-800 rounded-lg overflow-hidden p-6 transition-all duration-300 hover:border-brand-purple"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              {project.image && <img src={project.image} alt={project.title} className="w-full h-48 object-cover mb-4 rounded-md" />}
+              <h3 className="text-2xl font-bold mb-2 text-white">{project.title}</h3>
+              <p className="text-gray-400 mb-4 flex-grow">{project.description}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="px-3 py-1 bg-gray-800 text-brand-green rounded-full text-xs">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              {project.href && (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-brand-yellow mt-auto transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  Visit Project
+                  <ArrowUpRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
+                </a>
+              )}
+            </motion.div>
+          ))}
         </div>
-      )}
+      </div>
     </section>
-  )
-}
+  );
+};
 
 export default Projects;
