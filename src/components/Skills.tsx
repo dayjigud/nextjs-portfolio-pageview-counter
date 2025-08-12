@@ -66,7 +66,9 @@ const Skills = () => {
                 whileHover={{ scale: 1.1, y: -5, transition: { type: 'spring', stiffness: 300 } }}
               >
                 <CheckCircle className="text-text-dark flex-shrink-0" />
-                <span className="font-semibold">{skill}</span>
+                <div className="min-w-0">
+                  <span className="font-semibold break-words">{skill}</span>
+                </div>
               </motion.div>
             ))}
           </motion.div>
