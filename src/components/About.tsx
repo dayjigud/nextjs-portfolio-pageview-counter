@@ -1,10 +1,11 @@
-import GlassmorphicCard from './GlassmorphicCard';
+import { motion } from 'framer-motion';
 
 const sectionAnimation = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 50, scale: 0.8 },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
       duration: 0.8,
       type: 'spring',
@@ -18,7 +19,8 @@ const About = () => {
   return (
     <section className="section" id="about">
       <div className="container">
-        <GlassmorphicCard
+        <motion.div
+          className="bg-accent rounded-2xl shadow-clay p-8 md:p-12"
           variants={sectionAnimation}
           initial="hidden"
           whileInView="visible"
@@ -38,7 +40,7 @@ const About = () => {
               I stand as a beacon of innovation in our growing tech ecosystem, someone who is not just adapting to the acceleration of technological change but actively driving it forward with strategic vision and technical depth.
             </p>
           </div>
-        </GlassmorphicCard>
+        </motion.div>
       </div>
     </section>
   )

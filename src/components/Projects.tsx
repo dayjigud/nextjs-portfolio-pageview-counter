@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ExternalLink, X } from 'lucide-react';
-import GlassmorphicCard from './GlassmorphicCard';
 
 interface Project {
   title: string;
@@ -38,16 +37,28 @@ const projects: Project[] = [
 ];
 
 const sectionAnimation = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 50, scale: 0.8 },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
       duration: 0.8,
       type: 'spring',
       stiffness: 100,
       damping: 15,
+      staggerChildren: 0.2,
     },
+  },
+};
+
+const cardAnimation = {
+  hidden: { opacity: 0, y: 20, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 100 },
   },
 };
 
@@ -57,36 +68,35 @@ const Projects = () => {
   return (
     <section className="section" id="projects">
       <div className="container">
-        <GlassmorphicCard
+        <motion.div
+          className="bg-accent-2 rounded-2xl shadow-clay p-8 md:p-12"
           variants={sectionAnimation}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
-          <h2
-            className="text-3xl md:text-4xl font-bold text-center mb-12"
-          >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             My Projects
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={sectionAnimation}
+          >
             {projects.map((project) => (
               <motion.div
                 key={project.title}
                 className="card cursor-pointer bg-primary"
                 onClick={() => setSelectedProject(project)}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+                variants={cardAnimation}
                 whileHover={{ scale: 1.05, y: -5, transition: { type: 'spring', stiffness: 300 } }}
               >
-                {project.image && <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />}
+                {project.image && <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-t-2xl" />}
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2">{project.title}</h3>
                   <p className="text-text-dark mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 bg-secondary text-text-dark rounded-full text-sm">
+                      <span key={tag} className="px-3 py-1 bg-secondary text-text-dark rounded-full text-sm shadow-clay-inset">
                         {tag}
                       </span>
                     ))}
@@ -94,32 +104,39 @@ const Projects = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </GlassmorphicCard>
+          </motion.div>
+        </motion.div>
       </div>
 
       {selectedProject && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <motion.div
-            className="bg-secondary p-8 rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative"
-            initial={{ opacity: 0, scale: 0.9 }}
+            className="bg-secondary p-8 rounded-2xl shadow-clay max-w-2xl w-full max-h-[90vh] overflow-y-auto relative"
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
-            <button onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 text-text-dark hover:text-white">
+            <motion.button
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-4 right-4 text-text-dark"
+              whileHover={{ scale: 1.2, rotate: 90 }}
+            >
               <X size={24} />
-            </button>
-            <h3 className="text-3xl font-bold mb-4">{selectedProject.title}</h3>
+            </motion.button>
+            <h3 className="text-3xl font-bold mb-4 gradient-text">{selectedProject.title}</h3>
             <p className="text-text-dark mb-6">{selectedProject.detailedDescription || selectedProject.description}</p>
             {selectedProject.href && (
-              <a
+              <motion.a
                 href={selectedProject.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary inline-flex items-center gap-2"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
               >
                 Visit Project <ExternalLink size={18} />
-              </a>
+              </motion.a>
             )}
           </motion.div>
         </div>
