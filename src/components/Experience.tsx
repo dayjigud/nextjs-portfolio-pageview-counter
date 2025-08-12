@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Briefcase } from 'lucide-react';
-import GlassmorphicCard from './GlassmorphicCard';
 
 const experiences = [
   {
@@ -16,10 +15,11 @@ const experiences = [
 ];
 
 const sectionAnimation = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 50, scale: 0.8 },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
       duration: 0.8,
       type: 'spring',
@@ -33,58 +33,40 @@ const Experience = () => {
   return (
     <section className="section" id="experience">
       <div className="container">
-        <GlassmorphicCard
+        <motion.div
+          className="bg-accent-3 rounded-2xl shadow-clay p-8 md:p-12"
           variants={sectionAnimation}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
-          <h2
-            className="text-3xl md:text-4xl font-bold text-center mb-12"
-          >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
             Professional Experience
           </h2>
           <div className="relative">
-            <div className="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-secondary"></div>
+            <div className="absolute left-1/2 -translate-x-1/2 h-full w-1 bg-secondary rounded-full"></div>
             {experiences.map((exp, index) => (
-              <div key={index} className="flex items-center w-full mb-16">
-                <div className="w-1/2 flex justify-end pr-8">
-                  {index % 2 === 0 && (
-                    <motion.div
-                      className="max-w-md"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <h3 className="text-2xl font-bold text-right">{exp.role}</h3>
-                      <p className="text-accent text-right mb-2">{exp.company}</p>
-                      <p className="text-text-dark text-right">{exp.description}</p>
-                    </motion.div>
-                  )}
+              <div key={index} className={`flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'} w-full mb-16`}>
+                <div className="w-1/2">
+                  <motion.div
+                    className="bg-primary p-6 rounded-2xl shadow-clay"
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50, scale: 0.8 }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ type: 'spring', stiffness: 100 }}
+                  >
+                    <h3 className="text-2xl font-bold">{exp.role}</h3>
+                    <p className="text-accent-2 font-semibold mb-2">{exp.company}</p>
+                    <p className="text-text-dark">{exp.description}</p>
+                  </motion.div>
                 </div>
-                <div className="w-1/2 flex justify-start pl-8">
-                  {index % 2 !== 0 && (
-                    <motion.div
-                      className="max-w-md"
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <h3 className="text-2xl font-bold">{exp.role}</h3>
-                      <p className="text-accent mb-2">{exp.company}</p>
-                      <p className="text-text-dark">{exp.description}</p>
-                    </motion.div>
-                  )}
-                </div>
-                <div className="absolute left-1/2 -translate-x-1/2 bg-primary border-2 border-accent rounded-full p-2">
-                  <Briefcase className="text-accent" />
+                <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-secondary border-4 border-primary rounded-full p-3 shadow-clay">
+                  <Briefcase className="text-text-dark" />
                 </div>
               </div>
             ))}
           </div>
-        </GlassmorphicCard>
+        </motion.div>
       </div>
     </section>
   );
