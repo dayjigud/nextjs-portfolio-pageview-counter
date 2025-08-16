@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react'
+import { LazyMotion, domAnimation } from 'framer-motion'
 import './index.css'
 import Hero from './components/Hero'
 import Header from './components/Header'
@@ -12,20 +13,22 @@ const Skills = lazy(() => import('./components/Skills'))
 
 function App() {
   return (
-    <div className="bg-primary">
-      <Header />
-      <main>
-        <Hero />
-        <Suspense fallback={<div>Loading...</div>}>
-          <About />
-          <Projects />
-          <Experience />
-          <Skills />
-          <Contact />
-        </Suspense>
-      </main>
-      <Footer />
-    </div>
+    <LazyMotion features={domAnimation}>
+      <div className="bg-primary">
+        <Header />
+        <main>
+          <Hero />
+          <Suspense fallback={<div>Loading...</div>}>
+            <About />
+            <Projects />
+            <Experience />
+            <Skills />
+            <Contact />
+          </Suspense>
+        </main>
+        <Footer />
+      </div>
+    </LazyMotion>
   )
 }
 

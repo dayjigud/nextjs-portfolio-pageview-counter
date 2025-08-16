@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
@@ -24,23 +24,23 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           className="flex items-center justify-between h-20 bg-secondary rounded-b-2xl shadow-clay px-8"
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ type: 'spring', stiffness: 100, damping: 15 }}
         >
-          <motion.a
+          <m.a
             href="#home"
             className="text-2xl font-bold text-text-dark"
             variants={linkVariants}
             whileHover="hover"
           >
             Ayodeji
-          </motion.a>
+          </m.a>
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <motion.a
+              <m.a
                 key={link.title}
                 href={link.href}
                 className="text-text-dark font-semibold hover:text-primary transition-colors"
@@ -48,23 +48,23 @@ const Header = () => {
                 whileHover="hover"
               >
                 {link.title}
-              </motion.a>
+              </m.a>
             ))}
           </nav>
           <div className="md:hidden">
-            <motion.button
+            <m.button
               onClick={() => setIsOpen(!isOpen)}
               className="text-text-dark"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               {isOpen ? <X /> : <Menu />}
-            </motion.button>
+            </m.button>
           </div>
-        </motion.div>
+        </m.div>
       </div>
       {isOpen && (
-        <motion.div
+        <m.div
           className="md:hidden bg-secondary shadow-clay rounded-b-2xl mt-2"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -72,7 +72,7 @@ const Header = () => {
         >
           <nav className="flex flex-col items-center space-y-4 py-4">
             {navLinks.map((link) => (
-              <motion.a
+              <m.a
                 key={link.title}
                 href={link.href}
                 className="text-text-dark font-semibold hover:text-primary transition-colors"
@@ -81,10 +81,10 @@ const Header = () => {
                 whileHover="hover"
               >
                 {link.title}
-              </motion.a>
+              </m.a>
             ))}
           </nav>
-        </motion.div>
+        </m.div>
       )}
     </header>
   );
