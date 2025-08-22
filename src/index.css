@@ -3,10 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply text-text-dark font-sans;
-  background: linear-gradient(-45deg, #F3E8FF, #D4F8E8, #D1E8FF, #FFD6D6);
-  background-size: 400% 400%;
-  @apply animate-gradient;
+  @apply bg-primary text-text-dark font-sans;
 }
 
 h1, h2, h3, h4, h5, h6 {
