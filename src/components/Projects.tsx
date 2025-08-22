@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ExternalLink, X } from 'lucide-react';
 
@@ -36,59 +35,26 @@ const projects: Project[] = [
   },
 ];
 
-const sectionAnimation = {
-  hidden: { opacity: 0, y: 50, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      type: 'spring',
-      stiffness: 100,
-      damping: 15,
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const cardAnimation = {
-  hidden: { opacity: 0, y: 20, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { type: 'spring', stiffness: 100 },
-  },
-};
-
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <section className="section" id="projects">
       <div className="container">
-        <motion.div
+        <div
           className="bg-accent-2 rounded-2xl shadow-clay p-8 md:p-12"
-          variants={sectionAnimation}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             My Projects
           </h2>
-          <motion.div
+          <div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={sectionAnimation}
           >
             {projects.map((project) => (
-              <motion.div
+              <div
                 key={project.title}
                 className="card cursor-pointer bg-primary"
                 onClick={() => setSelectedProject(project)}
-                variants={cardAnimation}
-                whileHover={{ scale: 1.05, y: -5, transition: { type: 'spring', stiffness: 300 } }}
               >
                 {project.image && <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-t-2xl" />}
                 <div className="p-6">
@@ -102,43 +68,36 @@ const Projects = () => {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {selectedProject && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <motion.div
+          <div
             className="bg-secondary p-8 rounded-2xl shadow-clay max-w-2xl w-full max-h-[90vh] overflow-y-auto relative"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
-            <motion.button
+            <button
               onClick={() => setSelectedProject(null)}
               className="absolute top-4 right-4 text-text-dark"
-              whileHover={{ scale: 1.2, rotate: 90 }}
             >
               <X size={24} />
-            </motion.button>
+            </button>
             <h3 className="text-3xl font-bold mb-4 gradient-text">{selectedProject.title}</h3>
             <p className="text-text-dark mb-6">{selectedProject.detailedDescription || selectedProject.description}</p>
             {selectedProject.href && (
-              <motion.a
+              <a
                 href={selectedProject.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary inline-flex items-center gap-2"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.9 }}
               >
                 Visit Project <ExternalLink size={18} />
-              </motion.a>
+              </a>
             )}
-          </motion.div>
+          </div>
         </div>
       )}
     </section>

@@ -1,30 +1,9 @@
-import { motion } from 'framer-motion';
-
-const sectionAnimation = {
-  hidden: { opacity: 0, y: 50, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      type: 'spring',
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-};
-
 const About = () => {
   return (
     <section className="section" id="about">
       <div className="container">
-        <motion.div
+        <div
           className="bg-accent rounded-2xl shadow-clay p-8 md:p-12"
-          variants={sectionAnimation}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             About Me
@@ -40,7 +19,7 @@ const About = () => {
               I stand as a beacon of innovation in our growing tech ecosystem, someone who is not just adapting to the acceleration of technological change but actively driving it forward with strategic vision and technical depth.
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
