@@ -1,16 +1,447 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ayodeji Adeniyi</title>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayodeji Adeniyi - AI Product Manager</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round:wght@400;700&display=swap" media="print" onload="this.media='all'">
-    <script type="module" crossorigin src="/assets/index-DGhOmQe6.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DIQpzdZ8.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+        .prose { max-width: 65ch; }
+        .prose h2 { font-size: 1.5rem; font-weight: 700; margin-top: 2.5em; margin-bottom: 1em; }
+        .prose h3 { font-size: 1.25rem; font-weight: 600; margin-top: 2em; margin-bottom: 1em; }
+        .prose p, .prose li { color: #475569; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; }
+    </style>
+  <link rel="stylesheet" crossorigin href="./assets/index-BMh95Mgb.css">
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-40 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold tracking-tight text-slate-900">
+                Ayodeji<span class="text-blue-500">.</span>
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-slate-600 hover:text-blue-500 transition-colors duration-300">About</a>
+                <a href="#experience" class="text-slate-600 hover:text-blue-500 transition-colors duration-300">Experience</a>
+                <a href="#projects" class="text-slate-600 hover:text-blue-500 transition-colors duration-300">Projects</a>
+                <a href="#skills" class="text-slate-600 hover:text-blue-500 transition-colors duration-300">Skills</a>
+                <a href="#certifications" class="text-slate-600 hover:text-blue-500 transition-colors duration-300">Certifications</a>
+                <a href="#contact" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all duration-300 shadow-sm">Contact</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-slate-600 hover:text-blue-500">About</a>
+            <a href="#experience" class="block py-2 text-slate-600 hover:text-blue-500">Experience</a>
+            <a href="#projects" class="block py-2 text-slate-600 hover:text-blue-500">Projects</a>
+            <a href="#skills" class="block py-2 text-slate-600 hover:text-blue-500">Skills</a>
+            <a href="#certifications" class="block py-2 text-slate-600 hover:text-blue-500">Certifications</a>
+            <a href="#contact" class="block mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 text-center">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pt-24 md:pt-32">
+        <!-- Hero Section -->
+        <section id="home" class="text-center py-20">
+            <div class="max-w-4xl mx-auto">
+                <span class="inline-block bg-blue-100 text-blue-600 text-sm font-semibold px-3 py-1 rounded-full mb-4">AI Product Manager</span>
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-slate-900 mb-6">
+                    Building User-Centric AI Products <span class="gradient-text">That Drive Growth</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8">
+                    I specialize in leading cross-functional teams to deliver innovative digital solutions that solve real-world challenges, particularly in emerging markets.
+                </p>
+                <div class="flex justify-center items-center space-x-4">
+                    <a href="#projects" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-all duration-300 shadow-md">View My Work</a>
+                    <a href="mailto:dayjigud@gmail.com" class="bg-white text-slate-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-100 transition-all duration-300 border border-slate-200">Get In Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20">
+            <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-12 items-center">
+                <div class="md:col-span-1 flex justify-center">
+                    <img src="https://placehold.co/400x400/3B82F6/FFFFFF?text=AA" alt="Ayodeji Adeniyi" class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-white shadow-lg">
+                </div>
+                <div class="md:col-span-2">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">About Me</h2>
+                    <p class="text-slate-600 mb-4">
+                        I am a dynamic AI Product Manager with over 5 years of experience delivering innovative, user-centric digital solutions. My track record includes launching AI-powered web applications, from health tech platforms to niche dating apps, resulting in significant increases in user engagement and retention.
+                    </p>
+                    <p class="text-slate-600 mb-6">
+                        With expertise in agile methodologies, product strategy, UX optimization, and AI integration, I am passionate about leveraging technology to solve real-world challenges in emerging markets like Nigeria. I'm eager to bring strategic vision and execution excellence to impactful product management roles.
+                    </p>
+                     <div class="flex space-x-4">
+                        <a href="https://www.ayodeji.xyz" target="_blank" class="text-slate-500 hover:text-blue-500"><i data-lucide="globe" class="w-6 h-6"></i></a>
+                         <a href="#" class="text-slate-500 hover:text-blue-500"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                         <a href="#" class="text-slate-500 hover:text-blue-500"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Professional Experience</h2>
+                <div class="relative border-l-2 border-slate-200">
+                    <!-- Experience Item 1 -->
+                    <div class="mb-12 md:flex items-start">
+                         <div class="absolute -left-[11px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
+                        <div class="ml-10">
+                            <h3 class="text-xl font-semibold text-slate-900">AI Product Manager</h3>
+                            <p class="text-slate-500 mb-1">HNG Tech | Remote</p>
+                            <p class="text-sm text-slate-400 mb-4">Feb 2025 - Apr 2025</p>
+                            <ul class="list-disc list-inside text-slate-600 space-y-2">
+                                <li>Directed end-to-end agile processes, reducing development cycles by 25%.</li>
+                                <li>Collaborated with teams to define and prioritize product requirements, boosting user satisfaction by 35%.</li>
+                                <li>Led integration of AI-driven recommendation engines, increasing platform adoption by 30%.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Experience Item 2 -->
+                    <div class="mb-12 md:flex items-start">
+                        <div class="absolute -left-[11px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
+                        <div class="ml-10">
+                            <h3 class="text-xl font-semibold text-slate-900">Product Manager</h3>
+                            <p class="text-slate-500 mb-1">TechiesMatch | Remote</p>
+                            <p class="text-sm text-slate-400 mb-4">Jan 2025 - Apr 2025</p>
+                            <ul class="list-disc list-inside text-slate-600 space-y-2">
+                                <li>Managed development of an AI-powered dating platform, improving match compatibility by 40%.</li>
+                                <li>Led UX/UI planning and A/B testing, reducing drop-off rates by 28% and increasing retention from 45% to 75%.</li>
+                                <li>Oversaw launch of MVP features, using analytics to inform product roadmaps.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Experience Item 3 -->
+                    <div class="mb-12 md:flex items-start">
+                        <div class="absolute -left-[11px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
+                        <div class="ml-10">
+                            <h3 class="text-xl font-semibold text-slate-900">Product Manager</h3>
+                            <p class="text-slate-500 mb-1">HealthTrackNG | Remote</p>
+                            <p class="text-sm text-slate-400 mb-4">Jul 2025 - Aug 2025</p>
+                            <ul class="list-disc list-inside text-slate-600 space-y-2">
+                                <li>Launched a digital health solution for underserved communities, reaching over 10,000 users.</li>
+                                <li>Improved healthcare access and reduced appointment wait times by 50%.</li>
+                                <li>Achieved a 95% user satisfaction rate in post-launch surveys.</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <!-- Experience Item 4 -->
+                    <div class="md:flex items-start">
+                        <div class="absolute -left-[11px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
+                        <div class="ml-10">
+                            <h3 class="text-xl font-semibold text-slate-900">Business Manager</h3>
+                            <p class="text-slate-500 mb-1">Brightyield Golden Resources Limited | Abuja, Nigeria</p>
+                            <p class="text-sm text-slate-400 mb-4">Mar 2023 - Apr 2025</p>
+                            <ul class="list-disc list-inside text-slate-600 space-y-2">
+                                <li>Boosted operational efficiency by 20% with new resource management tools.</li>
+                                <li>Enhanced team productivity and reduced project delays by 15%.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Featured Projects</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="bg-slate-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/8B5CF6/FFFFFF?text=TechiesMatch" alt="TechiesMatch Project" class="w-full h-56 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-900 mb-2">TechiesMatch - AI-Powered Dating</h3>
+                            <p class="text-slate-600 mb-4 flex-grow">Conceptualized and launched a niche dating app for tech professionals, leveraging ML to improve match quality and user satisfaction.</p>
+                            <div class="mt-auto pt-4">
+                                <button data-modal-target="modal-techiesmatch" class="modal-open-button font-semibold text-blue-500 hover:text-blue-600">View Case Study <i data-lucide="arrow-right" class="inline w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="bg-slate-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/3B82F6/FFFFFF?text=HealthTrackNG" alt="HealthTrackNG Project" class="w-full h-56 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-900 mb-2">HealthTrackNG - Digital Health Access</h3>
+                            <p class="text-slate-600 mb-4 flex-grow">Designed a digital health solution to connect patients in underserved Nigerian communities with essential healthcare services, focusing on accessibility.</p>
+                             <div class="mt-auto pt-4">
+                                <button data-modal-target="modal-healthtrackng" class="modal-open-button font-semibold text-blue-500 hover:text-blue-600">View Case Study <i data-lucide="arrow-right" class="inline w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                     <div class="bg-slate-50 rounded-lg shadow-md overflow-hidden md:col-span-2">
+                        <div class="md:flex">
+                            <div class="md:w-1/2">
+                                <img src="https://placehold.co/600x400/10B981/FFFFFF?text=SubtleFlow" alt="SubtleFlow Project" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6 md:w-1/2 flex flex-col justify-center">
+                                <h3 class="text-xl font-semibold text-slate-900 mb-2">SubtleFlow - Finance Tracker</h3>
+                                <p class="text-slate-600 mb-4">Managed the full product lifecycle for a subscription-based finance app. Implemented AI-powered expense categorization saving users 10 hours per month.</p>
+                                <div class="mt-auto pt-4">
+                                    <button data-modal-target="modal-subtleflow" class="modal-open-button font-semibold text-blue-500 hover:text-blue-600">View Case Study <i data-lucide="arrow-right" class="inline w-4 h-4"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-12">Skills & Expertise</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md transform hover:-translate-y-1 transition-transform duration-300">
+                        <i data-lucide="lightbulb" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
+                        <h3 class="text-lg font-semibold text-slate-900">Product Strategy</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md transform hover:-translate-y-1 transition-transform duration-300">
+                        <i data-lucide="users" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
+                        <h3 class="text-lg font-semibold text-slate-900">User-Centered Design</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md transform hover:-translate-y-1 transition-transform duration-300">
+                        <i data-lucide="cpu" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
+                        <h3 class="text-lg font-semibold text-slate-900">AI Integration</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md transform hover:-translate-y-1 transition-transform duration-300">
+                        <i data-lucide="repeat" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
+                        <h3 class="text-lg font-semibold text-slate-900">Agile & Scrum</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-12">Certifications</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-left">
+                        <i data-lucide="award" class="w-10 h-10 text-blue-500 mb-4"></i>
+                        <h3 class="text-md font-semibold text-slate-900">Oracle Certified AI Associate</h3>
+                        <p class="text-slate-500 text-sm">Oracle</p>
+                    </div>
+                     <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-left">
+                        <i data-lucide="award" class="w-10 h-10 text-blue-500 mb-4"></i>
+                        <h3 class="text-md font-semibold text-slate-900">AI Micro-Certification</h3>
+                        <p class="text-slate-500 text-sm">Product School</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-left">
+                        <i data-lucide="award" class="w-10 h-10 text-blue-500 mb-4"></i>
+                        <h3 class="text-md font-semibold text-slate-900">Workflow Specialist</h3>
+                        <p class="text-slate-500 text-sm">Asana</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-left">
+                        <i data-lucide="award" class="w-10 h-10 text-blue-500 mb-4"></i>
+                        <h3 class="text-md font-semibold text-slate-900">HNG Finalist</h3>
+                        <p class="text-slate-500 text-sm">HNG Tech</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Let's Build Something Great Together</h2>
+                <p class="text-slate-600 mb-8">
+                    I'm always excited to connect with new people and explore interesting opportunities. Feel free to reach out!
+                </p>
+                <a href="mailto:dayjigud@gmail.com" class="inline-block bg-blue-500 text-white text-lg font-semibold px-8 py-4 rounded-lg hover:bg-blue-600 transition-all duration-300 shadow-lg">
+                    dayjigud@gmail.com
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-100">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-500">
+            <p>&copy; 2025 Ayodeji Adeniyi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modals Container -->
+    <div id="modal-container">
+        <!-- TechiesMatch Modal -->
+        <div id="modal-techiesmatch" class="modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center p-4 z-50 opacity-0">
+            <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto" @click.stop>
+                <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center z-10">
+                    <h3 class="text-lg font-semibold">Case Study: TechiesMatch</h3>
+                    <button class="modal-close-button text-slate-500 hover:text-slate-800 text-3xl leading-none">&times;</button>
+                </div>
+                <div class="p-8">
+                    <img src="https://placehold.co/1200x600/8B5CF6/FFFFFF?text=TechiesMatch+UI" alt="TechiesMatch App Screens" class="rounded-lg shadow-xl mb-8 w-full">
+                    <article class="prose mx-auto">
+                        <h2>The Challenge</h2>
+                        <p>The online dating market is saturated, but we identified a gap for tech professionals who seek partners with similar interests and career paths. Mainstream apps often failed to capture the nuances of this demographic, leading to low-quality matches and user fatigue.</p>
+                        <h2>The Process & Solution</h2>
+                        <p>The core innovation was a machine learning algorithm that went beyond simple profile data. It analyzed users' interests, communication styles, and in-app behavior to predict compatibility. This resulted in a <strong>40% improvement in match compatibility rates</strong>.</p>
+                        <p>I also designed an A/B testing plan for the onboarding flow, which successfully <strong>reduced the drop-off rate by 28%</strong>.</p>
+                        <h2>The Impact</h2>
+                        <p>Our data-driven approach yielded significant results within the first three months post-launch:</p>
+                        <ul>
+                            <li><strong>User retention increased from 45% to 75%</strong>, a 67% improvement.</li>
+                            <li>The AI-driven match recommendations led to a <strong>35% increase in daily active users</strong>.</li>
+                        </ul>
+                        <a href="http://www.techies.love" target="_blank" class="font-semibold text-blue-500 hover:underline">Visit Site <i data-lucide="external-link" class="inline w-4 h-4"></i></a>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!-- HealthTrackNG Modal -->
+        <div id="modal-healthtrackng" class="modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center p-4 z-50 opacity-0">
+            <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto" @click.stop>
+                <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center z-10">
+                    <h3 class="text-lg font-semibold">Case Study: HealthTrackNG</h3>
+                    <button class="modal-close-button text-slate-500 hover:text-slate-800 text-3xl leading-none">&times;</button>
+                </div>
+                <div class="p-8">
+                    <img src="https://placehold.co/1200x600/3B82F6/FFFFFF?text=HealthTrackNG+App" alt="HealthTrackNG App Screens" class="rounded-lg shadow-xl mb-8 w-full">
+                    <article class="prose mx-auto">
+                        <h2>The Challenge</h2>
+                        <p>In many underserved communities across Nigeria, accessing healthcare is a significant challenge. Patients face long wait times, a lack of information about available services, and difficulties in booking appointments, especially in low-connectivity environments.</p>
+                        <h2>The Process & Solution</h2>
+                        <p>Based on on-the-ground user research, we prioritized core accessibility features like <strong>Offline Functionality</strong> and <strong>Multilingual Support</strong> (English, Hausa, Yoruba). Partnering with local clinics, we integrated their schedules, allowing for real-time booking which <strong>reduced average appointment wait times by 50%</strong>.</p>
+                        <h2>The Impact</h2>
+                        <p>HealthTrackNG made a tangible difference in the communities it served:</p>
+                        <ul>
+                            <li>Successfully onboarded over <strong>10,000 active users</strong> within six months of launch.</li>
+                            <li>Achieved a <strong>95% user satisfaction rate</strong> in post-launch surveys.</li>
+                        </ul>
+                        <a href="https://healthtrack-ng-connect.vercel.app/" target="_blank" class="font-semibold text-blue-500 hover:underline">Visit Site <i data-lucide="external-link" class="inline w-4 h-4"></i></a>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!-- SubtleFlow Modal -->
+        <div id="modal-subtleflow" class="modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center p-4 z-50 opacity-0">
+            <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto" @click.stop>
+                <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center z-10">
+                    <h3 class="text-lg font-semibold">Case Study: SubtleFlow</h3>
+                    <button class="modal-close-button text-slate-500 hover:text-slate-800 text-3xl leading-none">&times;</button>
+                </div>
+                <div class="p-8">
+                    <img src="https://placehold.co/1200x600/10B981/FFFFFF?text=SubtleFlow+Dashboard" alt="SubtleFlow App Screens" class="rounded-lg shadow-xl mb-8 w-full">
+                    <article class="prose mx-auto">
+                        <h2>The Challenge</h2>
+                        <p>Personal finance management is tedious. Users complained about the hours spent manually categorizing expenses, leading to low engagement. The opportunity was to create a "zero-effort" finance app that used AI to automate the most time-consuming tasks.</p>
+                        <h2>The Process & Solution</h2>
+                        <p>By analyzing user data, we identified expense categorization as the biggest pain point. We developed an AI model to automate this process, which <strong>saved users an average of 10 hours per month</strong>. We also ensured the architecture was robust, successfully supporting <strong>5x user growth without performance degradation</strong>.</p>
+                        <h2>The Impact</h2>
+                        <p>The focus on AI-driven automation resulted in strong product outcomes:</p>
+                        <ul>
+                            <li>A <strong>35% increase in user engagement</strong> through features like automated budgeting alerts.</li>
+                            <li>A significant increase in positive app store reviews, specifically mentioning the automation feature.</li>
+                        </ul>
+                         <a href="http://www.subtleflow.xyz" target="_blank" class="font-semibold text-blue-500 hover:underline">Visit Site <i data-lucide="external-link" class="inline w-4 h-4"></i></a>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        lucide.createIcons();
+
+        // --- Mobile Menu Logic ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Smooth Scroll Logic ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    const headerOffset = document.getElementById('header').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                }
+            });
+        });
+
+        // --- Modal Logic ---
+        const openModalButtons = document.querySelectorAll('.modal-open-button');
+        const closeModalButtons = document.querySelectorAll('.modal-close-button');
+
+        const openModal = (modal) => {
+            if (modal == null) return;
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                document.body.style.overflow = 'hidden';
+            }, 10);
+        };
+
+        const closeModal = (modal) => {
+            if (modal == null) return;
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        };
+
+        openModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modalId = button.dataset.modalTarget;
+                const modal = document.getElementById(modalId);
+                openModal(modal);
+            });
+        });
+
+        document.getElementById('modal-container').addEventListener('click', e => {
+            if (e.target.classList.contains('modal')) {
+                closeModal(e.target);
+            }
+        });
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = button.closest('.modal');
+                closeModal(modal);
+            });
+        });
+    </script>
+
+</body>
 </html>

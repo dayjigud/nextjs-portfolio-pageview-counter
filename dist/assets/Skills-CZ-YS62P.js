@@ -1,6 +1,0 @@
-import{c as l,j as e}from"./index-DGhOmQe6.js";/**
- * @license lucide-react v0.453.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const n=l("CircleCheckBig",[["path",{d:"M21.801 10A10 10 0 1 1 17 3.335",key:"yps3ct"}],["path",{d:"m9 11 3 3L22 4",key:"1pflzl"}]]),i=["AI Product Management","Data Analysis","Cloud Technology","Security","Finance","Mechanical Engineering","Innovation","Strategic Thinking"],c=["bg-accent","bg-accent-2","bg-accent-3"],d=()=>e.jsx("section",{className:"section",id:"skills",children:e.jsx("div",{className:"container",children:e.jsxs("div",{className:"bg-secondary rounded-2xl shadow-clay p-8 md:p-12",children:[e.jsx("h2",{className:"text-3xl md:text-4xl font-bold text-center mb-12",children:"Skills & Expertise"}),e.jsx("div",{className:"grid grid-cols-2 md:grid-cols-4 gap-8",children:i.map((a,s)=>e.jsxs("div",{className:`flex items-center gap-4 p-4 rounded-2xl shadow-clay ${c[s%c.length]}`,children:[e.jsx(n,{className:"text-text-dark flex-shrink-0"}),e.jsx("div",{className:"min-w-0",children:e.jsx("span",{className:"font-semibold break-words",children:a})})]},s))})]})})});export{d as default};
