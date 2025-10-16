@@ -27,10 +27,21 @@
         .prose h3 { font-size: 1.25rem; font-weight: 600; margin-top: 2em; margin-bottom: 1em; }
         .prose p, .prose li { color: #475569; }
         .prose ul { list-style-type: disc; padding-left: 1.5rem; }
+
+        /* Added for animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-100 text-slate-800">
 
     <!-- Header -->
     <header id="header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-40 shadow-sm">
@@ -65,23 +76,23 @@
         <!-- Hero Section -->
         <section id="home" class="text-center py-20">
             <div class="max-w-4xl mx-auto">
-                <span class="inline-block bg-blue-100 text-blue-600 text-sm font-semibold px-3 py-1 rounded-full mb-4">AI Product Manager</span>
-                <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-slate-900 mb-6">
+                <span class="inline-block bg-blue-100 text-blue-600 text-sm font-semibold px-3 py-1 rounded-full mb-4 reveal">AI Product Manager</span>
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-slate-900 mb-6 reveal" style="transition-delay: 100ms;">
                     Building User-Centric AI Products <span class="gradient-text">That Drive Growth</span>
                 </h1>
-                <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8">
+                <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8 reveal" style="transition-delay: 200ms;">
                     I specialize in leading cross-functional teams to deliver innovative digital solutions that solve real-world challenges, particularly in emerging markets.
                 </p>
-                <div class="flex justify-center items-center space-x-4">
-                    <a href="#projects" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-all duration-300 shadow-md">View My Work</a>
-                    <a href="mailto:dayjigud@gmail.com" class="bg-white text-slate-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-100 transition-all duration-300 border border-slate-200">Get In Touch</a>
+                <div class="flex justify-center items-center space-x-4 reveal" style="transition-delay: 300ms;">
+                    <a href="#projects" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-all duration-300 shadow-md transform hover:-translate-y-1">View My Work</a>
+                    <a href="mailto:dayjigud@gmail.com" class="bg-white text-slate-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-100 transition-all duration-300 border border-slate-200 transform hover:-translate-y-1">Get In Touch</a>
                 </div>
             </div>
         </section>
 
         <!-- About Me Section -->
         <section id="about" class="py-20">
-            <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-12 items-center">
+            <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-12 items-center reveal">
                 <div class="md:col-span-1 flex justify-center">
                     <img src="images/profile.jpg" alt="Ayodeji Adeniyi" class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-white shadow-lg">
                 </div>
@@ -105,10 +116,10 @@
         <!-- Experience Section -->
         <section id="experience" class="py-20">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Professional Experience</h2>
+                <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center reveal">Professional Experience</h2>
                 <div class="relative border-l-2 border-slate-200">
                     <!-- Experience Item 1 -->
-                    <div class="mb-12 md:flex items-start">
+                    <div class="mb-12 md:flex items-start reveal">
                          <div class="absolute -left-[11px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
                         <div class="ml-10">
                             <h3 class="text-xl font-semibold text-slate-900">AI Product Manager</h3>
@@ -122,7 +133,7 @@
                         </div>
                     </div>
                     <!-- Experience Item 2 -->
-                    <div class="mb-12 md:flex items-start">
+                    <div class="mb-12 md:flex items-start reveal" style="transition-delay: 100ms;">
                         <div class="absolute -left-[11px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
                         <div class="ml-10">
                             <h3 class="text-xl font-semibold text-slate-900">Product Manager</h3>
@@ -136,7 +147,7 @@
                         </div>
                     </div>
                     <!-- Experience Item 3 -->
-                    <div class="mb-12 md:flex items-start">
+                    <div class="mb-12 md:flex items-start reveal" style="transition-delay: 200ms;">
                         <div class="absolute -left-[11px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
                         <div class="ml-10">
                             <h3 class="text-xl font-semibold text-slate-900">Product Manager</h3>
@@ -150,7 +161,7 @@
                         </div>
                     </div>
                      <!-- Experience Item 4 -->
-                    <div class="md:flex items-start">
+                    <div class="md:flex items-start reveal" style="transition-delay: 300ms;">
                         <div class="absolute -left-[11px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
                         <div class="ml-10">
                             <h3 class="text-xl font-semibold text-slate-900">Business Manager</h3>
@@ -167,12 +178,12 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-20 bg-white">
+        <section id="projects" class="py-20">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Featured Projects</h2>
+                <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center reveal">Featured Projects</h2>
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Project 1 -->
-                    <div class="bg-slate-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                    <div class="bg-white/30 backdrop-blur-md border border-slate-200/50 rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-all duration-300 reveal">
                         <img src="https://placehold.co/600x400/8B5CF6/FFFFFF?text=TechiesMatch" alt="TechiesMatch Project" class="w-full h-56 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-xl font-semibold text-slate-900 mb-2">TechiesMatch - AI-Powered Dating</h3>
@@ -183,7 +194,7 @@
                         </div>
                     </div>
                     <!-- Project 2 -->
-                    <div class="bg-slate-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                    <div class="bg-white/30 backdrop-blur-md border border-slate-200/50 rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-all duration-300 reveal" style="transition-delay: 100ms;">
                         <img src="https://placehold.co/600x400/3B82F6/FFFFFF?text=HealthTrackNG" alt="HealthTrackNG Project" class="w-full h-56 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-xl font-semibold text-slate-900 mb-2">HealthTrackNG - Digital Health Access</h3>
@@ -194,7 +205,7 @@
                         </div>
                     </div>
                     <!-- Project 3 -->
-                     <div class="bg-slate-50 rounded-lg shadow-md overflow-hidden md:col-span-2">
+                     <div class="bg-white/30 backdrop-blur-md border border-slate-200/50 rounded-lg shadow-lg overflow-hidden md:col-span-2 transform hover:-translate-y-2 transition-all duration-300 reveal" style="transition-delay: 200ms;">
                         <div class="md:flex">
                             <div class="md:w-1/2">
                                 <img src="https://placehold.co/600x400/10B981/FFFFFF?text=SubtleFlow" alt="SubtleFlow Project" class="w-full h-full object-cover">
@@ -215,21 +226,21 @@
         <!-- Skills Section -->
         <section id="skills" class="py-20">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-bold text-slate-900 mb-12">Skills & Expertise</h2>
+                <h2 class="text-3xl font-bold text-slate-900 mb-12 reveal">Skills & Expertise</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-md transform hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white/30 backdrop-blur-md p-6 rounded-lg shadow-lg transform hover:-translate-y-1 transition-transform duration-300 reveal">
                         <i data-lucide="lightbulb" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
                         <h3 class="text-lg font-semibold text-slate-900">Product Strategy</h3>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md transform hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white/30 backdrop-blur-md p-6 rounded-lg shadow-lg transform hover:-translate-y-1 transition-transform duration-300 reveal" style="transition-delay: 100ms;">
                         <i data-lucide="users" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
                         <h3 class="text-lg font-semibold text-slate-900">User-Centered Design</h3>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md transform hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white/30 backdrop-blur-md p-6 rounded-lg shadow-lg transform hover:-translate-y-1 transition-transform duration-300 reveal" style="transition-delay: 200ms;">
                         <i data-lucide="cpu" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
                         <h3 class="text-lg font-semibold text-slate-900">AI Integration</h3>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md transform hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white/30 backdrop-blur-md p-6 rounded-lg shadow-lg transform hover:-translate-y-1 transition-transform duration-300 reveal" style="transition-delay: 300ms;">
                         <i data-lucide="repeat" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
                         <h3 class="text-lg font-semibold text-slate-900">Agile & Scrum</h3>
                     </div>
@@ -238,26 +249,26 @@
         </section>
 
         <!-- Certifications Section -->
-        <section id="certifications" class="py-20 bg-white">
+        <section id="certifications" class="py-20">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-bold text-slate-900 mb-12">Certifications</h2>
+                <h2 class="text-3xl font-bold text-slate-900 mb-12 reveal">Certifications</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-left">
+                    <div class="bg-white/30 backdrop-blur-md p-6 rounded-lg border border-slate-200/50 text-left transform hover:-translate-y-1 transition-transform duration-300 reveal">
                         <i data-lucide="award" class="w-10 h-10 text-blue-500 mb-4"></i>
                         <h3 class="text-md font-semibold text-slate-900">Oracle Certified AI Associate</h3>
                         <p class="text-slate-500 text-sm">Oracle</p>
                     </div>
-                     <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-left">
+                     <div class="bg-white/30 backdrop-blur-md p-6 rounded-lg border border-slate-200/50 text-left transform hover:-translate-y-1 transition-transform duration-300 reveal" style="transition-delay: 100ms;">
                         <i data-lucide="award" class="w-10 h-10 text-blue-500 mb-4"></i>
                         <h3 class="text-md font-semibold text-slate-900">AI Micro-Certification</h3>
                         <p class="text-slate-500 text-sm">Product School</p>
                     </div>
-                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-left">
+                    <div class="bg-white/30 backdrop-blur-md p-6 rounded-lg border border-slate-200/50 text-left transform hover:-translate-y-1 transition-transform duration-300 reveal" style="transition-delay: 200ms;">
                         <i data-lucide="award" class="w-10 h-10 text-blue-500 mb-4"></i>
                         <h3 class="text-md font-semibold text-slate-900">Workflow Specialist</h3>
                         <p class="text-slate-500 text-sm">Asana</p>
                     </div>
-                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-left">
+                    <div class="bg-white/30 backdrop-blur-md p-6 rounded-lg border border-slate-200/50 text-left transform hover:-translate-y-1 transition-transform duration-300 reveal" style="transition-delay: 300ms;">
                         <i data-lucide="award" class="w-10 h-10 text-blue-500 mb-4"></i>
                         <h3 class="text-md font-semibold text-slate-900">HNG Finalist</h3>
                         <p class="text-slate-500 text-sm">HNG Tech</p>
@@ -268,7 +279,7 @@
 
         <!-- Contact Section -->
         <section id="contact" class="py-20">
-            <div class="max-w-2xl mx-auto text-center">
+            <div class="max-w-2xl mx-auto text-center reveal">
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">Let's Build Something Great Together</h2>
                 <p class="text-slate-600 mb-8">
                     I'm always excited to connect with new people and explore interesting opportunities. Feel free to reach out!
@@ -281,7 +292,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-100">
+    <footer class="bg-slate-200">
         <div class="container mx-auto px-6 py-8 text-center text-slate-500">
             <p>&copy; 2025 Ayodeji Adeniyi. All rights reserved.</p>
         </div>
@@ -441,6 +452,22 @@
                 closeModal(modal);
             });
         });
+
+        // --- Scroll Animation Logic ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 70) { // Trigger a bit earlier
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        // Initial check in case elements are already in view
+        revealOnScroll();
+
     </script>
 
 </body>
