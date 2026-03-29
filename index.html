@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="./src/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-. "
         rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.263.1" defer></script>
 </head>
 
 <body class="text-deep-charcoal overflow-x-hidden">
@@ -1001,6 +1001,9 @@
 
         // --- 3D Tilt Effect for Cards ---
         const initTiltEffect = () => {
+            const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+            if (isTouchDevice) return;
+
             const cards = document.querySelectorAll('.card-pastel');
 
             cards.forEach(card => {
@@ -1109,9 +1112,6 @@
                 card.addEventListener('mouseenter', handleEnter);
 
                 // Touch events for mobile
-                card.addEventListener('touchmove', handleMove, { passive: true });
-                card.addEventListener('touchend', handleLeave);
-                card.addEventListener('touchstart', handleEnter, { passive: true });
             });
         };
 
