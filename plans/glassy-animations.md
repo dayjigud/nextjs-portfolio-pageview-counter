@@ -1,5 +1,7 @@
 # Feature Implementation Plan: Glassy Animations
 
+> **Historical plan:** This document refers to the former React implementation and is not current architecture guidance.
+
 ## 📋 Todo Checklist
 - [x] ~~Install `framer-motion` if not already present.~~ ✅ Implemented
 - [ ] Configure `tailwind.config.js` for glassy effects.

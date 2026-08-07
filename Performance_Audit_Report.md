@@ -1,5 +1,7 @@
 # Performance Audit Report for www.ayodeji.xyz
 
+> **Historical record (August 16, 2024):** This audit concerns an earlier JavaScript application. Its asset names, bundle sizes, and recommendations are not a description of the current static implementation.
+
 ## 1. Executive Summary
 
 This report details a performance audit of `https://www.ayodeji.xyz` conducted on August 16, 2024. The analysis revealed significant opportunities for improvement, primarily related to render-blocking resources and large asset sizes. Implementing the recommendations in this report will lead to faster load times, a better user experience, and improved Core Web Vitals scores.

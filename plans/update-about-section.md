@@ -1,5 +1,7 @@
 # Feature Implementation Plan: Update About Me Section
 
+> **Historical plan:** This document refers to the former React implementation and is not current architecture guidance.
+
 ## 📋 Todo Checklist
 - [x] ~~Modify the text in `src/components/About.tsx`.~~ ✅ Implemented
 - [ ] Final Review and Testing.

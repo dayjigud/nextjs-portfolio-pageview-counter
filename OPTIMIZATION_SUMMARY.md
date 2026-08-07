@@ -1,5 +1,7 @@
 # Optimization Summary Report
 
+> **Historical record:** This report covers an earlier React-based implementation of the portfolio and does not describe the current static HTML/CSS site. File names, dependencies, entry points, and bundle measurements below are retained only as a record of that earlier work.
+
 This document summarizes the performance optimization work completed during Phase 2.
 
 ## 1. Problem Analysis

@@ -1,22 +1,26 @@
-# GEMINI.md
+# Project Guide
 
-## Project Overview
+## Overview
 
-This project is a personal portfolio website for Ayodeji Adeniyi, an AI Product Manager. It is a single-page application built with HTML, CSS, and JavaScript. The project is set up to use Vite as a build tool and Tailwind CSS for styling. It showcases his skills, experience, and projects. The project also includes analytics from Vercel.
+This repository contains Ayodeji Adeniyi's static, single-page portfolio. The current implementation uses semantic HTML, Tailwind CSS, a small vanilla JavaScript accessibility helper, and Vite. It does not use React, a client-side router, or Vercel Analytics.
 
-## Building and Running
+## Commands
 
-The following commands are available to build and run the project:
+- `npm ci`: install the locked dependency set.
+- `npm run dev`: start the Vite development server.
+- `npm run build`: create the production build in `dist/`.
+- `npm run preview`: serve the production build locally.
+- `npm test`: build and run the Playwright smoke and accessibility suite.
 
-*   `npm install`: Installs all the necessary dependencies for the project.
-*   `npm run dev`: Starts the development server, allowing for live-reloading and development.
-*   `npm run build`: Builds the project for production. The output is placed in the `dist` directory.
-*   `npm run preview`: Previews the production build locally.
+## Development conventions
 
-## Development Conventions
+- The page markup and content live in `index.html`.
+- Tailwind configuration lives in `tailwind.config.js`; custom styles live in `src/index.css`.
+- Keep JavaScript progressive and minimal. `src/navigation.js` exists to synchronize mobile-menu accessibility state and close the menu reliably.
+- Respect `prefers-reduced-motion` whenever adding or changing animation.
+- Update browser tests when changing navigation, interactive disclosures, local assets, or accessibility behavior.
+- Vercel deployment settings live in `vercel.json`.
 
-*   **Styling:** The project uses Tailwind CSS for styling. The configuration file is `tailwind.config.js`, and the main CSS file is `src/index.css`.
-*   **Build Tool:** The project uses Vite as a build tool. The configuration file is `vite.config.ts`.
-*   **Deployment:** The project is configured for deployment on Vercel. The configuration file is `vercel.json`.
-*   **TypeScript:** The project uses TypeScript. The configuration file is `tsconfig.json`.
-*   **Entry Point:** The main HTML file is `index.html`.
+## Historical material
+
+`Performance_Audit_Report.md` and `OPTIMIZATION_SUMMARY.md` concern an earlier React implementation. Do not treat their component names, bundle sizes, or recommendations as descriptions of the current site.

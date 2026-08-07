@@ -13,7 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-    <!-- This page intentionally ships zero JavaScript. All interaction and animation is CSS. -->
+    <script type="module" src="./src/navigation.js"></script>
 </head>
 
 <body>
@@ -40,13 +40,13 @@
                     href="#contact">Contact</a>
             </nav>
 
-            <!-- CSS-only mobile menu -->
-            <input type="checkbox" id="nav-toggle" class="peer sr-only">
-            <label for="nav-toggle" class="nav-toggle md:hidden" aria-label="Menu">
+            <!-- The mobile menu uses CSS for presentation and a tiny script for accessible state and link closing. -->
+            <button type="button" id="nav-toggle" class="nav-toggle md:hidden" aria-label="Open menu"
+                aria-controls="mobile-navigation" aria-expanded="false">
                 <span class="bar bar-1"></span>
                 <span class="bar bar-2"></span>
-            </label>
-            <nav class="nav-panel md:hidden" aria-label="Mobile">
+            </button>
+            <nav id="mobile-navigation" class="nav-panel md:hidden" aria-label="Mobile">
                 <a class="border-b border-line px-5 py-6 font-display text-display-md font-bold uppercase"
                     href="#about">About</a>
                 <a class="border-b border-line px-5 py-6 font-display text-display-md font-bold uppercase"
@@ -93,7 +93,7 @@
 
             <p class="hero-fade mt-12 inline-block bg-cobalt px-4 py-3 font-mono text-meta uppercase tracking-widest text-paper"
                 style="--i:5">
-                This page ships 0&nbsp;KB of JavaScript — everything you see is CSS
+                CSS-first by design — with only a tiny accessibility helper
             </p>
         </section>
 
@@ -145,7 +145,7 @@
                         I work across the whole stack of product-making. On one side: user research,
                         roadmaps, A/B tests and go-to-market. On the other: React, TypeScript and
                         Supabase. This page is part of the argument — designed, written and animated
-                        by hand, shipping zero JavaScript.
+                        by hand, with a tiny accessibility-focused JavaScript helper.
                     </p>
                 </div>
 
@@ -192,9 +192,9 @@
                 </div>
                 <div class="bg-paper p-6 md:p-8">
                     <p class="font-display text-5xl font-black md:text-6xl">
-                        <span class="stat-num" style="--target:0"><span>0</span></span><span class="text-accent">KB</span>
+                        <span>&lt;1</span><span class="text-accent">KB</span>
                     </p>
-                    <p class="kicker mt-2">JavaScript On This Page</p>
+                    <p class="kicker mt-2">JavaScript, Gzipped</p>
                 </div>
             </div>
         </section>
@@ -560,7 +560,7 @@
                                     <li><strong>Extended processing times</strong> — loan approvals often took
                                         7–10 days.</li>
                                     <li>Manual data entry caused inaccuracies that <strong>drove up operational
-                                        cost and rework</strong>.</li>
+                                        costs and rework</strong>.</li>
                                     <li>The firm was <strong>growing faster than its manual processes could
                                         absorb</strong>.</li>
                                 </ul>
