@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ============================================================
-   Swiss / editorial design system — zero JavaScript.
+   Swiss / editorial design system — CSS-first with minimal JS.
    Every animation on this site is pure CSS. Scroll-driven
    effects are gated behind @supports so browsers without
    animation-timeline get a fully visible, static page.
@@ -80,10 +80,9 @@
 }
 
 /* ------------------------------------------------------------
-   Header — CSS-only mobile menu (checkbox pattern).
-   Trade-off documented: tapping a menu link scrolls to the
-   section but cannot uncheck the box without JS; the fullscreen
-   panel with a clear X keeps this acceptable.
+   Header — button-driven mobile menu. CSS owns presentation;
+   navigation.js synchronizes accessible state and closes the
+   panel after navigation, on Escape, or at the desktop breakpoint.
    ------------------------------------------------------------ */
 .nav-toggle {
   display: flex;
@@ -102,13 +101,13 @@
   background: theme('colors.ink');
   transition: transform 0.25s ease;
 }
-#nav-toggle:checked ~ .nav-toggle .bar-1 {
+#nav-toggle[aria-expanded='true'] .bar-1 {
   transform: translateY(4px) rotate(45deg);
 }
-#nav-toggle:checked ~ .nav-toggle .bar-2 {
+#nav-toggle[aria-expanded='true'] .bar-2 {
   transform: translateY(-4px) rotate(-45deg);
 }
-#nav-toggle:focus-visible ~ .nav-toggle {
+#nav-toggle:focus-visible {
   outline: 2px solid theme('colors.cobalt');
   outline-offset: 3px;
 }
@@ -124,11 +123,11 @@
   background: theme('colors.paper');
   z-index: 40;
 }
-#nav-toggle:checked ~ .nav-panel {
+#nav-toggle[aria-expanded='true'] ~ .nav-panel {
   display: flex;
 }
 /* Lock page scroll while the menu is open */
-body:has(#nav-toggle:checked) {
+body:has(#nav-toggle[aria-expanded='true']) {
   overflow: hidden;
 }
 

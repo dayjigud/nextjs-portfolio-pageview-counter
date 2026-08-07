@@ -1,50 +1,51 @@
-# Ayodeji Adeniyi - Portfolio
+# Ayodeji Adeniyi — Portfolio
 
-This is the repository for my personal portfolio website, showcasing my skills, projects, and professional experience.
+Ayodeji Adeniyi's single-page portfolio, featuring selected product-engineering and product-management work, experience, capabilities, credentials, and contact details.
 
-## Features
+## Architecture
 
-*   **About Me**: A brief introduction to my background and expertise.
-*   **Experience**: A timeline of my professional roles and accomplishments.
-*   **Skills**: A list of my key skills and areas of expertise.
-*   **Projects**: A showcase of my recent projects with descriptions and links.
-*   **Contact**: A section with my contact information and links to my social profiles.
+The current site is intentionally small and static:
 
-## Technologies Used
+- Semantic HTML in `index.html`
+- Tailwind CSS and custom CSS in `src/index.css`
+- A small vanilla JavaScript module in `src/navigation.js` that keeps the mobile menu's accessible state synchronized and closes it after navigation
+- Vite for local development and production builds
+- Vercel configuration in `vercel.json`
 
-*   **React**: A JavaScript library for building user interfaces.
-*   **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
-*   **Vite**: A fast build tool and development server for modern web projects.
-*   **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
-*   **Framer Motion**: A library for creating animations in React.
-*   **Lucide React**: A library of simply designed, beautiful icons.
+There is no React application or client-side router in the current implementation. Most interaction and all animation are CSS-driven.
 
-## Getting Started
-
-To get a local copy up and running, follow these simple steps.
+## Local development
 
 ### Prerequisites
 
-*   npm
-    ```sh
-    npm install npm@latest -g
-    ```
+- Node.js 20 or later
+- npm
 
-### Installation
+```sh
+npm ci
+npm run dev
+```
 
-1.  Clone the repo
-    ```sh
-    git clone https://github.com/dayjigud/nextjs-portfolio-pageview-counter.git
-    ```
-2.  Install NPM packages
-    ```sh
-    npm install
-    ```
-3.  Run the development server
-    ```sh
-    npm run dev
-    ```
+Vite prints the local development URL in the terminal.
 
-## Deployment
+## Checks
 
-This project is deployed on [Vercel](https://vercel.com/).
+```sh
+npm run build
+npm test
+```
+
+`npm test` builds the production site and runs the Playwright browser and accessibility smoke tests against it. Install the test browser once with `npx playwright install chromium` if it is not already available.
+
+## Production build
+
+```sh
+npm run build
+npm run preview
+```
+
+Vite writes production files to `dist/`. Vercel uses the same build command and output directory.
+
+## Historical reports
+
+`Performance_Audit_Report.md` and `OPTIMIZATION_SUMMARY.md` describe an earlier React-based version of this portfolio. They are retained as historical records and are not documentation for the current architecture.
