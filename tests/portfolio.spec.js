@@ -106,3 +106,24 @@ test.describe('mobile navigation', () => {
     await expect(button).toHaveAttribute('aria-expanded', 'false');
   });
 });
+
+test.describe('private projects page', () => {
+  test('supports a persistent task workflow without linking from the portfolio', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('a[href="/projects"]')).toHaveCount(0);
+
+    await page.goto('/projects/');
+    await expect(page.getByRole('heading', { name: 'Donewell.' })).toBeVisible();
+    await page.getByPlaceholder('What needs doing?').fill('Ship a thoughtful side project');
+    await page.getByRole('button', { name: /Add task/ }).click();
+    const task = page.locator('.task-row').filter({ hasText: 'Ship a thoughtful side project' });
+    await expect(task).toBeVisible();
+    await task.getByRole('button', { name: /Mark .* complete/ }).click();
+    await page.getByRole('button', { name: 'Completed' }).click();
+    await expect(task).toHaveClass(/done/);
+
+    await page.reload();
+    await page.getByRole('button', { name: 'Completed' }).click();
+    await expect(page.locator('.task-row').filter({ hasText: 'Ship a thoughtful side project' })).toBeVisible();
+  });
+});
