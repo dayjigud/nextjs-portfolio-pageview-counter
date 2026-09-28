@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff5c35">
+  <title>Projects — Ayodeji Adeniyi</title>
+  <meta name="description" content="Small, useful experiments by Ayodeji Adeniyi. Start with Donewell, a thoughtful local-first task manager.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="../assets/projects-Bhx10APr.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/index-DY_FACyA.js">
+  <link rel="stylesheet" crossorigin href="../assets/index-F66a9dKL.css">
+</head>
+<body class="projects-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="projects-header">
+    <a class="projects-mark" href="/projects" aria-label="Projects home">A<span>+</span></a>
+    <p>Private workshop <span aria-hidden="true">/</span> useful little things</p>
+    <span class="projects-clock" aria-label="Current local time"></span>
+  </header>
+
+  <main id="main">
+    <section class="projects-intro" aria-labelledby="projects-title">
+      <p class="eyebrow">Ayodeji's side quests — vol. 01</p>
+      <h1 id="projects-title">Things I made<br><em>for the fun of it.</em></h1>
+      <div class="intro-foot">
+        <p>Quiet tools and weekend experiments. No accounts, no tracking, no nonsense.</p>
+        <span aria-hidden="true">Scroll to explore ↓</span>
+      </div>
+    </section>
+
+    <section class="project-feature" aria-labelledby="donewell-title">
+      <div class="project-meta">
+        <span>01 / Productivity</span><span>2026</span>
+      </div>
+      <div class="project-heading">
+        <div><p class="eyebrow">Your day, minus the noise</p><h2 id="donewell-title">Donewell.</h2></div>
+        <p>A calm, local-first task desk with just enough structure to keep momentum—and none of the admin of managing your task manager.</p>
+      </div>
+
+      <div class="todo-shell">
+        <aside class="todo-sidebar">
+          <div>
+            <p class="todo-brand">Donewell<span>.</span></p>
+            <p class="todo-date"></p>
+          </div>
+          <nav aria-label="Task filters">
+            <button class="filter active" data-filter="all"><span>All tasks</span><b data-count="all">0</b></button>
+            <button class="filter" data-filter="today"><span>Today</span><b data-count="today">0</b></button>
+            <button class="filter" data-filter="upcoming"><span>Upcoming</span><b data-count="upcoming">0</b></button>
+            <button class="filter" data-filter="completed"><span>Completed</span><b data-count="completed">0</b></button>
+          </nav>
+          <div class="local-note"><span>●</span><p><strong>Stored on this device</strong>Your list stays in your browser.</p></div>
+        </aside>
+
+        <div class="todo-workspace">
+          <div class="todo-toolbar">
+            <div><p class="eyebrow">Current view</p><h3>All tasks</h3></div>
+            <button class="clear-completed" type="button">Clear completed</button>
+          </div>
+
+          <form class="task-form">
+            <label class="sr-only" for="task-title">What needs doing?</label>
+            <input id="task-title" name="title" maxlength="120" required autocomplete="off" placeholder="What needs doing?">
+            <div class="task-options">
+              <label><span>Due</span><input name="due" type="date"></label>
+              <label><span>Priority</span><select name="priority"><option value="normal">Normal</option><option value="high">High</option><option value="low">Low</option></select></label>
+              <button type="submit">Add task <span aria-hidden="true">↵</span></button>
+            </div>
+          </form>
+
+          <div class="list-tools">
+            <label><span class="sr-only">Search tasks</span><input class="task-search" type="search" placeholder="Search tasks…"></label>
+            <span class="progress-copy" aria-live="polite"></span>
+          </div>
+          <div class="progress-track" aria-hidden="true"><span></span></div>
+          <ul class="task-list" aria-label="Tasks"></ul>
+          <div class="empty-state" hidden><span>✓</span><h4>All clear.</h4><p>Nothing here needs your attention.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="projects-footer"><p>Built with care by Ayodeji.</p><p>Everything works offline after the first visit.</p></footer>
+</body>
+</html>

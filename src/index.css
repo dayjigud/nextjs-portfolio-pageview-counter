@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* The private /projects workshop keeps the portfolio's type, but has its own warmer identity. */
+.projects-page { --project-orange:#ff5c35; --project-cream:#f4f0e8; background:#151515; color:#f7f4ee; }
+.projects-header { height:72px; padding:0 clamp(1.25rem,4vw,4rem); display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #3a3a3a; font:500 .72rem/1 'JetBrains Mono',monospace; letter-spacing:.09em; text-transform:uppercase; }
+.projects-mark { font:900 1.5rem/1 Archivo,sans-serif; }.projects-mark span,.todo-brand span { color:var(--project-orange); }
+.projects-header p { color:#aaa; }.projects-header p span { padding:0 .6rem; color:var(--project-orange); }
+.projects-intro { padding:clamp(5rem,11vw,10rem) clamp(1.25rem,5vw,5rem) 4rem; min-height:calc(100vh - 72px); display:flex; flex-direction:column; justify-content:space-between; }
+.eyebrow { font:500 .7rem/1.5 'JetBrains Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
+.projects-intro h1 { margin:2rem 0; font:900 clamp(3.5rem,10vw,9rem)/.88 Archivo,sans-serif; letter-spacing:-.055em; text-transform:uppercase; }
+.projects-intro h1 em { color:var(--project-orange); font-style:normal; }
+.intro-foot { display:flex; justify-content:space-between; align-items:end; border-top:1px solid #3a3a3a; padding-top:1.25rem; color:#aaa; font-size:.9rem; }
+.intro-foot p { max-width:32rem; }.intro-foot span { font:500 .65rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }
+.project-feature { background:var(--project-cream); color:#171717; padding:clamp(1.25rem,4vw,4rem); }
+.project-meta { display:flex; justify-content:space-between; border-top:2px solid #171717; padding-top:.75rem; font:500 .67rem/1 'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.1em; }
+.project-heading { margin:4rem 0 3rem; display:grid; grid-template-columns:2fr 1fr; gap:3rem; align-items:end; }
+.project-heading h2 { font:900 clamp(4rem,10vw,9rem)/.85 Archivo,sans-serif; letter-spacing:-.06em; }.project-heading>p { color:#5c5a55; line-height:1.7; }
+.todo-shell { min-height:650px; display:grid; grid-template-columns:250px 1fr; border:1px solid #beb9ae; background:#fff; box-shadow:0 24px 70px #302b221f; }
+.todo-sidebar { background:#181818; color:#fff; padding:2rem 1.5rem; display:flex; flex-direction:column; }
+.todo-brand { font:900 1.5rem/1 Archivo,sans-serif; }.todo-date { margin-top:.7rem; color:#858585; font-size:.72rem; }
+.todo-sidebar nav { margin-top:4rem; display:grid; gap:.35rem; }.filter { padding:.85rem 1rem; display:flex; justify-content:space-between; text-align:left; color:#aaa; font-size:.82rem; transition:.2s; }.filter:hover,.filter.active { background:#292929; color:#fff; }.filter.active { box-shadow:inset 2px 0 var(--project-orange); }.filter b { font:500 .65rem/1.5 'JetBrains Mono',monospace; }
+.local-note { margin-top:auto; border-top:1px solid #333; padding-top:1.25rem; display:flex; gap:.7rem; color:#777; font-size:.65rem; line-height:1.5; }.local-note span { color:#62c875; }.local-note strong { display:block; color:#ccc; }
+.todo-workspace { padding:clamp(1.5rem,4vw,3.5rem); min-width:0; }.todo-toolbar { display:flex; justify-content:space-between; align-items:end; }.todo-toolbar h3 { margin-top:.45rem; font:700 clamp(1.8rem,4vw,3rem)/1 Archivo,sans-serif; }.clear-completed { color:#777; font:500 .64rem/1 'JetBrains Mono',monospace; text-transform:uppercase; border-bottom:1px solid; padding-bottom:.25rem; }
+.task-form { margin-top:2.5rem; border:1px solid #ccc6bb; }.task-form>input { width:100%; padding:1.25rem 1.35rem; outline:0; font-size:1.05rem; }.task-form:focus-within { border-color:#171717; box-shadow:0 0 0 1px #171717; }.task-options { border-top:1px solid #e0dcd3; display:flex; align-items:stretch; }.task-options label { display:flex; align-items:center; gap:.6rem; padding:.8rem 1rem; border-right:1px solid #e0dcd3; color:#777; font:500 .63rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.task-options input,.task-options select { color:#171717; background:transparent; }.task-options button { margin-left:auto; padding:.8rem 1.2rem; background:var(--project-orange); color:#fff; font:600 .73rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }
+.list-tools { margin-top:2.5rem; display:flex; justify-content:space-between; color:#777; font:500 .67rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.task-search { background:transparent; outline:0; text-transform:none; min-width:8rem; }.progress-track { height:2px; margin-top:1rem; background:#e5e1d9; }.progress-track span { display:block; height:100%; background:var(--project-orange); transition:width .3s; }
+.task-list { margin-top:.5rem; }.task-row { display:grid; grid-template-columns:auto 1fr auto; gap:1rem; align-items:center; padding:1.25rem .25rem; border-bottom:1px solid #e5e1d9; }.task-check { width:24px; height:24px; border:1px solid #aaa; display:grid; place-items:center; border-radius:50%; }.task-check span { opacity:0; }.task-row.done .task-check { border-color:var(--project-orange); background:var(--project-orange); color:#fff; }.task-row.done .task-check span { opacity:1; }.task-row.done .task-copy p { text-decoration:line-through; color:#999; }.task-copy p { font-weight:600; }.task-copy div { display:flex; gap:.75rem; margin-top:.45rem; color:#888; font:500 .59rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.priority { color:#666; }.priority.high { color:#d33b1a; }.priority.low { color:#2c7860; }.task-delete { opacity:0; color:#888; font-size:1.4rem; }.task-row:hover .task-delete,.task-delete:focus-visible { opacity:1; }
+.empty-state { padding:5rem 1rem; text-align:center; color:#888; }.empty-state span { display:grid; place-items:center; margin:auto; width:3rem; height:3rem; border:1px solid #ccc; border-radius:50%; }.empty-state h4 { margin-top:1rem; color:#222; font:700 1.3rem Archivo,sans-serif; }.empty-state p { margin-top:.35rem; font-size:.8rem; }
+.projects-footer { padding:2rem clamp(1.25rem,4vw,4rem); display:flex; justify-content:space-between; color:#888; font:500 .65rem/1.5 'JetBrains Mono',monospace; text-transform:uppercase; }
+@media(max-width:700px){.projects-header p{display:none}.projects-intro{min-height:75vh}.intro-foot span{display:none}.project-heading{grid-template-columns:1fr}.todo-shell{grid-template-columns:1fr}.todo-sidebar{padding:1.25rem}.todo-sidebar nav{margin-top:1.5rem;grid-template-columns:repeat(2,1fr)}.local-note{display:none}.task-options{flex-wrap:wrap}.task-options label{flex:1}.task-options button{width:100%;padding:1rem}.projects-footer{gap:2rem}.projects-footer p:last-child{text-align:right}}
+
 /* ============================================================
    Swiss / editorial design system — CSS-first with minimal JS.
    Every animation on this site is pure CSS. Scroll-driven
