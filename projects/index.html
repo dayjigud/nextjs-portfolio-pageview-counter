@@ -48,6 +48,7 @@
           <nav aria-label="Task filters">
             <button class="filter active" data-filter="all"><span>All tasks</span><b data-count="all">0</b></button>
             <button class="filter" data-filter="today"><span>Today</span><b data-count="today">0</b></button>
+            <button class="filter" data-filter="overdue"><span>Overdue</span><b data-count="overdue">0</b></button>
             <button class="filter" data-filter="upcoming"><span>Upcoming</span><b data-count="upcoming">0</b></button>
             <button class="filter" data-filter="completed"><span>Completed</span><b data-count="completed">0</b></button>
           </nav>
@@ -59,24 +60,35 @@
             <div><p class="eyebrow">Current view</p><h3>All tasks</h3></div>
             <button class="clear-completed" type="button">Clear completed</button>
           </div>
+          <div class="task-notice" role="status" hidden><span></span><button class="undo-action" type="button" hidden>Undo</button></div>
 
           <form class="task-form">
             <label class="sr-only" for="task-title">What needs doing?</label>
             <input id="task-title" name="title" maxlength="120" required autocomplete="off" placeholder="What needs doing?">
             <div class="task-options">
-              <label><span>Due</span><input name="due" type="date"></label>
+              <div class="date-field"><span>Due</span><input name="due" type="hidden"><button class="date-trigger" type="button" aria-label="Choose due date" aria-haspopup="dialog" aria-expanded="false"><span>Pick a date</span><span aria-hidden="true">▦</span></button><div class="date-picker" role="dialog" aria-label="Choose due date" hidden></div></div>
               <label><span>Priority</span><select name="priority"><option value="normal">Normal</option><option value="high">High</option><option value="low">Low</option></select></label>
               <button type="submit">Add task <span aria-hidden="true">↵</span></button>
             </div>
+            <details class="task-more"><summary>More details</summary>
+              <div class="task-more-fields">
+                <label>Repeat <select name="repeat"><option value="none">Never</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select></label>
+                <label>Label <input name="tag" maxlength="40" placeholder="e.g. Work"></label>
+                <label class="notes-field">Notes <textarea name="notes" maxlength="1000" rows="2" placeholder="Add helpful details"></textarea></label>
+              </div>
+            </details>
           </form>
 
           <div class="list-tools">
             <label><span class="sr-only">Search tasks</span><input class="task-search" type="search" placeholder="Search tasks…"></label>
+            <label>Label <select class="tag-filter"><option value="">All labels</option></select></label>
+            <label>Sort <select class="task-sort"><option value="newest">Newest</option><option value="due">Due date</option><option value="priority">Priority</option></select></label>
             <span class="progress-copy" aria-live="polite"></span>
           </div>
           <div class="progress-track" aria-hidden="true"><span></span></div>
           <ul class="task-list" aria-label="Tasks"></ul>
           <div class="empty-state" hidden><span>✓</span><h4>All clear.</h4><p>Nothing here needs your attention.</p></div>
+          <div class="task-backup"><p>Keep a copy of your tasks on this device.</p><div><button class="export-tasks" type="button">Export backup</button><button class="import-tasks" type="button">Import backup</button><input class="import-file" type="file" accept=".json,application/json" hidden></div></div>
         </div>
       </div>
     </section>
