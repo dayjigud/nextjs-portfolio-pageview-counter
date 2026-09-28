@@ -118,6 +118,30 @@ test.describe('mobile navigation', () => {
 });
 
 test.describe('private projects page', () => {
+  test('keeps the mobile calendar below its field and clear of other controls', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'Mobile viewport only');
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto('/projects/');
+
+    const checkLayout = async (field, priority, container) => {
+      await field.getByRole('button', { name: 'Choose due date' }).click();
+      const pickerBox = await field.locator('.date-picker').boundingBox();
+      const priorityBox = await priority.boundingBox();
+      const containerBox = await container.boundingBox();
+      const monthBox = await field.locator('.calendar-month').boundingBox();
+      expect(pickerBox.x).toBeGreaterThanOrEqual(containerBox.x - 1);
+      expect(pickerBox.x + pickerBox.width).toBeLessThanOrEqual(containerBox.x + containerBox.width + 1);
+      expect(pickerBox.y + pickerBox.height).toBeLessThanOrEqual(priorityBox.y + 1);
+      expect(monthBox.width).toBeGreaterThanOrEqual(80);
+      await page.keyboard.press('Escape');
+    };
+
+    await checkLayout(page.locator('.task-form .date-field'), page.locator('.task-options > label'), page.locator('.task-form'));
+    await page.locator('.task-row').first().getByRole('button', { name: /^Edit/ }).click();
+    const editor = page.locator('.task-edit-form');
+    await checkLayout(editor.locator('.date-field'), editor.getByLabel('Priority'), editor);
+  });
+
   test('chooses and clears dates with the calendar, and requires one for repeating tasks', async ({ page }) => {
     await page.goto('/projects/');
     const field = page.locator('.task-form .date-field');

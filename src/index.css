@@ -36,6 +36,17 @@
 .empty-state { padding:5rem 1rem; text-align:center; color:#888; }.empty-state span { display:grid; place-items:center; margin:auto; width:3rem; height:3rem; border:1px solid #ccc; border-radius:50%; }.empty-state h4 { margin-top:1rem; color:#222; font:700 1.3rem Archivo,sans-serif; }.empty-state p { margin-top:.35rem; font-size:.8rem; }
 .projects-footer { padding:2rem clamp(1.25rem,4vw,4rem); display:flex; justify-content:space-between; color:#888; font:500 .65rem/1.5 'JetBrains Mono',monospace; text-transform:uppercase; }
 @media(max-width:700px){.projects-header p{display:none}.projects-intro{min-height:75vh}.intro-foot span{display:none}.project-heading{grid-template-columns:1fr}.todo-shell{grid-template-columns:1fr}.todo-sidebar{padding:1.25rem}.todo-sidebar nav{margin-top:1.5rem;grid-template-columns:repeat(2,1fr)}.local-note{display:none}.task-options{flex-wrap:wrap}.task-options label,.task-options .date-field{flex:1}.task-options>button[type=submit]{width:100%;padding:1rem}.task-row{gap:.6rem}.task-actions{gap:.5rem}.task-backup{align-items:start}.projects-footer{gap:2rem}.projects-footer p:last-child{text-align:right}}
+@media(max-width:700px){
+  .task-options .date-field,.task-edit-options .date-field{flex:1 1 100%;width:100%}
+  .task-options .date-field{flex-wrap:wrap;border-right:0;border-bottom:1px solid #e0dcd3}
+  .task-edit-options .date-field{display:flex;flex-direction:column;align-items:stretch}
+  .date-picker{position:static;flex:0 0 100%;width:100%;margin-top:.4rem;padding:.75rem;box-shadow:none}
+  .date-picker-header{grid-template-columns:1.7rem minmax(0,1fr) 1.7rem;grid-template-rows:auto auto}
+  .calendar-prev{grid-column:1;grid-row:1/3}
+  .calendar-month{grid-column:2;grid-row:1}
+  .calendar-year{grid-column:2;grid-row:2}
+  .calendar-next{grid-column:3;grid-row:1/3}
+}
 
 /* ============================================================
    Swiss / editorial design system — CSS-first with minimal JS.
