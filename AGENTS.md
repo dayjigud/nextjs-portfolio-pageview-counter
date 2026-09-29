@@ -1,28 +1,46 @@
 # Repository guide for coding agents
 
-## What this project is
+Keep this file synchronized with major architecture and development workflow changes. Before finishing a substantial coding task, check whether it changes anything documented here or adds information future agents need; update this file in the same change when it does. Skip documentation churn for minor fixes and cosmetic edits.
 
-This is a small Vite site with two HTML entry points. `index.html` is Ayodeji's portfolio. `projects/index.html` is the Donewell task app at `/projects/`. The app uses vanilla JavaScript and browser storage; there is no React application, account system, or task backend.
+## Project overview
 
-## Where to work
+This is a Vite site with two HTML entry points: Ayodeji Adeniyi's portfolio at `/` and the Donewell task app at `/projects/`. The current implementation uses semantic HTML, vanilla JavaScript, Tailwind CSS, and custom CSS. There is no React app or client-side router.
 
-- Edit portfolio markup in `index.html` and its mobile navigation behavior in `src/navigation.js`.
-- Edit Donewell markup in `projects/index.html` and its behavior in `src/projects.js`.
-- Edit shared and page-specific styles in `src/index.css`; Tailwind settings are in `tailwind.config.js`.
-- Vite builds both pages through `vite.config.ts`. Vercel settings are in `vercel.json`.
-- `dist/` is tracked build output. Change source files first, then run `npm run build` to regenerate it. Do not hand-edit generated assets.
+Donewell runs entirely in the browser. It has no account system, server API, or database. The absence of a portfolio link to `/projects/` does not make that page authenticated or access-controlled.
 
-## Donewell behavior to preserve
+## Repository map
 
-- Tasks are stored locally under `donewell-tasks-v1`. Preserve existing saved tasks when changing the data model. Backup import/export uses JSON and must keep working with current backups.
-- Due dates are local calendar dates in `YYYY-MM-DD` form. Avoid UTC conversions that can shift a date for users in other time zones.
-- The calendar picker works in both add and edit forms. Keep it usable by keyboard and on narrow screens. Repeating tasks require a due date.
-- `/projects/` is intentionally absent from the portfolio navigation, but anyone with its URL can access it. Do not treat that lack of a link as authentication.
+- `index.html`: portfolio content and markup; `src/navigation.js`: accessible mobile menu behavior.
+- `projects/index.html`: Donewell markup; `src/projects.js`: task state, calendar, filters, repeating tasks, and JSON backup import/export.
+- `src/index.css`: shared and page-specific styles. `tailwind.config.js` defines theme tokens and scanned source files; `postcss.config.js` wires Tailwind and Autoprefixer.
+- `public/images/`: static images. `vite.config.ts` configures both HTML build entries and relative asset paths.
+- `tests/portfolio.spec.js` and `playwright.config.js`: desktop and mobile Chromium browser tests, including accessibility checks.
+- `.github/workflows/ci.yml`: CI install, Chromium setup, and test run. `vercel.json`: deployment build and output settings.
+- `dist/`: tracked generated production output. Edit source files, then regenerate with `npm run build`; do not hand-edit generated assets.
+- `plans/` contains working notes. `Performance_Audit_Report.md` and `OPTIMIZATION_SUMMARY.md` describe an older React version and are historical, not current architecture guidance.
 
-## Commands and checks
+## Setup and commands
 
-Use Node.js 20 or newer and `npm ci` for a clean install. Run `npm run dev` for local work, `npm run build` for production output, and `npm test` for the Playwright suite. If Playwright's Chromium is missing, install it with `npx playwright install chromium`.
+Use Node.js 20 or newer and npm. No application environment variables or secret configuration are required by the current source. Playwright reads `CI` to adjust retries, reporting, and server reuse in CI.
 
-The tests in `tests/portfolio.spec.js` cover desktop and mobile layouts, navigation, accessibility, and Donewell task flows. Run the relevant tests after changing behavior; run the full suite when changes affect the portfolio or shared styles. Report any failures rather than changing tests to conceal them. Preserve semantic controls, visible focus states, and reduced-motion behavior.
+```sh
+npm ci
+npm run dev
+npm run build
+npm run preview
+npm test
+```
 
-`Performance_Audit_Report.md` and `OPTIMIZATION_SUMMARY.md` describe an older React version and are historical references, not current architecture documentation.
+`npm test` builds the site, then runs Playwright against the production preview server. If Chromium is missing, run `npx playwright install chromium`. The package has no lint, formatting, type-check, or database script; do not assume those checks exist because `tsconfig.json` is present. Vercel builds with `npm run build` and serves `dist/`.
+
+## Implementation conventions and constraints
+
+- Keep page markup in its HTML entry point, behavior in the corresponding `src/*.js` module, and styling in `src/index.css`. Follow existing semantic controls, ARIA state, visible focus styles, and `prefers-reduced-motion` handling.
+- Donewell saves its task array in `localStorage` under `donewell-tasks-v1`. Preserve existing saved tasks when evolving the data shape. JSON backup import/export uses version `1`; keep current backups readable.
+- Due dates are local calendar dates in `YYYY-MM-DD` form. Avoid UTC conversions that could shift a user's date. Repeating tasks require a due date, and the date picker must work in both add and edit forms with keyboard and narrow screens.
+- Task rows are rendered from user-entered data in `src/projects.js`; keep escaping and backup validation intact when changing rendering or import behavior.
+- The portfolio and Donewell share the stylesheet but have distinct page styling. Check both pages when changing shared CSS or Tailwind configuration.
+
+## Testing expectations
+
+Run relevant Playwright tests after behavior changes; run the full `npm test` suite for portfolio or shared-style changes. Tests cover navigation, desktop and mobile layouts, keyboard interaction, accessibility, and Donewell persistence, calendar, recurrence, filtering, and backups. Report failures rather than changing tests to hide them. After source changes that affect production output, run `npm run build` so tracked `dist/` matches the source.
