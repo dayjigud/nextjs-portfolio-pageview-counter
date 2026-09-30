@@ -10,13 +10,18 @@ export async function getAuthState(){
 }
 export async function ensureGuestSession(){const client=requireShopClient();const {data}=await client.auth.getSession();if(data.session)return data.session;
  const result=await client.auth.signInAnonymously();if(result.error)throw new Error('Your guest cart could not be started. Please retry.');return result.data.session;}
-async function beginGoogle(returnTo){
+async function beginGoogle(returnTo, emptyBagHome=false){
  const client=requireShopClient();const {data}=await client.auth.getSession();
  if(data.session?.user.is_anonymous){const cart=await getCart();if(cart.lines.length){const handoff=await prepareHandoff();writeHandoff(sessionStorage,{...handoff,returnTo:safeReturnPath(returnTo),guestSession:data.session});}}
- const redirectTo=new URL('/projects/shop/auth/callback/',location.origin);redirectTo.searchParams.set('next',safeReturnPath(returnTo));
+ const redirectTo=new URL('/projects/shop/auth/callback/',location.origin);redirectTo.searchParams.set('next',safeReturnPath(returnTo));if(emptyBagHome)redirectTo.searchParams.set('emptyBagHome','1');
  const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:redirectTo.href}});if(error)throw new Error('Google sign-in could not start. Your cart is unchanged.');
 }
-export async function signInShop(returnTo='/projects/shop/cart/'){await beginGoogle(safeReturnPath(returnTo));}
+export async function signInShop(returnTo){await beginGoogle(safeReturnPath(returnTo??'/projects/shop/cart/'),returnTo===undefined);}
+async function returnAfterGoogle(returnTo,params){
+ let destination=safeReturnPath(returnTo);
+ if(params.get('emptyBagHome')==='1'&&destination==='/projects/shop/cart/'&&!(await getCart()).lines.length)destination='/projects/shop/';
+ location.replace(destination);
+}
 export async function startCheckout(){const state=await getAuthState();if(state.user&&!state.isAnonymous){location.assign('/projects/shop/checkout/');return;}await beginGoogle('/projects/shop/checkout/');}
 export async function completeOAuthCallback(){
  const client=requireShopClient();const params=new URLSearchParams(location.search);const recovery=readHandoffRecovery(sessionStorage);const handoff=readHandoff(sessionStorage);
@@ -30,7 +35,7 @@ export async function completeOAuthCallback(){
  if(params.has('error')||!params.get('code')){
   if(!params.has('error')&&(await getAuthState()).user?.is_anonymous===false){
    if(handoff){await redeemHandoff(handoff.token);clearHandoff(sessionStorage);}
-   location.replace(safeReturnPath(handoff?.returnTo??params.get('next')));return;
+   await returnAfterGoogle(handoff?.returnTo??params.get('next'),params);return;
   }
   if(handoff?.guestSession)await client.auth.setSession(handoff.guestSession);
   clearHandoff(sessionStorage);history.replaceState(null,'',location.pathname);
@@ -42,7 +47,7 @@ export async function completeOAuthCallback(){
  if(handoff){try{await redeemHandoff(handoff.token);clearHandoff(sessionStorage);}catch(error){
   throw error;
  }}
- location.replace(safeReturnPath(handoff?.returnTo??params.get('next')));
+ await returnAfterGoogle(handoff?.returnTo??params.get('next'),params);
 }
 export async function getTransferReview(){
  const state=readHandoff(sessionStorage);if(!state?.guestSession)throw new Error('This cart transfer has expired.');
