@@ -326,3 +326,46 @@ for (const scenario of [
     expect(state.checkoutRequests).toHaveLength(0);
   });
 }
+
+test('shop home shows its layout while catalog and identity requests are held', async ({ page }) => {
+  await shopFixture(page, { account: true });
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  await page.route(/\/(auth\/v1\/user|rest\/v1\/products)(\?|$)/, async route => { await held; await route.fallback(); });
+  await page.goto('/projects/shop/');
+  try {
+    await expect(page.getByRole('link', { name: 'Luma shop home' })).toBeVisible({ timeout: 1000 });
+    await expect(page.locator('.luma-hero')).toBeVisible({ timeout: 1000 });
+    await expect(page.getByText('Opening Luma…', { exact: true })).toHaveCount(0);
+  } finally { release(); }
+  await expect(page.getByRole('button', { name: 'Add Halo Headphones to bag' })).toBeVisible();
+});
+
+test('warm product navigation uses public catalog data without waiting for identity or catalog reads', async ({ page }) => {
+  await shopFixture(page, { account: true });
+  await page.goto('/projects/shop/');
+  await expect(page.getByRole('button', { name: 'Add Halo Headphones to bag' })).toBeVisible();
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  await page.route(/\/(auth\/v1\/user|rest\/v1\/products)(\?|$)/, async route => { await held; await route.fallback(); });
+  await page.goto('/projects/shop/product/?slug=halo-headphones');
+  try {
+    await expect(page.getByRole('heading', { name: 'Halo Headphones', exact: true })).toBeVisible({ timeout: 1000 });
+    await expect(page.getByRole('button', { name: /Add to bag/ })).toBeVisible({ timeout: 1000 });
+    await expect(page.getByText('Opening Luma…', { exact: true })).toHaveCount(0);
+  } finally { release(); }
+});
+
+test('private page layout appears while fresh bag data loads', async ({ page }) => {
+  await shopFixture(page, { account: true, filled: true });
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  await page.route('**/functions/v1/cart', async route => { await held; await route.fallback(); });
+  await page.goto('/projects/shop/cart/');
+  try {
+    await expect(page.getByRole('heading', { name: 'Your bag.', exact: true })).toBeVisible({ timeout: 1000 });
+    await expect(page.getByText('Loading your saved bag…', { exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Checkout', exact: true })).toHaveCount(0);
+  } finally { release(); }
+  await expect(page.getByRole('combobox', { name: 'Quantity', exact: true })).toHaveValue('1');
+});

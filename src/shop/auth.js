@@ -8,6 +8,12 @@ export async function getAuthState(){
  const {data,error}=await requireShopClient().auth.getUser();
  if(error||!data.user)return {isAnonymous:true,user:null};return {user:data.user,isAnonymous:Boolean(data.user.is_anonymous)};
 }
+// Local session data only selects UI; server handlers still validate every identity.
+export async function getDisplayAuthState(){
+ if(!isConfigured())return {isAnonymous:true,user:null};
+ const {data}=await requireShopClient().auth.getSession();const user=data.session?.user;
+ return {user:user??null,isAnonymous:!user||Boolean(user.is_anonymous)};
+}
 export async function ensureGuestSession(){const client=requireShopClient();const {data}=await client.auth.getSession();if(data.session)return data.session;
  const result=await client.auth.signInAnonymously();if(result.error)throw new Error('Your guest cart could not be started. Please retry.');return result.data.session;}
 async function beginGoogle(returnTo, emptyBagHome=false){

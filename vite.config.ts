@@ -1,10 +1,19 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
+import { navHtml, loadingHtml } from './src/shop/render.js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './', // Use relative paths for assets
-  plugins: [],
+  plugins: [{
+    name: 'luma-initial-layout',
+    transformIndexHtml(html) {
+      const mode = html.match(/data-shop-page="([a-z]+)"/)?.[1];
+      if (!mode) return html;
+      return html.replace('<header data-shop-nav></header>', `<header data-shop-nav>${navHtml()}</header>`)
+        .replace('<div data-shop-initial></div>', loadingHtml(mode));
+    },
+  }],
   build: {
     sourcemap: false, // Ensure sourcemaps are off for production
     rollupOptions: {
