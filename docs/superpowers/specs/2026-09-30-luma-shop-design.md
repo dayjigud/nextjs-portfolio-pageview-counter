@@ -7,9 +7,9 @@ Status: visual direction approved; functional specification awaiting review. Imp
 
 Build a portfolio demonstration of an end-to-end tech gadget shop. Luma appears as project 02 after Donewell on `/projects/`. Visitors can browse products, sign in through Google, maintain a saved cart, place a simulated order, receive a real Mailgun confirmation, and review their own order history. Supabase is the source of truth for shop business data.
 
-The user selected tech gadgets and accessories, a portfolio demo, and simulated checkout without card details. They approved Prism Playground integrated into the existing projects page. The approved design is [Superdesign draft v2](https://p.superdesign.dev/draft/915202d9-2dce-46dc-9f3d-83a65613918d), on the [project canvas](https://superdesign.dev/teams/bcf6ae71-b64e-4f7b-bb97-9698d780cde5/projects/100fe9e1-396a-4f42-b6a0-799396d90f4e).
+The user selected tech gadgets and accessories, a portfolio demo, and simulated checkout without card details. Guests must be able to add, edit, remove, and view cart items without Google sign-in; clicking checkout is the sign-in gate. They approved Prism Playground integrated into the existing projects page. The approved design is [Superdesign draft v2](https://p.superdesign.dev/draft/915202d9-2dce-46dc-9f3d-83a65613918d), on the [project canvas](https://superdesign.dev/teams/bcf6ae71-b64e-4f7b-bb97-9698d780cde5/projects/100fe9e1-396a-4f42-b6a0-799396d90f4e).
 
-The following functional defaults are proposed for review: NGN pricing, Google sign-in required before persistent cart changes, a fixed fictional delivery fee of NGN 2,500, no separate tax calculation, fictional delivery details, and no admin interface. These are scope decisions, not claims that the user separately selected them.
+The following functional defaults are proposed for review: NGN pricing, a fixed fictional delivery fee of NGN 2,500, no separate tax calculation, fictional delivery details, and no admin interface. These are scope decisions, not claims that the user separately selected them.
 
 Success means the complete browsing-to-receipt flow works across reloads and devices, another customer cannot access a user's data, and the portfolio and Donewell retain their existing behavior and appearance.
 
@@ -46,14 +46,20 @@ Use truthful copy: “Portfolio demo — no payment or shipment.” Forms use re
 
 These are Vite HTML entries, not a client-side router. Query parameters select products and receipts, with validation and owner checks. Direct loads, refreshes, and deep links must work in production.
 
-Browsing is public. On the first signed-out add-to-cart attempt, prompt Google sign-in, retain only the selected product/variant/quantity as a short-lived pending action, and execute it once after successful return. Cancellation preserves browsing context. No anonymous persistent cart is included in v1.
+Browsing and all cart actions are available without a visible sign-in step. On the first guest cart mutation, create or reuse a Supabase anonymous session in the background and save the cart under its user id. Do not create anonymous users merely for page views. Guests can reopen their saved cart after reload in the same browser. Clearing browser storage or moving to another device cannot recover an anonymous cart; cross-device recovery starts after Google sign-in.
 
-The embedded panel and full shop use the same catalog/cart modules and database records. Successful signed-in mutations are persisted before reporting success. A catalog change or unavailable item produces an actionable message and requires a fresh quote. Product cards and details share consistent names and pricing.
+Clicking checkout on a non-empty guest cart prompts Google sign-in. First prepare a short-lived cart handoff on the server, then run ordinary Google OAuth and, after callback, merge the guest cart into the permanent account cart before opening checkout. This works for both new and existing Google accounts without relying on identity linking. If already signed into Google through the shop, checkout opens directly. Voluntary sign-in from navigation uses the same cart transfer flow.
+
+A handoff is a 256-bit random single-use capability, valid for 15 minutes, stored only as a hash in a private table; its plaintext is kept in sessionStorage during OAuth, never in URLs or logs. Preparation requires the guest session and locks transfer to its cart/revision. Redemption requires a server-validated permanent Google user and the token. A guest cart UUID alone is never sufficient. Redemption, merging, cart revision updates, marking the handoff used, and clearing the transferred guest cart are atomic. A retry by the same destination user returns the prior result; another destination is rejected. Expired handoffs never delete the source cart.
+
+Merge distinct variants and add quantities for matching variants. If the result exceeds quantity/line bounds or contains unavailable variants, return a reviewable merge conflict without clearing either source cart; allow selecting adjustments and retrying the transfer. If the guest cart is edited, issue a fresh handoff under the preserved guest session and invalidate the old token; recheck the destination revision at redemption. Do not silently drop or clamp items. Refresh authoritative prices and totals after merge. Google denial/cancellation leaves the guest cart available; failed or interrupted transfers must remain recoverable in the original browser, with an actionable retry and no automatic order placement. Maintain the original guest session in short-lived sessionStorage solely for recovery until transfer succeeds or expires; clear recovery credentials on success/explicit cancellation. Never show a signed-in account cart to a later signed-out visitor.
+
+The embedded panel and full shop use the same catalog/cart modules and database records. Successful guest and signed-in mutations are persisted before reporting success. A catalog change or unavailable item produces an actionable message and requires a fresh quote. Product cards and details share consistent names and pricing.
 
 ## Customer checkout flow
 
-1. Browse, search, filter, and select a product. Sign in if needed, then add a valid variant to the saved cart.
-2. Adjust quantities (1–10 per variant; maximum 20 distinct cart lines), remove items, and open checkout.
+1. Browse, search, filter, and add valid variants to a saved guest or account cart without a Google sign-in prompt.
+2. View the cart, adjust quantities (1–10 per variant; maximum 20 distinct cart lines), and remove items freely. Clicking checkout prompts Google sign-in only for guests, transfers/merges their cart, and then opens checkout. A canceled login returns to the intact cart.
 3. Pre-fill display name when available. Collect a demo recipient name, city, and fictional address; show a clear instruction to use fictional delivery details. Receipt email is the authenticated account's email and is not editable.
 4. Request a server-calculated quote. Show item prices, subtotal, fixed demo delivery fee, and total, all in NGN. No tax or charge is represented as real.
 5. Submit with a persisted idempotency key and cart revision. Disable repeat submission while awaiting the response, while retaining a retry path after a network failure.
@@ -68,7 +74,7 @@ Retain Vite, semantic HTML, vanilla JavaScript modules, Tailwind, and shared `sr
 
 Proposed browser modules divide responsibilities into Supabase client/config, auth, catalog, cart, checkout, order history, rendering/escaping, and page initialization. `src/projects.js` remains Donewell-specific. Add separate shop initialization to the projects entry without coupling either app's state.
 
-Supabase supplies Auth, Postgres, and Storage. Public browser configuration is limited to the project URL and publishable key. Mailgun credentials, privileged database credentials, and Google OAuth client secrets never enter frontend bundles, repository artifacts, or browser-visible error messages.
+Supabase supplies Auth, Postgres, and Storage, including background anonymous sessions for guest cart ownership. Public browser configuration is limited to the project URL and publishable key. Mailgun credentials, privileged database credentials, and Google OAuth client secrets never enter frontend bundles, repository artifacts, or browser-visible error messages.
 
 Use authenticated Supabase Edge Functions for quotes and checkout. The handler validates the user with Supabase Auth and applies ownership checks even when a privileged database connection is needed. The quote is server-derived; the final transaction independently validates it. Use a dedicated least-privileged server database role and a parameterized Postgres transaction for order creation, with browser roles denied order writes. Do not expose a privileged SQL RPC to browser roles.
 
@@ -83,31 +89,33 @@ Use separate development/test and public-demo environments. Selecting the existi
 | `product_variants` | id, product id, label, integer price in kobo, currency NGN, active flag | Public read of active variants of active products |
 | `product_images` | id, product id, Storage object path, alt text, sort order | Public read of active-product imagery |
 | `profiles` | user id referencing Auth, display name, timestamps | Own row; editable display name only |
-| `carts` | id, unique user id, monotonically increasing revision, timestamps | Own cart read; mutations through authenticated server endpoint |
+| `carts` | id, unique user id referencing Auth (anonymous or permanent), monotonically increasing revision, timestamps | Own guest/account cart read; mutations through session-authenticated server endpoint |
 | `cart_items` | cart id, variant id, quantity; unique cart/variant | Own cart items read; mutations through endpoint |
 | `orders` | UUID, display reference, user id, demo flag, confirmed status, NGN totals, recipient email snapshot, demo delivery details, idempotency key, request fingerprint, created timestamp | Own orders read only |
 | `order_items` | order id, product/variant ids, immutable name/variant/price/quantity snapshots | Read through owned parent order |
+| private `cart_handoffs` | token hash, source user/cart/revision, expiry, redemption destination/time/result | Server only; never accessible through the browser Data API |
 | private `email_jobs` | unique order/type, status, attempts, next attempt, lease expiry, Mailgun message id, last sanitized error | Server only |
 | private `request_limits` | user id, window, action, counter | Server only |
 
 All monetary values use integer kobo and checked arithmetic; UI formats naira consistently. Order totals and item snapshots cannot be overwritten by customers or affected by later catalog edits. Use foreign keys, non-negative prices, quantity bounds, indexes on ownership/filter fields, and a unique `(user_id, idempotency_key)` constraint.
 
-Enable RLS on exposed tables and explicitly grant only necessary operations. Ownership policies include parent relationships, and update policies include `WITH CHECK`. Avoid authorization based on user-editable metadata. Public Storage reads are limited to catalog assets; uploads are server/operator-only. No personal data is stored in a public bucket.
+Enable RLS on exposed tables and explicitly grant only necessary operations. Ownership policies include parent relationships, and update policies include `WITH CHECK`. Avoid authorization based on user-editable metadata. Anonymous sessions also use the authenticated database role: cart policies allow ownership for both guest and permanent users, while profiles, orders, receipts, checkout, and email creation additionally require a non-anonymous, server-validated Google account. The authenticated role alone is insufficient for checkout. Customer order reads combine ownership and a non-anonymous-session condition. Public Storage reads are limited to catalog assets; uploads are server/operator-only. No personal data is stored in a public bucket.
 
 ## Server operations and concurrency
 
 - Cart mutation endpoint: validate session, ownership, active variant, bounds, and expected cart revision; update items and revision within one transaction. Return a conflict on stale revision, then refetch.
+- Cart handoff endpoints: prepare under the anonymous owner session, redeem under a permanent Google session; enforce the single-use hash, expiry, revision, ownership, atomic merge, and retry rules above. Never accept arbitrary client-supplied source/destination user ids.
 - Quote endpoint: read the owned cart, calculate authoritative prices and fee, return its revision and normalized quote fingerprint. Reject empty/unavailable carts.
-- Checkout endpoint: authenticate, enforce limits, lock cart, resolve idempotency key before rejecting an already-cleared cart, compare revision and quote, then insert order/items/email job and clear the cart in one transaction. Reusing a key with different request content returns a conflict. Use one lock order to avoid deadlocks.
+- Checkout endpoint: require a permanent Google identity and confirmed account email (reject anonymous sessions), enforce limits, lock cart, resolve idempotency key before rejecting an already-cleared cart, compare revision and quote, then insert order/items/email job and clear the cart in one transaction. Reusing a key with different request content returns a conflict. Use one lock order to avoid deadlocks.
 - Email worker: claim a due job with a lease, send from trusted saved order content to its saved authenticated recipient, then record Mailgun acceptance. Scheduler calls are service-authenticated; they are not public mail-sending endpoints.
 
-Proposed limits: 3 new demo orders per hour and 10 per day per user; count atomically on the server. Idempotent retries do not count as new orders. Rate-limit cart/quote requests separately. Return useful user-facing errors without exposing internals.
+Proposed limits: 3 new demo orders per hour and 10 per day per user; count atomically on the server. Idempotent retries do not count as new orders. Rate-limit cart/quote/handoff requests separately. Enable anonymous sign-in abuse controls and invisible CAPTCHA/Turnstile support as required by the selected Supabase setup; handle challenge failure without losing cart intent. Schedule deletion of abandoned anonymous users/carts after 30 days of cart inactivity and expired handoffs after 24 hours, excluding active transfer leases and permanent accounts. Explain the guest-cart lifetime in concise help text. Return useful user-facing errors without exposing internals.
 
 ## Google sign-in configuration
 
 Use Supabase's Google provider, configured through Google Cloud Console/Google Auth Platform: application branding, audience, basic profile/email/OpenID scopes, web OAuth client, authorized origins, and the Supabase callback URL. Configure the shop's callback URL in Supabase's redirect allowlist separately from Google's provider callback.
 
-Use the browser PKCE flow and explicit code exchange on the shop callback page. Preserve only allowlisted relative return routes and validated pending cart actions. Handle denied consent, failed exchange, expired sessions, reload, sign-out, and a return on another device without a stored pending action.
+Use the browser PKCE flow and explicit code exchange on the shop callback page. Preserve only allowlisted relative return routes and the short-lived handoff/recovery state described above. Handle denied consent, failed exchange, expired sessions, reload, sign-out, and missing handoff state. Restore/merge the cart before redirecting to checkout. Anonymous sessions must render as guests, with a Sign in option, not as signed-in customers. Sign-out hides account data and starts a fresh empty guest context on the next cart action; do not copy the previous account cart into the guest context.
 
 Google testing-mode audience restrictions must be checked before declaring public sign-in ready. Account/profile display information is not authorization. Email recipients derive from the server-validated authenticated user; request payloads cannot select a different destination.
 
@@ -147,8 +155,8 @@ Repository `vercel.json` currently includes a catch-all rewrite to `/index.html`
 
 1. Visual review of the embedded section, storefront, product details, cart, checkout, confirmation, and account on desktop and 320px/390px mobile. Extend Superdesign from the selected direction for checkout/account before implementing those screens; correct known canvas simplifications rather than importing them.
 2. Full existing Playwright suite after shared CSS/page changes; focused new coverage for browsing, keyboard interaction, mobile layouts, form validation, and persistence. Preserve existing tests and report unrelated failures.
-3. Database integration tests prove user A cannot read or mutate user B's records, public catalog writes fail, and browser roles cannot create orders or access private email jobs.
-4. Checkout tests cover tampered prices/fees, unknown/inactive variants, invalid quantities, stale quote/cart revision, concurrent cart changes, double-clicks, retry after timeout, atomic rollback, and existing idempotency key with changed payload.
+3. Database integration tests prove user A cannot read or mutate user B's records, public catalog writes fail, and browser roles cannot create orders or access private email jobs/handoffs. Prove anonymous users cannot reach checkout/order/history APIs even though they have authenticated-role JWTs.
+4. Guest cart tests cover add/view/edit/remove without login, reload persistence, login only at checkout, new/existing Google account merges, matching-variant sums, merge conflicts, canceled OAuth, interrupted/expired handoffs, replay to another account, concurrent mutations, and sign-out privacy. Checkout tests cover tampered prices/fees, unknown/inactive variants, invalid quantities, stale quote/cart revision, concurrent cart changes, double-clicks, retry after timeout, atomic rollback, and existing idempotency key with changed payload.
 5. Email tests cover acceptance, failure/retry, lease recovery, unauthorized scheduler calls, altered recipient payload, and safe templating. Use mocked Mailgun in automated tests plus one approved controlled-recipient live test during integration.
 6. Google integration is verified with a real authorized test user, callback configuration, denied consent, sign-out, reload, and return context. Automated browser tests may stub external login; report real integration separately.
 7. Verify deep links on production preview and actual Vercel preview. Inspect built assets for accidental secrets. Run Supabase advisors and resolve findings relevant to the new schema before public release.
@@ -164,6 +172,7 @@ Before service setup, resolve which Supabase account/project to use, which Googl
 
 ## Technical references
 
+- [Supabase anonymous sessions and guest-cart identity conflicts](https://supabase.com/docs/guides/auth/auth-anonymous)
 - [Supabase Google sign-in](https://supabase.com/docs/guides/auth/social-login/auth-google)
 - [Supabase row-level security](https://supabase.com/docs/guides/database/postgres/row-level-security)
 - [Supabase Edge Functions](https://supabase.com/docs/guides/functions)
