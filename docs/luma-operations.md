@@ -4,6 +4,8 @@
 
 Selected isolated Supabase project: `xiunfinvgxoquxiqnnyj` (Luma, Main connection, eu-west-1). The additive schema/catalog can be deployed independently from credentials and OAuth. Application success must never be claimed until the live integrations pass.
 
+Verified Mailgun sending configuration: `MAILGUN_DOMAIN=ayodeji.xyz`, `MAILGUN_REGION=US`, sender `Luma Demo <orders@ayodeji.xyz>`. These are Supabase Edge Function secrets; the API key is configured outside this repository. SPF was verified, DKIM active, and the first live confirmation was accepted and delivered on 30 September 2026.
+
 Runtime: official Supabase CLI 2.117.0; pinned Deno 2.7.4 via `npx --yes deno@2.7.4`; PostgreSQL driver `npm:postgres@3.4.7`. No Docker runtime is available locally. Server domain tests are real Deno tests; SQL access/constraint fixtures can run in the dedicated Luma project and roll back their identities. Concurrent request/rollback tests still require the configured server database credential; deterministic browser mocks do not prove these.
 
 ## Server secrets (Supabase dashboard → Edge Functions → Secrets)
@@ -32,13 +34,17 @@ Deploy `cart`, `cart-handoff`, `quote`, `checkout`, and `orders` with `verify_jw
 
 Upload seven illustrations into public Storage bucket `luma-catalog` at seed paths: `luma-a1.svg`, `luma-buds-pro.svg`, `soundcylinder.svg`, `magstand.svg`, `mechkey-flow.svg`, `pro-hub.svg`, `luma-watch-s1.svg`. Bucket public reads are intentional for catalog only. No customer uploads or personal data belong there.
 
-## Scheduler activation (operator step)
+## Email scheduler
 
 The same seven illustration files are bundled in `public/images/luma/` and used if their Storage URLs are unavailable. Catalog records, carts and orders always come from Supabase; there is no local product/order data fallback. Upload the bundled files to complete Storage provisioning.
 
 Anonymous CAPTCHA is not active in this build. Before enabling CAPTCHA in the Supabase dashboard, add its client challenge/token flow and verify failure preserves the pending cart action. Do not expose a CAPTCHA site-key setting that the client ignores.
 
 After sender and server credential verification, enable `pg_cron`, `pg_net`, and Vault in the selected project. Store the scheduler secret in Vault under `luma_scheduler_secret`. Schedule an HTTP POST to `/functions/v1/email-worker` every minute, using the Vault value in `Authorization: Bearer …` and `{}` JSON. Set a bounded HTTP timeout and review cron/net error logs. The worker itself processes up to 20 leased jobs, recovers five-minute expired leases, and stops after the initial send plus retries after 1, 5, and 30 minutes. Mailgun acceptance is not inbox delivery. A crash after Mailgun acceptance may produce duplicate confirmation mail; order creation remains idempotent.
+
+`20260930171122_luma_email_schedule.sql` installs the named `luma-confirmation-email-worker` job for the dedicated Luma project. It uses a 120-second HTTP timeout and reads the bearer credential from Vault at execution time; no secret appears in the migration or cron command. Calling `cron.schedule` with the existing job name updates that job. The job issues no HTTP request until Vault contains `luma_scheduler_secret` with at least 64 characters. Use the same unique random 64-character alphanumeric value in Vault and the Edge Function secret `LUMA_SCHEDULER_SECRET`; missing or mismatched values prevent processing.
+
+On 30 September 2026, the first live confirmation remained `pending` with `attempts=0` because neither the cron schedule nor its credential was provisioned. After installing the schedule and the operator saving matching credentials, the scheduled worker returned HTTP 200 with `processed=1, accepted=1`; the outbox recorded acceptance on its first attempt. Mailgun reported delivery to Gmail at 18:15:03 Africa/Lagos with a successful SMTP response. The following scheduled call also returned HTTP 200 with no remaining work. To diagnose future issues, inspect `luma_private.email_jobs` (status, attempts, last_error, message_id), `cron.job_run_details`, and `net._http_response` status codes. A successful cron SQL run alone does not prove the asynchronous HTTP request or Mailgun send succeeded. Preserve the queued order and retry it through the worker rather than creating duplicate orders.
 
 **Guest deletion is not deployed without separate approval.** Automatic approval review rejected the initial migration because it included a security-definer function deleting anonymous Auth users. The safer additive schema excludes that function. `supabase/pending-migrations/20260930120911_luma_guest_maintenance.sql` is kept separately for explicit review/approval; it is intentionally outside normal migrations so ordinary schema pushes cannot deploy it. `guest-cleanup` must not be scheduled until this approval and verification. Its private function limits deletion to anonymous users whose carts are inactive over 30 days, excludes active handoffs, uses row locks, and is executable only by the server role. Expired JWTs/current user validation and Auth cascading deletion protect removed identities. Enable the daily cleanup only after isolated fixtures prove permanent/recent/active-transfer accounts survive.
 
