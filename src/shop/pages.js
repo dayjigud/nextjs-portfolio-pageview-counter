@@ -8,7 +8,7 @@ import { shopPath, navHtml, googleIconHtml, heroHtml, unavailableHtml, stateHtml
 
 export async function initShopPage(root, embedded = false) {
  const content = root.querySelector('[data-shop-content]');
- const bundledImages=new Set(['luma-a1.svg','luma-buds-pro.svg','soundcylinder.svg','magstand.svg','mechkey-flow.svg','pro-hub.svg','luma-watch-s1.svg']);
+ const bundledImages=new Set(['luma-a1.svg','luma-buds-pro.svg','soundcylinder.svg','magstand.svg','mechkey-flow.svg','pro-hub.svg','luma-watch-s1.svg','pocketcharge-20k.svg','halo-desk-light.svg','foldaway-stand.svg','nanocharge-65w.svg','linkcable-usbc.svg','arc-mouse.svg','luma-mini-speaker.svg','luma-fitband.svg']);
  root.addEventListener('error',event=>{
   const image=event.target;if(!(image instanceof HTMLImageElement))return;
   const path=new URL(image.currentSrc||image.src,location.origin).pathname;

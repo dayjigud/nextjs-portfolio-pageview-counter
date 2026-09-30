@@ -32,11 +32,11 @@ Mailgun: choose domain/region, verify required DNS (SPF/DKIM and provider-requir
 
 Deploy `cart`, `cart-handoff`, `quote`, `checkout`, and `orders` with `verify_jwt=false` and mandatory handler Auth `/user` validation. Deploy `email-worker` and `guest-cleanup` with gateway JWT verification disabled **only because the handlers validate the dedicated scheduler bearer secret**. All browser endpoints call Auth's `/user` endpoint to validate current identities. Orders/quote/checkout require a confirmed Google identity, not merely the authenticated database role.
 
-Upload seven illustrations into public Storage bucket `luma-catalog` at seed paths: `luma-a1.svg`, `luma-buds-pro.svg`, `soundcylinder.svg`, `magstand.svg`, `mechkey-flow.svg`, `pro-hub.svg`, `luma-watch-s1.svg`. Bucket public reads are intentional for catalog only. No customer uploads or personal data belong there.
+Catalog illustrations are maintained in `public/images/luma/`. Upload each file into public Storage bucket `luma-catalog` using the filename stored in `product_images.storage_path`. Bucket public reads are intentional for catalog only. No customer uploads or personal data belong there. Catalog migrations preserve product and variant IDs so saved carts and historical orders remain valid.
 
 ## Email scheduler
 
-The same seven illustration files are bundled in `public/images/luma/` and used if their Storage URLs are unavailable. Catalog records, carts and orders always come from Supabase; there is no local product/order data fallback. Upload the bundled files to complete Storage provisioning.
+The illustration files are also bundled in `public/images/luma/` and used if their Storage URLs are unavailable. Add new filenames to the allowlist in `src/shop/pages.js` when extending the catalog. Catalog records, carts and orders always come from Supabase; there is no local product/order data fallback.
 
 Anonymous CAPTCHA is not active in this build. Before enabling CAPTCHA in the Supabase dashboard, add its client challenge/token flow and verify failure preserves the pending cart action. Do not expose a CAPTCHA site-key setting that the client ignores.
 
