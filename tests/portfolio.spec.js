@@ -118,10 +118,49 @@ test.describe('mobile navigation', () => {
 });
 
 test.describe('private projects page', () => {
+  test('starts empty, loads samples into every view, and returns to empty', async ({ page }) => {
+    await page.goto('/projects/');
+    await expect(page.locator('.task-row')).toHaveCount(0);
+    await expect(page.locator('.empty-state')).toBeVisible();
+    await page.getByRole('button', { name: 'Load sample data' }).click();
+    await expect(page.locator('.task-row')).toHaveCount(6);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    for (const filter of ['today', 'overdue', 'upcoming', 'completed']) {
+      await page.locator(`.filter[data-filter="${filter}"]`).click();
+      await expect(page.locator('.task-row').first()).toBeVisible();
+    }
+    await page.getByRole('button', { name: 'Clear sample data' }).click();
+    await expect(page.locator('.task-row')).toHaveCount(0);
+    await expect(page.locator('.empty-state')).toBeVisible();
+    await page.reload();
+    await expect(page.locator('.task-row')).toHaveCount(0);
+    await page.getByRole('button', { name: 'Load sample data' }).click();
+    await page.reload();
+    await expect(page.locator('.task-row')).toHaveCount(0);
+  });
+
+  test('preserves saved tasks while sample data is explored and changed', async ({ page }) => {
+    await page.goto('/projects/');
+    await page.getByPlaceholder('What needs doing?').fill('My saved task');
+    await page.getByRole('button', { name: /Add task/ }).click();
+    const stored = await page.evaluate(() => localStorage.getItem('donewell-tasks-v1'));
+    await page.getByRole('button', { name: 'Load sample data' }).click();
+    await page.getByRole('button', { name: 'Delete Plan the week with intention' }).click();
+    await page.getByRole('button', { name: 'Back to my tasks' }).click();
+    await expect(page.locator('.task-row')).toHaveCount(1);
+    await expect(page.locator('.task-row')).toContainText('My saved task');
+    await expect(page.getByRole('button', { name: 'Undo' })).toBeHidden();
+    expect(await page.evaluate(() => localStorage.getItem('donewell-tasks-v1'))).toBe(stored);
+    await page.reload();
+    await expect(page.locator('.task-row')).toContainText('My saved task');
+  });
+
   test('keeps the mobile calendar below its field and clear of other controls', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile viewport only');
     await page.setViewportSize({ width: 320, height: 700 });
     await page.goto('/projects/');
+    await page.getByRole('button', { name: 'Load sample data' }).click();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 
     const checkLayout = async (field, priority, container) => {
       await field.getByRole('button', { name: 'Choose due date' }).click();
@@ -202,6 +241,8 @@ test.describe('private projects page', () => {
 
   test('edits task details, cancels changes, and keeps saved edits after reload', async ({ page }) => {
     await page.goto('/projects/');
+    await page.getByPlaceholder('What needs doing?').fill('Plan the week with intention');
+    await page.getByRole('button', { name: /Add task/ }).click();
     const task = page.locator('.task-row').filter({ hasText: 'Plan the week with intention' });
     await task.getByRole('button', { name: 'Edit Plan the week with intention' }).click();
     const editor = page.getByRole('form', { name: 'Edit Plan the week with intention' });

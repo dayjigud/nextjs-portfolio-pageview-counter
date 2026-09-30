@@ -7,14 +7,20 @@ const validDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(value) && dateKey(parseD
 const priorities = ['normal', 'high', 'low'];
 const repeats = ['none', 'daily', 'weekly', 'monthly'];
 
-const starterTasks = [
+const sampleTasks = () => [
   { id: crypto.randomUUID(), title: 'Plan the week with intention', due: today(), priority: 'high', completed: false, created: Date.now() },
   { id: crypto.randomUUID(), title: 'Take a proper screen break', due: today(), priority: 'normal', completed: false, created: Date.now() - 1 },
   { id: crypto.randomUUID(), title: 'Review the project notes', due: tomorrow(), priority: 'low', completed: false, created: Date.now() - 2 },
+  { id: crypto.randomUUID(), title: 'Send the project update', due: dateKey(new Date(new Date().setDate(new Date().getDate() - 1))), priority: 'high', completed: false, created: Date.now() - 3, tag: 'Work', notes: 'Share progress and next steps.' },
+  { id: crypto.randomUUID(), title: 'Read a chapter', due: tomorrow(), priority: 'normal', completed: false, created: Date.now() - 4, tag: 'Personal' },
+  { id: crypto.randomUUID(), title: 'Daily reflection', due: today(), priority: 'normal', completed: false, created: Date.now() - 5, repeat: 'daily', tag: 'Personal' },
+  { id: crypto.randomUUID(), title: 'Tidy the workspace', due: today(), priority: 'low', completed: true, created: Date.now() - 6 },
+  { id: crypto.randomUUID(), title: 'Outline the next project', due: '', priority: 'normal', completed: true, created: Date.now() - 7, tag: 'Work' },
 ];
 
 let tasks;
-try { const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)); tasks = Array.isArray(stored) ? stored : starterTasks; } catch { tasks = starterTasks; }
+try { const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)); tasks = Array.isArray(stored) ? stored : []; } catch { tasks = []; }
+let tasksBeforeSamples = null;
 let activeFilter = 'all';
 let searchTerm = '';
 let editingId = null;
@@ -29,7 +35,7 @@ const viewTitle = document.querySelector('.todo-toolbar h3');
 const notice = document.querySelector('.task-notice');
 const tagFilter = document.querySelector('.tag-filter');
 const formatDate = (date) => new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' }).format(parseDate(date));
-const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+const save = () => { if (tasksBeforeSamples === null) localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); };
 const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 const rowFor = (id) => [...list.querySelectorAll('.task-row')].find((row) => row.dataset.id === id);
 const fullDate = (value) => new Intl.DateTimeFormat('en', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }).format(parseDate(value));
@@ -363,6 +369,26 @@ document.querySelectorAll('.filter').forEach((button) => button.addEventListener
 document.querySelector('.task-search').addEventListener('input', (event) => { searchTerm = event.target.value.toLowerCase(); render(); });
 tagFilter.addEventListener('change', (event) => { activeTag = event.target.value; render(); });
 document.querySelector('.task-sort').addEventListener('change', (event) => { sortBy = event.target.value; render(); });
+const sampleButton = document.querySelector('.sample-data');
+sampleButton.addEventListener('click', () => {
+  if (tasksBeforeSamples === null) {
+    tasksBeforeSamples = structuredClone(tasks);
+    tasks = sampleTasks();
+    sampleButton.textContent = tasksBeforeSamples.length ? 'Back to my tasks' : 'Clear sample data';
+  } else {
+    tasks = tasksBeforeSamples;
+    tasksBeforeSamples = null;
+    sampleButton.textContent = 'Load sample data';
+  }
+  editingId = null;
+  activeTag = '';
+  searchTerm = '';
+  document.querySelector('.task-search').value = '';
+  undoSnapshot = null;
+  notice.hidden = true;
+  render();
+});
+
 document.querySelector('.clear-completed').addEventListener('click', () => {
   const before = structuredClone(tasks);
   tasks = tasks.filter((task) => !task.completed);
