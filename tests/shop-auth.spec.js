@@ -305,3 +305,24 @@ test('product quantity gets immediate feedback and a lost add response is reconc
   await page.reload();
   await expect(page.locator('[data-cart-count]')).toHaveText('4');
 });
+
+for (const scenario of [
+  { name: 'signed out with no bag', options: {}, destination: '/projects/shop/' },
+  { name: 'empty guest bag', options: { filled: true, guestQuantity: 0 }, destination: '/projects/shop/' },
+  { name: 'filled guest bag', options: { filled: true }, destination: '/projects/shop/cart/' },
+  { name: 'saved account bag', options: { accountQuantity: 2 }, destination: '/projects/shop/cart/' },
+]) {
+  test(`header sign-in returns ${scenario.name} to the appropriate shop page`, async ({ page }) => {
+    const { state } = await shopFixture(page, scenario.options);
+    await page.goto('/projects/shop/');
+    await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+    await page.getByRole('button', { name: 'Continue with Google', exact: true }).click();
+    await waitForGoogleNavigation(page, state);
+    const callback = new URL(state.oauth[0].searchParams.get('redirect_to'));
+    callback.searchParams.set('code', 'header-signin-code');
+    await page.goto(callback.href);
+    await expect(page).toHaveURL(url => url.pathname === scenario.destination);
+    await expect(page.getByRole('link', { name: 'Account', exact: true })).toBeVisible();
+    expect(state.checkoutRequests).toHaveLength(0);
+  });
+}
