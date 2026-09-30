@@ -207,3 +207,101 @@ test('an expired transfer retains guest recovery if restoration fails and restor
   await expect(page.getByRole('combobox', { name: 'Quantity', exact: true })).toHaveValue('1');
   await expect(page.getByRole('button', { name: 'Sign in', exact: true })).toBeVisible();
 });
+
+for (const account of [false, true]) {
+  test(`${account ? 'account' : 'guest'} add updates the badge immediately without redundant cart or auth reads`, async ({ page }) => {
+    await shopFixture(page, { account, filled: true });
+    await page.goto('/projects/shop/');
+    await expect(page.locator('[data-cart-count]')).toHaveText('1');
+    const requests = [];
+    page.on('request', request => {
+      if (/\/(functions\/v1\/cart|auth\/v1\/user)$/.test(new URL(request.url()).pathname)) requests.push(request.method() + ' ' + new URL(request.url()).pathname);
+    });
+    let release;
+    const held = new Promise(resolve => { release = resolve; });
+    await page.route('**/functions/v1/cart', async route => {
+      if (route.request().method() === 'POST') await held;
+      await route.fallback();
+    });
+    const add = page.getByRole('button', { name: 'Add Halo Headphones to bag' });
+    await add.click();
+    try {
+      await expect(page.locator('[data-cart-count]')).toHaveText('2', { timeout: 1000 });
+      await expect(page.locator('[data-shop-notice]')).toContainText('Saving');
+    } finally { release(); }
+    await expect(page.locator('[data-shop-notice]')).toContainText('Added to your bag');
+    expect(requests).toEqual(['POST /functions/v1/cart']);
+    await add.click();
+    await expect(page.locator('[data-shop-notice]')).toContainText('Added to your bag');
+    await expect(add).toBeEnabled();
+    await page.reload();
+    await expect(page.locator('[data-cart-count]')).toHaveText('3');
+  });
+}
+
+test('a rejected add reconciles the immediate badge and allows retry', async ({ page }) => {
+  await shopFixture(page, { account: true, filled: true });
+  await page.goto('/projects/shop/');
+  await expect(page.locator('[data-cart-count]')).toHaveText('1');
+  await page.route('**/functions/v1/cart', async route => {
+    if (route.request().method() !== 'POST') return route.fallback();
+    await route.fulfill({ status: 409, contentType: 'application/json', body: JSON.stringify({ error: { code: 'CART_CONFLICT', message: 'Your bag changed. Please retry.' } }) });
+  });
+  const add = page.getByRole('button', { name: 'Add Halo Headphones to bag' });
+  await add.click();
+  await expect(page.locator('[data-shop-notice]')).toContainText('Your bag changed');
+  await expect(page.locator('[data-cart-count]')).toHaveText('1');
+  await expect(add).toBeEnabled();
+});
+
+test('queued adds preserve quantities and opening the bag waits for saving', async ({ page }) => {
+  const { state } = await shopFixture(page, { filled: true });
+  await page.goto('/projects/shop/');
+  await expect(page.locator('[data-cart-count]')).toHaveText('1');
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  await page.route('**/functions/v1/cart', async route => {
+    if (route.request().method() === 'POST') await held;
+    await route.fallback();
+  });
+  await page.getByRole('button', { name: 'Add Halo Headphones to bag' }).click();
+  // Filtering replaces the card while its original add is still in flight.
+  await page.getByRole('button', { name: 'Audio', exact: true }).click();
+  await page.getByRole('button', { name: 'Add Halo Headphones to bag' }).click();
+  await expect(page.locator('[data-cart-count]')).toHaveText('3');
+  await page.getByRole('link', { name: /Bag/ }).click();
+  await expect(page).toHaveURL(/\/shop\/$/);
+  release();
+  await expect(page).toHaveURL(/\/cart\/$/);
+  await expect(page.getByRole('combobox', { name: 'Quantity', exact: true })).toHaveValue('3');
+  expect(state.mutations.map(input => [input.quantity, input.expectedRevision])).toEqual([[2, 1], [3, 2]]);
+});
+
+test('product quantity gets immediate feedback and a lost add response is reconciled without replay', async ({ page }) => {
+  const { state, carts, guestId } = await shopFixture(page, { filled: true });
+  await page.goto('/projects/shop/product/?slug=halo-headphones');
+  await expect(page.locator('[data-cart-count]')).toHaveText('1');
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  await page.route('**/functions/v1/cart', async route => {
+    if (route.request().method() !== 'POST') return route.fallback();
+    await held;
+    const body = route.request().postDataJSON();
+    state.mutations.push(body);
+    const cart = carts.get(guestId);
+    cart.lines[0].quantity = body.quantity;
+    cart.revision++;
+    cart.subtotalKobo = cart.lines[0].priceKobo * body.quantity;
+    await route.abort('failed');
+  });
+  await page.getByRole('spinbutton', { name: 'Quantity', exact: true }).fill('3');
+  const add = page.getByRole('button', { name: /Add to bag/ });
+  await add.click();
+  await expect(page.locator('[data-cart-count]')).toHaveText('4');
+  release();
+  await expect(add).toBeEnabled();
+  await expect(page.locator('[data-cart-count]')).toHaveText('4');
+  expect(state.mutations).toHaveLength(1);
+  await page.reload();
+  await expect(page.locator('[data-cart-count]')).toHaveText('4');
+});
