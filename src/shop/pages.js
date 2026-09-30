@@ -1,10 +1,10 @@
-import { isConfigured, getAuthState, startCheckout, signInShop, completeOAuthCallback, signOutShop, getTransferReview, reviseGuestTransfer, retryGuestTransfer } from './auth.js';
+import { isConfigured, getDisplayAuthState, startCheckout, signInShop, completeOAuthCallback, signOutShop, getTransferReview, reviseGuestTransfer, retryGuestTransfer } from './auth.js';
 import { getCatalog, getProduct } from './catalog.js';
 import { getCart, updateCart, getQuote, placeOrder, getOrder, listOrders, findOrderByRequest } from './api.js';
 import { addToCart } from './cart.js';
 import { orderRequestKey, clearOrderKey, pendingOrderKey } from './checkout.js';
 import { formatMoney, escapeHtml } from './contracts.js';
-import { shopPath, navHtml, googleIconHtml, heroHtml, unavailableHtml, stateHtml, collectionHtml, cardHtml, cartLinesHtml, totalsHtml, notify } from './render.js';
+import { shopPath, navHtml, googleIconHtml, heroHtml, unavailableHtml, stateHtml, collectionHtml, cardHtml, cartLinesHtml, totalsHtml, loadingHtml, notify } from './render.js';
 
 export async function initShopPage(root, embedded = false) {
  const content = root.querySelector('[data-shop-content]');
@@ -73,7 +73,9 @@ export async function initShopPage(root, embedded = false) {
   content.innerHTML=`<div class="luma-page-heading"><p class="luma-eyebrow">MAKE YOURSELF AT HOME</p><h1>Hello, ${escapeHtml(auth.user.user_metadata?.full_name?.split(' ')[0] || 'you')}<span>.</span></h1><p>${escapeHtml(auth.user.email)}</p><button class="luma-text-link" type="button" data-action="signout">Sign out</button></div><section class="luma-surface"><h2>Your demo orders</h2>${orders.length ? orders.map(order=>`<a class="luma-order-row" href="${shopPath}confirmation/?order=${encodeURIComponent(order.id)}"><div><strong>${escapeHtml(order.reference)}</strong><p>${escapeHtml(new Date(order.createdAt).toLocaleDateString())} · Demo confirmed</p></div><span>${formatMoney(order.totalKobo)} ↗</span></a>`).join('') : '<p class="luma-empty">No demo orders yet. Your next favorite is waiting in the collection.</p>'}</section>`;
  }
  async function render() {
-  auth = await getAuthState(); root.querySelector('[data-shop-nav]').innerHTML=navHtml(auth);
+  root.querySelector('[data-shop-nav]').innerHTML=navHtml();
+  content.innerHTML=loadingHtml(mode);
+  auth = await getDisplayAuthState(); root.querySelector('[data-shop-nav]').innerHTML=navHtml(auth);
   if(!isConfigured()){content.innerHTML=(mode==='catalog' ? heroHtml() : '')+unavailableHtml();return;}
   if(mode==='catalog' || mode==='product') cartReady = refreshCart().then(()=>true,()=>false);
   if(mode==='catalog') await renderCollection();

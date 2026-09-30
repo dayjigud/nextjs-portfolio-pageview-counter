@@ -33,3 +33,10 @@ export function notify(root, message, error = false) {
  const notice = root.querySelector('[data-shop-notice]');
  notice.textContent = message; notice.hidden = false; notice.dataset.error = String(error);
 }
+
+export function loadingHtml(mode) {
+ const labels={product:['Your next good thing.','Loading product details…'],cart:['Your bag.','Loading your saved bag…'],checkout:['Make it yours.','Checking your bag and delivery total…'],account:['Your account.','Loading your account…'],confirmation:['Your receipt.','Loading your private receipt…'],callback:['Bringing your bag along.','Finishing Google sign-in…']};
+ if(mode==='catalog')return heroHtml()+'<section id="collection" class="luma-page-heading"><h2>The good stuff.</h2><p role="status">Loading the collection…</p></section>';
+ const [title,message]=labels[mode]??labels.product;
+ return `<div class="luma-page-heading"><a href="${shopPath}">← The collection</a><h1>${title}</h1><p role="status">${message}</p></div>`;
+}

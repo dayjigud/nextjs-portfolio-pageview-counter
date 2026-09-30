@@ -36,7 +36,7 @@ Catalog illustrations are maintained in `public/images/luma/`. Upload each file 
 
 ## Email scheduler
 
-The illustration files are also bundled in `public/images/luma/` and used if their Storage URLs are unavailable. Add new filenames to the allowlist in `src/shop/pages.js` when extending the catalog. Catalog records, carts and orders always come from Supabase; there is no local product/order data fallback.
+The illustration files are also bundled in `public/images/luma/` and used if their Storage URLs are unavailable. Add new filenames to the allowlist in `src/shop/pages.js` when extending the catalog. Catalog records originate in Supabase; recent public catalog rows are cached in this browser tab for two minutes to speed navigation. Cart, quote, order, and customer data are not cached by this catalog layer. Server responses remain authoritative for prices and availability. There is no fabricated product/order fallback.
 
 Anonymous CAPTCHA is not active in this build. Before enabling CAPTCHA in the Supabase dashboard, add its client challenge/token flow and verify failure preserves the pending cart action. Do not expose a CAPTCHA site-key setting that the client ignores.
 
