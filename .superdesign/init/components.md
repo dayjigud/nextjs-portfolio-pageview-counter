@@ -1,0 +1,1136 @@
+# UI primitives
+Vite multi-page site with semantic HTML, vanilla JS, Tailwind and custom CSS. No shared component modules or component library. Controls are inline HTML. Full page control sources:
+## `index.html`
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayodeji Adeniyi — Product Engineer & Product Manager</title>
+    <meta name="description"
+        content="Ayodeji Adeniyi is a product engineer and product manager shipping AI-powered products across African markets — strategy on one side, working software on the other.">
+    <link rel="stylesheet" href="./src/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script type="module" src="./src/navigation.js"></script>
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Reading progress bar (CSS scroll-driven; hidden where unsupported) -->
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="sticky top-0 z-40 bg-paper border-b border-ink">
+        <div class="wrap relative flex h-14 items-center justify-between">
+            <a href="#home" class="font-display text-lg font-black uppercase tracking-tight">
+                Adeniyi<span class="text-accent">&reg;</span>
+            </a>
+
+            <nav class="hidden items-center gap-8 font-mono text-meta uppercase tracking-widest md:flex"
+                aria-label="Primary">
+                <a class="link-sweep" href="#about">About</a>
+                <a class="link-sweep" href="#projects">Work</a>
+                <a class="link-sweep" href="#experience">Experience</a>
+                <a class="link-sweep" href="#skills">Capabilities</a>
+                <a class="link-sweep" href="#certifications">Credentials</a>
+                <a class="bg-ink px-4 py-2 text-paper transition-colors duration-300 hover:bg-accent"
+                    href="#contact">Contact</a>
+            </nav>
+
+            <!-- The mobile menu uses CSS for presentation and a tiny script for accessible state and link closing. -->
+            <button type="button" id="nav-toggle" class="nav-toggle md:hidden" aria-label="Open menu"
+                aria-controls="mobile-navigation" aria-expanded="false">
+                <span class="bar bar-1"></span>
+                <span class="bar bar-2"></span>
+            </button>
+            <nav id="mobile-navigation" class="nav-panel md:hidden" aria-label="Mobile">
+                <a class="border-b border-line px-5 py-6 font-display text-display-md font-bold uppercase"
+                    href="#about">About</a>
+                <a class="border-b border-line px-5 py-6 font-display text-display-md font-bold uppercase"
+                    href="#projects">Work</a>
+                <a class="border-b border-line px-5 py-6 font-display text-display-md font-bold uppercase"
+                    href="#experience">Experience</a>
+                <a class="border-b border-line px-5 py-6 font-display text-display-md font-bold uppercase"
+                    href="#skills">Capabilities</a>
+                <a class="border-b border-line px-5 py-6 font-display text-display-md font-bold uppercase"
+                    href="#certifications">Credentials</a>
+                <a class="bg-ink px-5 py-6 font-display text-display-md font-bold uppercase text-paper"
+                    href="#contact">Contact</a>
+                <p class="kicker mt-auto px-5 py-6">dayjigud@gmail.com</p>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- ================= 01 / HERO ================= -->
+        <section id="home" class="wrap pb-12 pt-14 md:pb-16 md:pt-24">
+            <p class="kicker hero-fade" style="--i:0">
+                Portfolio — 2026&ensp;&middot;&ensp;<span class="text-accent"
+                    aria-hidden="true">&#9679;</span> Available for work
+            </p>
+
+            <h1 class="mt-8 font-display text-display-xl font-black uppercase">
+                <span class="hero-line"><span style="--i:0">Product</span></span>
+                <span class="hero-line"><span style="--i:1">Engineer <span class="text-accent">&amp;</span></span></span>
+                <span class="hero-line"><span style="--i:2">Product Manager</span></span>
+            </h1>
+
+            <div class="mt-10 grid grid-cols-12 items-end gap-x-4">
+                <p class="col-span-12 max-w-xl text-lg leading-relaxed md:col-span-7 hero-fade" style="--i:3">
+                    I build products twice — first as a strategist, then as an engineer.
+                    I ship AI-powered software across African markets: health platforms,
+                    logistics, fintech, mobility and matchmaking — most of it live and linked below.
+                </p>
+                <div class="col-span-12 mt-8 flex flex-wrap gap-4 md:col-span-5 md:mt-0 md:justify-end hero-fade"
+                    style="--i:4">
+                    <a href="#projects" class="btn-ink">View Work <span aria-hidden="true">&rarr;</span></a>
+                    <a href="mailto:dayjigud@gmail.com" class="btn-line">Email Me</a>
+                </div>
+            </div>
+
+            <p class="hero-fade mt-12 inline-block bg-cobalt px-4 py-3 font-mono text-meta uppercase tracking-widest text-paper"
+                style="--i:5">
+                CSS-first by design — with only a tiny accessibility helper
+            </p>
+        </section>
+
+        <!-- Marquee -->
+        <div class="marquee border-y border-ink py-3" aria-hidden="true">
+            <div class="marquee-track font-mono text-meta uppercase tracking-widest">
+                <span class="marquee-copy">
+                    <span>Product Engineer</span><span class="text-accent">&#10042;</span>
+                    <span>Product Manager</span><span class="text-accent">&#10042;</span>
+                    <span>Builder</span><span class="text-accent">&#10042;</span>
+                    <span>Strategist</span><span class="text-accent">&#10042;</span>
+                    <span>AI Products</span><span class="text-accent">&#10042;</span>
+                </span>
+                <span class="marquee-copy" aria-hidden="true">
+                    <span>Product Engineer</span><span class="text-accent">&#10042;</span>
+                    <span>Product Manager</span><span class="text-accent">&#10042;</span>
+                    <span>Builder</span><span class="text-accent">&#10042;</span>
+                    <span>Strategist</span><span class="text-accent">&#10042;</span>
+                    <span>AI Products</span><span class="text-accent">&#10042;</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- ================= 02 / ABOUT ================= -->
+        <section id="about" class="wrap py-20 md:py-28">
+            <header class="reveal border-t-2 border-ink pt-4">
+                <div class="mb-8 flex items-baseline justify-between">
+                    <span class="kicker">02 / About</span>
+                    <span class="kicker hidden sm:block">Profile</span>
+                </div>
+                <h2 class="font-display text-display-lg font-black uppercase">About</h2>
+            </header>
+
+            <div class="mt-14 grid grid-cols-12 gap-x-6 gap-y-12">
+                <figure class="reveal col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
+                    <img src="images/profile.webp" alt="Portrait of Ayodeji Adeniyi"
+                        class="w-full border border-line grayscale transition-[filter] duration-500 hover:grayscale-0">
+                    <figcaption class="kicker mt-3">Fig. 01 — A. Adeniyi</figcaption>
+                </figure>
+
+                <div class="col-span-12 space-y-5 text-[1.05rem] leading-relaxed md:col-span-5 lg:col-span-6">
+                    <p class="reveal">
+                        I build products twice — first as a strategist, then as an engineer. I've
+                        shipped AI-powered products for African markets: a digital health platform
+                        for underserved communities, an ML-matched dating app for tech professionals,
+                        and booking infrastructure for interstate travel — all live and linked below.
+                    </p>
+                    <p class="reveal">
+                        I work across the whole stack of product-making. On one side: user research,
+                        roadmaps, A/B tests and go-to-market. On the other: React, TypeScript and
+                        Supabase. This page is part of the argument — designed, written and animated
+                        by hand, with a tiny accessibility-focused JavaScript helper.
+                    </p>
+                </div>
+
+                <dl class="reveal col-span-12 space-y-4 font-mono text-meta uppercase tracking-widest md:col-span-3">
+                    <div class="border-b border-line pb-3">
+                        <dt class="text-mute">Portfolio</dt>
+                        <dd>8 Products</dd>
+                    </div>
+                    <div class="border-b border-line pb-3">
+                        <dt class="text-mute">Focus</dt>
+                        <dd>AI Products</dd>
+                    </div>
+                    <div class="border-b border-line pb-3">
+                        <dt class="text-mute">Status</dt>
+                        <dd><span class="text-accent" aria-hidden="true">&#9679;</span> Available</dd>
+                    </div>
+                    <div class="pb-3">
+                        <dt class="text-mute">Links</dt>
+                        <dd class="mt-1 flex flex-col gap-1 normal-case">
+                            <a class="link-sweep w-fit" href="https://www.ayodeji.xyz" target="_blank"
+                                rel="noopener">ayodeji.xyz &nearr;</a>
+                            <a class="link-sweep w-fit" href="https://LinkedIn.com/in/dayjigud" target="_blank"
+                                rel="noopener">LinkedIn &nearr;</a>
+                            <a class="link-sweep w-fit" href="https://x.com/dayjigud" target="_blank"
+                                rel="noopener">X / Twitter &nearr;</a>
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+
+            <!-- Stat row — counters tick up on scroll where supported -->
+            <div class="reveal mt-16 grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-3">
+                <div class="bg-paper p-6 md:p-8">
+                    <p class="font-display text-5xl font-black md:text-6xl">
+                        <span class="stat-num" style="--target:7"><span>7</span></span>
+                    </p>
+                    <p class="kicker mt-2">Products Shipped</p>
+                </div>
+                <div class="bg-paper p-6 md:p-8">
+                    <p class="font-display text-5xl font-black md:text-6xl">
+                        <span class="stat-num" style="--target:6"><span>6</span></span>
+                    </p>
+                    <p class="kicker mt-2">Live &amp; Clickable Today</p>
+                </div>
+                <div class="bg-paper p-6 md:p-8">
+                    <p class="font-display text-5xl font-black md:text-6xl">
+                        <span>&lt;1</span><span class="text-accent">KB</span>
+                    </p>
+                    <p class="kicker mt-2">JavaScript, Gzipped</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 03 / WORK ================= -->
+        <section id="projects" class="wrap py-20 md:py-28">
+            <header class="reveal border-t-2 border-ink pt-4">
+                <div class="mb-8 flex items-baseline justify-between">
+                    <span class="kicker">03 / Work</span>
+                    <span class="kicker hidden sm:block">Selected projects — tap a row for the case study</span>
+                </div>
+                <h2 class="font-display text-display-lg font-black uppercase">Work</h2>
+            </header>
+
+            <div class="mt-14 border-t border-line">
+                <!-- P.01 Waybl -->
+                <details class="project reveal border-b border-line">
+                    <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
+                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.01</span>
+                        <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
+                            <a href="https://waybl.app" target="_blank" rel="noopener"
+                                class="proj-arrow relative z-10" aria-label="Visit the Waybl website">&nearr;</a>
+                            <span class="marker" aria-hidden="true">+</span>
+                        </span>
+                        <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
+                            Waybl</h3>
+                        <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
+                            Peer-to-peer delivery marketplace connecting Senders with Carriers</p>
+                        <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">Logistics / Marketplace</span>
+                    </summary>
+                    <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
+                        <figure class="col-span-12 md:col-span-4">
+                            <div class="border border-line bg-cobalt p-6 py-24 text-paper">
+                                <p class="font-display text-display-lg font-black uppercase">Waybl</p>
+                                <p class="kicker mt-3 text-paper">Send it with someone already going</p>
+                            </div>
+                            <figcaption class="kicker mt-3"><a class="link-sweep" href="https://waybl.app" target="_blank" rel="noopener">waybl.app &nearr;</a> · Public MVP in development</figcaption>
+                        </figure>
+                        <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
+                            <div>
+                                <h4>My Role</h4>
+                                <p>Product Manager — product strategy, end-to-end journey design, roadmap
+                                    prioritization, stakeholder alignment and phased public-launch planning.
+                                    2026 – present.</p>
+                            </div>
+                            <div>
+                                <h4>The Problem</h4>
+                                <p>Sending parcels between cities can be expensive, slow and difficult to trust,
+                                    while travellers already move along those routes with spare capacity. Waybl
+                                    is building a marketplace that matches Senders with verified Carriers and
+                                    manages the journey from request and payment through secure handover and delivery.</p>
+                            </div>
+                            <div>
+                                <h4>Product Decisions &amp; Scope</h4>
+                                <ul>
+                                    <li><strong>Designed the full two-sided journey.</strong> Covered Sender and
+                                        Carrier onboarding, identity verification, matching, booking-based messaging,
+                                        secure four-digit handover codes, tracking and completion.</li>
+                                    <li><strong>Reviewed the unhappy paths.</strong> Added missing flows for failed
+                                        payments, trip changes, cancellations, no-shows, delayed or lost parcels,
+                                        disputes and account recovery.</li>
+                                    <li><strong>Clarified the money model.</strong> Defined a one-time Waybl fee and
+                                        aligned deposits, refunds, Carrier earnings and withdrawals so customers and
+                                        the team can see how money moves.</li>
+                                    <li><strong>Turned the review into delivery work.</strong> Added 22 missing
+                                        roadmap items and mapped dependencies across design, backend and frontend in
+                                        Linear, keeping the launch focused on complete customer journeys.</li>
+                                    <li><strong>Kept launch public.</strong> Reframed Phase 6 as a public MVP and
+                                        added readiness checks for mobile use, security, payment recovery and support
+                                        operations.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Current Status</h4>
+                                <p>The service foundation covers matching, journey tracking, secure handover,
+                                    private messaging and safety checks. I am driving the remaining customer-facing
+                                    journeys and launch-readiness work.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- P.02 Àrà -->
+                <details class="project reveal border-b border-line">
+                    <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
+                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.02</span>
+                        <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
+                            <a href="https://ara.ayodeji.xyz" target="_blank" rel="noopener"
+                                class="proj-arrow relative z-10" aria-label="Visit the Àrà website">&nearr;</a>
+                            <span class="marker" aria-hidden="true">+</span>
+                        </span>
+                        <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
+                            Àrà</h3>
+                        <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
+                            AI-native product studio — idea to shipped product, in weeks</p>
+                        <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">AI / Studio</span>
+                    </summary>
+                    <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
+                        <figure class="col-span-12 md:col-span-4">
+                            <img loading="lazy" src="images/Ara Logo.webp" alt="Àrà logo"
+                                class="w-full border border-line">
+                            <figcaption class="kicker mt-3">ara.ayodeji.xyz</figcaption>
+                        </figure>
+                        <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
+                            <div>
+                                <h4>My Role</h4>
+                                <p>Product Engineer — solo, end to end: positioning, brand, design system,
+                                    copy, and every line of code. Independent studio, 2026 – present.</p>
+                            </div>
+                            <div>
+                                <h4>The Problem</h4>
+                                <p>Àrà (ah-RAH — Yorùbá for "wonders, the never-seen-before") exists because
+                                    small businesses in Nigeria keep hearing they need AI but can't buy it.
+                                    What's on offer is open-ended consulting, priced by the hour, with no
+                                    guaranteed output — exactly the engagement shape a cash-conscious founder
+                                    can't risk. The bet: productize the work into fixed-scope, fixed-price
+                                    offers — an AI opportunity audit, a six-week MVP, an AI integration
+                                    sprint, and an always-on design &amp; build subscription.</p>
+                            </div>
+                            <div>
+                                <h4>Decisions &amp; Tradeoffs</h4>
+                                <ul>
+                                    <li><strong>Fixed price over hourly.</strong> Removes the buyer's risk and
+                                        forces honest scoping on my side. The tradeoff: I have to say no to
+                                        vague briefs, and the audit exists precisely to turn vague briefs into
+                                        buildable ones.</li>
+                                    <li><strong>The site is the demo.</strong> Instead of claiming AI
+                                        competence, the landing page embeds two working AI tools — "Audit my
+                                        business" and "Spec my idea" — running server-side Gemini with
+                                        structured, validated JSON output. The tradeoff: real inference costs
+                                        and abuse surface, handled with rate limiting and server-side keys.
+                                        The upside surprised me: prospects arrive at the booking call with a
+                                        machine-drafted spec already in hand, so the tools double as lead
+                                        qualification.</li>
+                                    <li><strong>A design system from Nigerian textile traditions</strong> —
+                                        Adire, Aso-oke, Uli linework, Benin coral beads — instead of the
+                                        default SaaS gradient. Slower to build (nothing could be borrowed from
+                                        a UI kit), but it makes the studio unmistakable, and the interactive
+                                        Design Lab lets visitors play with the system itself.</li>
+                                    <li><strong>Never lose a lead.</strong> The Supabase-backed booking flow
+                                        falls back to a plain mailto link if anything fails. A broken API call
+                                        should never cost a client.</li>
+                                    <li><strong>Accessibility as a constraint, not a patch.</strong> Every
+                                        animation honors reduced-motion preferences.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Stack</h4>
+                                <p>Frontend: <strong>React 18, TypeScript, Vite, Tailwind CSS, Framer
+                                    Motion</strong> · Backend: <strong>Vercel Serverless Functions +
+                                    Gemini, Supabase (PostgreSQL)</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- P.03 SafeTrip -->
+                <details class="project reveal border-b border-line">
+                    <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
+                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.03</span>
+                        <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
+                            <a href="https://www.safetripbuses.com" target="_blank" rel="noopener"
+                                class="proj-arrow relative z-10" aria-label="Visit the SafeTrip website">&nearr;</a>
+                            <span class="marker" aria-hidden="true">+</span>
+                        </span>
+                        <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
+                            SafeTrip</h3>
+                        <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
+                            Interstate &amp; metro bus booking platform for Nigeria</p>
+                        <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">Transport</span>
+                    </summary>
+                    <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
+                        <figure class="col-span-12 md:col-span-4">
+                            <img loading="lazy" src="images/SafeTrip Logo.webp" alt="SafeTrip logo"
+                                class="w-full border border-line">
+                            <figcaption class="kicker mt-3">safetripbuses.com</figcaption>
+                        </figure>
+                        <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
+                            <div>
+                                <h4>My Role</h4>
+                                <p>Product Strategist &amp; IT Consultant — client engagement,
+                                    Nov 2025 – Feb 2026.</p>
+                            </div>
+                            <div>
+                                <h4>Overview</h4>
+                                <p>SafeTrip is a single-page web application for a bus transportation and
+                                    logistics company, providing a user-friendly interface for booking interstate
+                                    and metro bus tickets, along with a comprehensive admin panel for managing
+                                    company operations.</p>
+                            </div>
+                            <div>
+                                <h4>Key Features</h4>
+                                <ul>
+                                    <li><strong>Interstate booking</strong> between major Nigerian cities with
+                                        real-time availability.</li>
+                                    <li><strong>First &amp; last mile (metro) booking</strong> for LAMATA franchise
+                                        routes within Lagos.</li>
+                                    <li>Dynamic pricing and scheduling — all routes, schedules and prices fetched
+                                        in real time from the backend.</li>
+                                    <li>Accurate seat availability calculated from live booking data.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Admin Panel</h4>
+                                <ul>
+                                    <li>Full CRUD for schedules, with support for recurring daily schedules.</li>
+                                    <li>Fleet, route and booking management in one dashboard.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Stack</h4>
+                                <p>Frontend: <strong>React, Vite, TypeScript, Tailwind CSS</strong> ·
+                                    Backend: <strong>Supabase (PostgreSQL)</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- P.04 TechiesMatch -->
+                <details class="project reveal border-b border-line">
+                    <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
+                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.04</span>
+                        <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
+                            <a href="https://www.techies.love" target="_blank" rel="noopener"
+                                class="proj-arrow relative z-10" aria-label="Visit the TechiesMatch website">&nearr;</a>
+                            <span class="marker" aria-hidden="true">+</span>
+                        </span>
+                        <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
+                            TechiesMatch</h3>
+                        <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
+                            AI-powered dating for tech professionals, matched by ML</p>
+                        <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">AI / ML</span>
+                    </summary>
+                    <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
+                        <figure class="col-span-12 md:col-span-4">
+                            <img loading="lazy" src="images/Social media Logo 3.webp" alt="TechiesMatch logo"
+                                class="w-full border border-line">
+                            <figcaption class="kicker mt-3">techies.love</figcaption>
+                        </figure>
+                        <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
+                            <div>
+                                <h4>My Role</h4>
+                                <p>Product Manager — contract role on a small founding team,
+                                    Jan – Apr 2025.</p>
+                            </div>
+                            <div>
+                                <h4>The Challenge</h4>
+                                <p>The online dating market is saturated, but the team identified a gap for tech
+                                    professionals who seek partners with similar interests and career paths.
+                                    Mainstream apps often failed to capture the nuances of this demographic,
+                                    leading to low-quality matches and user fatigue.</p>
+                            </div>
+                            <div>
+                                <h4>The Process &amp; Solution</h4>
+                                <p>The core innovation was a machine learning algorithm that went beyond simple
+                                    profile data. It analyzed users' interests, communication styles, and in-app
+                                    behavior to predict compatibility — matches users rated as
+                                    <strong>meaningfully better than swipe-based alternatives</strong>. I also
+                                    designed and ran an A/B testing program on the onboarding flow, shipping the
+                                    variant that <strong>measurably cut sign-up drop-off</strong>.</p>
+                            </div>
+                            <div>
+                                <h4>The Impact</h4>
+                                <ul>
+                                    <li>Early cohorts <strong>returned at a markedly higher rate</strong> than
+                                        the pre-ML baseline, validating the compatibility model.</li>
+                                    <li>ML-driven match recommendations became the app's most-used feature and
+                                        the core of its retention loop.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- P.05 HealthTrackNG -->
+                <details class="project reveal border-b border-line">
+                    <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
+                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.05</span>
+                        <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
+                            <a href="https://healthtrack-ng-connect.vercel.app/" target="_blank" rel="noopener"
+                                class="proj-arrow relative z-10" aria-label="Visit the HealthTrackNG website">&nearr;</a>
+                            <span class="marker" aria-hidden="true">+</span>
+                        </span>
+                        <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
+                            HealthTrackNG</h3>
+                        <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
+                            Offline-first digital health access for underserved communities</p>
+                        <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">Health Tech</span>
+                    </summary>
+                    <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
+                        <figure class="col-span-12 md:col-span-4">
+                            <img loading="lazy" src="images/HealthTrack Logo.webp" alt="HealthTrackNG logo"
+                                class="w-full border border-line">
+                            <figcaption class="kicker mt-3">healthtrack-ng-connect.vercel.app</figcaption>
+                        </figure>
+                        <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
+                            <div>
+                                <h4>My Role</h4>
+                                <p>Product Manager — independent build with clinic partners,
+                                    Jul – Aug 2025.</p>
+                            </div>
+                            <div>
+                                <h4>The Challenge</h4>
+                                <p>In many underserved communities across Nigeria, accessing healthcare is a
+                                    significant challenge. Patients face long wait times, a lack of information
+                                    about available services, and difficulties in booking appointments,
+                                    especially in low-connectivity environments.</p>
+                            </div>
+                            <div>
+                                <h4>The Process &amp; Solution</h4>
+                                <p>Based on on-the-ground user research, we prioritized core accessibility
+                                    features like <strong>offline functionality</strong> and <strong>multilingual
+                                    support</strong> (English, Hausa, Yoruba). Partnering with local clinics, we
+                                    integrated their schedules for real-time booking, replacing hours of queueing
+                                    with <strong>a confirmed appointment before leaving home</strong>.</p>
+                            </div>
+                            <div>
+                                <h4>The Impact</h4>
+                                <ul>
+                                    <li>Adopted by <strong>patients across multiple partner clinics</strong>
+                                        in its first months, with offline access driving usage in
+                                        low-connectivity areas.</li>
+                                    <li>Post-launch surveys showed <strong>strong satisfaction</strong>, led by
+                                        local-language support and shorter waits.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- P.06 Subtleflow -->
+                <details class="project reveal border-b border-line">
+                    <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
+                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.06</span>
+                        <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
+                            <a href="https://www.subtleflow.xyz" target="_blank" rel="noopener"
+                                class="proj-arrow relative z-10" aria-label="Visit the Subtleflow website">&nearr;</a>
+                            <span class="marker" aria-hidden="true">+</span>
+                        </span>
+                        <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
+                            Subtleflow</h3>
+                        <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
+                            Free business documents — invoices, contracts &amp; proposals, drafted with AI</p>
+                        <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">SaaS</span>
+                    </summary>
+                    <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
+                        <figure class="col-span-12 md:col-span-4">
+                            <img loading="lazy" src="images/Subtleflow Logo.webp" alt="Subtleflow logo"
+                                class="w-full border border-line">
+                            <figcaption class="kicker mt-3">subtleflow.xyz</figcaption>
+                        </figure>
+                        <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
+                            <div>
+                                <h4>My Role</h4>
+                                <p>Designer &amp; developer — independent solo build, 2025.</p>
+                            </div>
+                            <div>
+                                <h4>The Challenge</h4>
+                                <p>Small businesses assemble the documents they send — invoices, quotations,
+                                    contracts, proposals — from Word templates, one-off invoice generators and
+                                    separate e-signature tools. The result is slow to produce, inconsistent with
+                                    the brand, and invisible once sent: nobody knows whether a document was ever
+                                    opened.</p>
+                            </div>
+                            <div>
+                                <h4>The Process &amp; Solution</h4>
+                                <p>I designed and built Subtleflow as <strong>one workspace for all ten document
+                                    types</strong> a business sends, with sequential numbering and reusable brand
+                                    profiles. "Draft with AI" turns a one-line brief into a complete editable
+                                    draft — line items, contract clauses, proposal scope — via structured AI
+                                    output behind a Supabase Edge Function. Tokenized share links let clients
+                                    review and <strong>sign on any device</strong>, statuses move from sent to
+                                    viewed to accepted automatically, and every document exports as a print-ready
+                                    branded PDF generated in the browser. Built with React 19, Vite, and Supabase
+                                    (auth, Postgres with row-level security, Edge Functions).</p>
+                            </div>
+                            <div>
+                                <h4>The Impact</h4>
+                                <ul>
+                                    <li><strong>Completely free</strong> — unlimited documents, clients and brand
+                                        profiles, with no tiers or trials.</li>
+                                    <li>E-signatures recorded with signer name, email and timestamp — <strong>no
+                                        account needed</strong> on the client's side.</li>
+                                    <li>View tracking shows the moment a document is seen, and overdue invoices
+                                        flag themselves.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- P.07 Brightyield -->
+                <details class="project reveal border-b border-line">
+                    <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
+                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.07</span>
+                        <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
+                            <a href="https://www.brightyield.co" target="_blank" rel="noopener"
+                                class="proj-arrow relative z-10" aria-label="Visit the Brightyield website">&nearr;</a>
+                            <span class="marker" aria-hidden="true">+</span>
+                        </span>
+                        <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
+                            Brightyield</h3>
+                        <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
+                            Digitized loan operations for civil servants via IPPIS deductions</p>
+                        <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">Finance</span>
+                    </summary>
+                    <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
+                        <figure class="col-span-12 md:col-span-4">
+                            <img loading="lazy" src="images/Brightyield Logo.jpg" alt="Brightyield logo"
+                                class="w-full border border-line">
+                            <figcaption class="kicker mt-3">brightyield.co</figcaption>
+                        </figure>
+                        <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
+                            <div>
+                                <h4>My Role</h4>
+                                <p>Business Manager, Operations &amp; Business Development — full-time
+                                    employer, Mar 2023 – Apr 2025.</p>
+                            </div>
+                            <div>
+                                <h4>Overview</h4>
+                                <p>Brightyield Golden Resources Limited is a finance firm in Abuja, Nigeria,
+                                    specializing in loans to police officers and civil servants, leveraging the
+                                    IPPIS infrastructure for direct deductions. I led initiatives to streamline
+                                    operations and transform a loan process that was previously manual and prone
+                                    to delays.</p>
+                            </div>
+                            <div>
+                                <h4>The Challenge</h4>
+                                <ul>
+                                    <li><strong>Extended processing times</strong> — loan approvals often took
+                                        7–10 days.</li>
+                                    <li>Manual data entry caused inaccuracies that <strong>drove up operational
+                                        costs and rework</strong>.</li>
+                                    <li>The firm was <strong>growing faster than its manual processes could
+                                        absorb</strong>.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>The Solution</h4>
+                                <p>I proposed digitizing the loan workflow through a custom resource management
+                                    tool integrated with existing CRM systems: automated eligibility checks, KPI
+                                    dashboards for real-time tracking, and mobile-friendly interfaces for on-duty
+                                    officers. The result: <strong>approvals moved from days toward hours</strong>,
+                                    manual re-entry disappeared, and the firm <strong>absorbed its client growth
+                                    without added headcount</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- P.08 Jentech AI (no case study — external link only) -->
+                <div class="project-summary reveal grid grid-cols-12 items-baseline gap-x-4 gap-y-2 border-b border-line px-3 py-6 md:px-5 md:py-8">
+                    <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.08</span>
+                    <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
+                        <a href="https://www.jentech.ai" target="_blank" rel="noopener"
+                            class="proj-arrow relative z-10" aria-label="Visit the Jentech AI website">&nearr;</a>
+                    </span>
+                    <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
+                        Jentech AI</h3>
+                    <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
+                        Research &amp; development driving strategic product direction</p>
+                    <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">AI / Research</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 04 / EXPERIENCE ================= -->
+        <section id="experience" class="wrap py-20 md:py-28">
+            <header class="reveal border-t-2 border-ink pt-4">
+                <div class="mb-8 flex items-baseline justify-between">
+                    <span class="kicker">04 / Experience</span>
+                    <span class="kicker hidden sm:block">2023 — Present</span>
+                </div>
+                <h2 class="font-display text-display-lg font-black uppercase">Experience</h2>
+            </header>
+
+            <div class="mt-14 border-t border-line">
+                <article class="exp reveal grid grid-cols-12 gap-x-6 gap-y-4 border-b border-line py-8 md:py-10">
+                    <div class="col-span-12 md:col-span-3">
+                        <span class="kicker">E.01</span>
+                        <p class="mt-1 font-mono text-meta uppercase tracking-widest">2026 — Present</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-4">
+                        <h3 class="font-display text-display-md font-bold uppercase">Waybl</h3>
+                        <p class="mt-2 text-sm text-mute">Product Manager · Remote</p>
+                    </div>
+                    <ul class="exp-list col-span-12 space-y-2 text-sm leading-relaxed md:col-span-5">
+                        <li>Own product strategy and phased public-MVP delivery for a peer-to-peer logistics
+                            marketplace connecting Senders with Carriers.</li>
+                        <li>Audited end-to-end journeys and added 22 missing roadmap items covering payments,
+                            identity verification, cancellations, disputes and parcel recovery.</li>
+                        <li>Clarified fee, refund, deposit, earnings and withdrawal rules, then mapped
+                            cross-team dependencies and launch-readiness checks in Linear.</li>
+                    </ul>
+                </article>
+
+                <article class="exp reveal grid grid-cols-12 gap-x-6 gap-y-4 border-b border-line py-8 md:py-10">
+                    <div class="col-span-12 md:col-span-3">
+                        <span class="kicker">E.02</span>
+                        <p class="mt-1 font-mono text-meta uppercase tracking-widest">2026 — Present</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-4">
+                        <h3 class="font-display text-display-md font-bold uppercase">Àrà</h3>
+                        <p class="mt-2 text-sm text-mute">Product Engineer · Abuja, NG</p>
+                    </div>
+                    <ul class="exp-list col-span-12 space-y-2 text-sm leading-relaxed md:col-span-5">
+                        <li>Built an AI-native product studio end-to-end — brand, design
+                            system, copy and code.</li>
+                        <li>Shipped two live AI tools (business audit and idea-to-spec) powered by
+                            server-side Gemini with structured JSON output.</li>
+                        <li>Designed a culturally-rooted design system from Nigerian textile traditions
+                            with full reduced-motion support.</li>
+                    </ul>
+                </article>
+
+                <article class="exp reveal grid grid-cols-12 gap-x-6 gap-y-4 border-b border-line py-8 md:py-10">
+                    <div class="col-span-12 md:col-span-3">
+                        <span class="kicker">E.03</span>
+                        <p class="mt-1 font-mono text-meta uppercase tracking-widest">Nov 2025 — Feb 2026</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-4">
+                        <h3 class="font-display text-display-md font-bold uppercase">SafeTrip</h3>
+                        <p class="mt-2 text-sm text-mute">Product Strategist &amp; IT Consultant · Lagos, NG</p>
+                    </div>
+                    <ul class="exp-list col-span-12 space-y-2 text-sm leading-relaxed md:col-span-5">
+                        <li>Led development of a comprehensive bus booking platform with interstate and metro
+                            booking capabilities.</li>
+                        <li>Implemented real-time scheduling, dynamic pricing, and accurate seat availability
+                            features.</li>
+                        <li>Built a full-featured admin panel for managing schedules, vehicles, routes, and
+                            bookings.</li>
+                    </ul>
+                </article>
+
+                <article class="exp reveal grid grid-cols-12 gap-x-6 gap-y-4 border-b border-line py-8 md:py-10">
+                    <div class="col-span-12 md:col-span-3">
+                        <span class="kicker">E.04</span>
+                        <p class="mt-1 font-mono text-meta uppercase tracking-widest">Sep 2025 — Jan 2026</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-4">
+                        <h3 class="font-display text-display-md font-bold uppercase">Jentech AI</h3>
+                        <p class="mt-2 text-sm text-mute">Research Development Lead · Remote</p>
+                    </div>
+                    <ul class="exp-list col-span-12 space-y-2 text-sm leading-relaxed md:col-span-5">
+                        <li>Led comprehensive research initiatives to drive strategic decision-making and product
+                            direction.</li>
+                        <li>Managed end-to-end research lifecycles, from hypothesis generation to data synthesis
+                            and presentation.</li>
+                        <li>Collaborated with cross-functional teams to transform raw data into actionable
+                            insights, directly influencing key organizational outcomes.</li>
+                    </ul>
+                </article>
+
+                <article class="exp reveal grid grid-cols-12 gap-x-6 gap-y-4 border-b border-line py-8 md:py-10">
+                    <div class="col-span-12 md:col-span-3">
+                        <span class="kicker">E.05</span>
+                        <p class="mt-1 font-mono text-meta uppercase tracking-widest">Jul 2025 — Aug 2025</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-4">
+                        <h3 class="font-display text-display-md font-bold uppercase">HealthTrackNG</h3>
+                        <p class="mt-2 text-sm text-mute">Product Manager · Remote</p>
+                    </div>
+                    <ul class="exp-list col-span-12 space-y-2 text-sm leading-relaxed md:col-span-5">
+                        <li>Launched a digital health solution for underserved communities, adopted across
+                            multiple partner clinics.</li>
+                        <li>Replaced hours of queueing with real-time clinic booking, prioritizing offline
+                            access and multilingual support.</li>
+                        <li>Post-launch surveys showed strong user satisfaction.</li>
+                    </ul>
+                </article>
+
+                <article class="exp reveal grid grid-cols-12 gap-x-6 gap-y-4 border-b border-line py-8 md:py-10">
+                    <div class="col-span-12 md:col-span-3">
+                        <span class="kicker">E.06</span>
+                        <p class="mt-1 font-mono text-meta uppercase tracking-widest">Feb 2025 — Apr 2025</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-4">
+                        <h3 class="font-display text-display-md font-bold uppercase">HNG Tech</h3>
+                        <p class="mt-2 text-sm text-mute">Product Owner &amp; Mentor · Remote</p>
+                    </div>
+                    <ul class="exp-list col-span-12 space-y-2 text-sm leading-relaxed md:col-span-5">
+                        <li>Directed end-to-end agile processes, tightening development cycles sprint over
+                            sprint.</li>
+                        <li>Collaborated with teams to define and prioritize product requirements from user
+                            feedback.</li>
+                        <li>Led integration of AI-driven recommendation engines; reached Finalist stage of
+                            HNG's competitive program.</li>
+                    </ul>
+                </article>
+
+                <article class="exp reveal grid grid-cols-12 gap-x-6 gap-y-4 border-b border-line py-8 md:py-10">
+                    <div class="col-span-12 md:col-span-3">
+                        <span class="kicker">E.07</span>
+                        <p class="mt-1 font-mono text-meta uppercase tracking-widest">Jan 2025 — Apr 2025</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-4">
+                        <h3 class="font-display text-display-md font-bold uppercase">TechiesMatch</h3>
+                        <p class="mt-2 text-sm text-mute">Product Manager · Remote</p>
+                    </div>
+                    <ul class="exp-list col-span-12 space-y-2 text-sm leading-relaxed md:col-span-5">
+                        <li>Managed development of an AI-powered dating platform whose ML matching became the
+                            core retention loop.</li>
+                        <li>Led UX/UI planning and an A/B testing program that measurably cut onboarding
+                            drop-off.</li>
+                        <li>Oversaw launch of MVP features, using analytics to inform product roadmaps.</li>
+                    </ul>
+                </article>
+
+                <article class="exp reveal grid grid-cols-12 gap-x-6 gap-y-4 border-b border-line py-8 md:py-10">
+                    <div class="col-span-12 md:col-span-3">
+                        <span class="kicker">E.08</span>
+                        <p class="mt-1 font-mono text-meta uppercase tracking-widest">Mar 2023 — Apr 2025</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-4">
+                        <h3 class="font-display text-display-md font-bold uppercase">Brightyield</h3>
+                        <p class="mt-2 text-sm text-mute">Business Manager, Operations &amp; Business
+                            Development · Abuja, NG</p>
+                    </div>
+                    <ul class="exp-list col-span-12 space-y-2 text-sm leading-relaxed md:col-span-5">
+                        <li>Digitized a manual loan workflow — approvals moved from days toward hours and
+                            manual re-entry disappeared.</li>
+                        <li>Enhanced team productivity and absorbed rapid client growth without added
+                            headcount.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= 05 / CAPABILITIES ================= -->
+        <section id="skills" class="wrap py-20 md:py-28">
+            <header class="reveal border-t-2 border-ink pt-4">
+                <div class="mb-8 flex items-baseline justify-between">
+                    <span class="kicker">05 / Capabilities</span>
+                    <span class="kicker hidden sm:block">Builder &times; Strategist</span>
+                </div>
+                <h2 class="font-display text-display-lg font-black uppercase">Capabilities</h2>
+            </header>
+
+            <h3 class="kicker reveal mt-14">Engineering</h3>
+            <div class="reveal mt-4 grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-2 md:grid-cols-4">
+                <div class="bg-paper p-6">
+                    <span class="kicker">E.01</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">AI Integration</h4>
+                    <p class="mt-1 text-sm text-mute">LLM features, ML matching &amp; automation</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">E.02</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Frontend Engineering</h4>
+                    <p class="mt-1 text-sm text-mute">React, TypeScript, Vite, Tailwind CSS</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">E.03</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Backend &amp; Data</h4>
+                    <p class="mt-1 text-sm text-mute">Supabase, PostgreSQL, real-time systems</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">E.04</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Rapid Prototyping</h4>
+                    <p class="mt-1 text-sm text-mute">Zero-to-one MVPs shipped to production</p>
+                </div>
+            </div>
+
+            <h3 class="kicker reveal mt-12">Product</h3>
+            <div class="reveal mt-4 grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-2 md:grid-cols-4">
+                <div class="bg-paper p-6">
+                    <span class="kicker">P.01</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Product Strategy</h4>
+                    <p class="mt-1 text-sm text-mute">Vision &amp; roadmapping</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">P.02</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">User-Centered Design</h4>
+                    <p class="mt-1 text-sm text-mute">UX research &amp; usability testing</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">P.03</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Data Analytics</h4>
+                    <p class="mt-1 text-sm text-mute">Insights &amp; metrics</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">P.04</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Experimentation</h4>
+                    <p class="mt-1 text-sm text-mute">A/B tests &amp; funnel optimization</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">P.05</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Agile &amp; Scrum</h4>
+                    <p class="mt-1 text-sm text-mute">Sprint planning &amp; delivery</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">P.06</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Stakeholder Mgmt</h4>
+                    <p class="mt-1 text-sm text-mute">Communication &amp; alignment</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">P.07</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Go-to-Market</h4>
+                    <p class="mt-1 text-sm text-mute">Launch strategy</p>
+                </div>
+                <div class="bg-paper p-6">
+                    <span class="kicker">P.08</span>
+                    <h4 class="mt-8 font-display text-lg font-bold uppercase">Growth</h4>
+                    <p class="mt-1 text-sm text-mute">Retention &amp; scale</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 06 / CREDENTIALS ================= -->
+        <section id="certifications" class="wrap py-20 md:py-28">
+            <header class="reveal border-t-2 border-ink pt-4">
+                <div class="mb-8 flex items-baseline justify-between">
+                    <span class="kicker">06 / Credentials</span>
+                    <span class="kicker hidden sm:block">Education &amp; certifications</span>
+                </div>
+                <h2 class="font-display text-display-lg font-black uppercase">Credentials</h2>
+            </header>
+
+            <div class="mt-14 border-t border-line font-mono text-sm">
+                <div class="reveal grid grid-cols-12 items-baseline gap-x-4 border-b border-line py-5">
+                    <span class="kicker col-span-3 md:col-span-1">C.01</span>
+                    <span class="col-span-9 font-medium uppercase tracking-wide md:col-span-5">B.Eng Mechanical
+                        Engineering</span>
+                    <span class="col-span-9 col-start-4 uppercase text-mute md:col-span-4 md:col-start-auto">Afe
+                        Babalola University</span>
+                    <span class="hidden uppercase text-mute md:col-span-2 md:block md:text-right">Degree</span>
+                </div>
+                <div class="reveal grid grid-cols-12 items-baseline gap-x-4 border-b border-line py-5">
+                    <span class="kicker col-span-3 md:col-span-1">C.02</span>
+                    <span class="col-span-9 font-medium uppercase tracking-wide md:col-span-5">Oracle Certified AI
+                        Associate</span>
+                    <span class="col-span-9 col-start-4 uppercase text-mute md:col-span-4 md:col-start-auto">Oracle</span>
+                    <span class="hidden uppercase text-mute md:col-span-2 md:block md:text-right">Certification</span>
+                </div>
+                <div class="reveal grid grid-cols-12 items-baseline gap-x-4 border-b border-line py-5">
+                    <span class="kicker col-span-3 md:col-span-1">C.03</span>
+                    <span class="col-span-9 font-medium uppercase tracking-wide md:col-span-5">AI
+                        Micro-Certification</span>
+                    <span class="col-span-9 col-start-4 uppercase text-mute md:col-span-4 md:col-start-auto">Product
+                        School</span>
+                    <span class="hidden uppercase text-mute md:col-span-2 md:block md:text-right">Training</span>
+                </div>
+                <div class="reveal grid grid-cols-12 items-baseline gap-x-4 border-b border-line py-5">
+                    <span class="kicker col-span-3 md:col-span-1">C.04</span>
+                    <span class="col-span-9 font-medium uppercase tracking-wide md:col-span-5">Workflow
+                        Specialist</span>
+                    <span class="col-span-9 col-start-4 uppercase text-mute md:col-span-4 md:col-start-auto">Asana</span>
+                    <span class="hidden uppercase text-mute md:col-span-2 md:block md:text-right">Certification</span>
+                </div>
+                <div class="reveal grid grid-cols-12 items-baseline gap-x-4 border-b border-line py-5">
+                    <span class="kicker col-span-3 md:col-span-1">C.05</span>
+                    <span class="col-span-9 font-medium uppercase tracking-wide md:col-span-5">HNG Finalist</span>
+                    <span class="col-span-9 col-start-4 uppercase text-mute md:col-span-4 md:col-start-auto">HNG
+                        Tech</span>
+                    <span class="hidden uppercase text-mute md:col-span-2 md:block md:text-right">Achievement</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 07 / CONTACT ================= -->
+        <section id="contact" class="bg-ink text-paper">
+            <div class="wrap py-24 md:py-32">
+                <div class="mb-12 flex items-baseline justify-between border-t border-paper/20 pt-4 font-mono text-meta uppercase tracking-widest text-paper/50">
+                    <span>07 / Contact</span>
+                    <span class="hidden sm:block">Open to product &amp; engineering roles</span>
+                </div>
+                <div class="grid max-w-3xl grid-cols-1 gap-px border border-paper/20 bg-paper/20 sm:grid-cols-2">
+                    <div class="bg-ink p-6 md:p-8">
+                        <p class="kicker text-paper/50">Path 01 — Hiring?</p>
+                        <p class="mt-3 text-lg leading-relaxed text-paper/80">
+                            I'm open to product management and product engineering roles.
+                        </p>
+                        <a href="mailto:dayjigud@gmail.com?subject=Role%20opportunity"
+                            class="btn-line mt-6 inline-block border-paper/40 text-paper hover:border-accent">
+                            Email me about a role <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                    <div class="bg-ink p-6 md:p-8">
+                        <p class="kicker text-paper/50">Path 02 — Have a build?</p>
+                        <p class="mt-3 text-lg leading-relaxed text-paper/80">
+                            Àrà takes fixed-scope, fixed-price projects: audits, MVPs and AI sprints.
+                        </p>
+                        <a href="https://ara.ayodeji.xyz" target="_blank" rel="noopener"
+                            class="btn-line mt-6 inline-block border-paper/40 text-paper hover:border-accent">
+                            Build with Àrà <span aria-hidden="true">&nearr;</span></a>
+                    </div>
+                </div>
+                <a href="mailto:dayjigud@gmail.com"
+                    class="link-sweep mt-10 inline-block break-all font-display text-[clamp(1.75rem,6.2vw,6rem)] font-black uppercase leading-none tracking-tight text-paper"
+                    style="background-image: linear-gradient(#FF3E00, #FF3E00); padding-bottom: 0.08em;">
+                    Dayjigud@<wbr>Gmail.com
+                </a>
+                <div class="mt-16 flex flex-wrap gap-x-10 gap-y-4 font-mono text-meta uppercase tracking-widest">
+                    <a class="link-sweep inline-flex items-center gap-2 text-paper/80 hover:text-paper"
+                        href="https://LinkedIn.com/in/dayjigud" target="_blank" rel="noopener">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+                        </svg>
+                        LinkedIn &nearr;
+                    </a>
+                    <a class="link-sweep inline-flex items-center gap-2 text-paper/80 hover:text-paper"
+                        href="https://x.com/dayjigud" target="_blank" rel="noopener">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z" />
+                        </svg>
+                        X / Twitter &nearr;
+                    </a>
+                    <a class="link-sweep inline-flex items-center gap-2 text-paper/80 hover:text-paper"
+                        href="https://www.ayodeji.xyz" target="_blank" rel="noopener">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                        ayodeji.xyz &nearr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer / colophon -->
+            <footer class="border-t border-paper/15">
+                <div class="wrap flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 py-8 font-mono text-meta uppercase tracking-widest text-paper/40">
+                    <span>&copy; 2026 Ayodeji Adeniyi</span>
+                    <span>Designed &amp; built by hand</span>
+                    <span>Type: Archivo / Inter / JetBrains Mono</span>
+                </div>
+            </footer>
+        </section>
+    </main>
+</body>
+
+</html>
+
+```
+## `projects/index.html`
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff5c35">
+  <title>Projects — Ayodeji Adeniyi</title>
+  <meta name="description" content="Small, useful experiments by Ayodeji Adeniyi. Start with Donewell, a thoughtful local-first task manager.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/index.css">
+  <script type="module" src="../src/projects.js"></script>
+</head>
+<body class="projects-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="projects-header">
+    <a class="projects-mark" href="/projects" aria-label="Projects home">A<span>+</span></a>
+    <p>Private workshop <span aria-hidden="true">/</span> useful little things</p>
+    <span class="projects-clock" aria-label="Current local time"></span>
+  </header>
+
+  <main id="main">
+    <section class="projects-intro" aria-labelledby="projects-title">
+      <p class="eyebrow">Ayodeji's side quests — vol. 01</p>
+      <h1 id="projects-title">Things I made<br><em>for the fun of it.</em></h1>
+      <div class="intro-foot">
+        <p>Quiet tools and weekend experiments. No accounts, no tracking, no nonsense.</p>
+        <span aria-hidden="true">Scroll to explore ↓</span>
+      </div>
+    </section>
+
+    <section class="project-feature" aria-labelledby="donewell-title">
+      <div class="project-meta">
+        <span>01 / Productivity</span><span>2026</span>
+      </div>
+      <div class="project-heading">
+        <div><p class="eyebrow">Your day, minus the noise</p><h2 id="donewell-title">Donewell.</h2></div>
+        <p>A calm, local-first task desk with just enough structure to keep momentum—and none of the admin of managing your task manager.</p>
+      </div>
+
+      <div class="todo-shell">
+        <aside class="todo-sidebar">
+          <div>
+            <p class="todo-brand">Donewell<span>.</span></p>
+            <p class="todo-date"></p>
+          </div>
+          <nav aria-label="Task filters">
+            <button class="filter active" data-filter="all"><span>All tasks</span><b data-count="all">0</b></button>
+            <button class="filter" data-filter="today"><span>Today</span><b data-count="today">0</b></button>
+            <button class="filter" data-filter="overdue"><span>Overdue</span><b data-count="overdue">0</b></button>
+            <button class="filter" data-filter="upcoming"><span>Upcoming</span><b data-count="upcoming">0</b></button>
+            <button class="filter" data-filter="completed"><span>Completed</span><b data-count="completed">0</b></button>
+          </nav>
+          <div class="local-note"><span>●</span><p><strong>Stored on this device</strong>Your list stays in your browser.</p></div>
+        </aside>
+
+        <div class="todo-workspace">
+          <div class="todo-toolbar">
+            <div><p class="eyebrow">Current view</p><h3>All tasks</h3></div>
+            <div class="todo-toolbar-actions"><button class="sample-data" type="button">Load sample data</button><button class="clear-completed" type="button">Clear completed</button></div>
+          </div>
+          <div class="task-notice" role="status" hidden><span></span><button class="undo-action" type="button" hidden>Undo</button></div>
+
+          <form class="task-form">
+            <label class="sr-only" for="task-title">What needs doing?</label>
+            <input id="task-title" name="title" maxlength="120" required autocomplete="off" placeholder="What needs doing?">
+            <div class="task-options">
+              <div class="date-field"><span>Due</span><input name="due" type="hidden"><button class="date-trigger" type="button" aria-label="Choose due date" aria-haspopup="dialog" aria-expanded="false"><span>Pick a date</span><span aria-hidden="true">▦</span></button><div class="date-picker" role="dialog" aria-label="Choose due date" hidden></div></div>
+              <label><span>Priority</span><select name="priority"><option value="normal">Normal</option><option value="high">High</option><option value="low">Low</option></select></label>
+              <button type="submit">Add task <span aria-hidden="true">↵</span></button>
+            </div>
+            <details class="task-more"><summary>More details</summary>
+              <div class="task-more-fields">
+                <label>Repeat <select name="repeat"><option value="none">Never</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select></label>
+                <label>Label <input name="tag" maxlength="40" placeholder="e.g. Work"></label>
+                <label class="notes-field">Notes <textarea name="notes" maxlength="1000" rows="2" placeholder="Add helpful details"></textarea></label>
+              </div>
+            </details>
+          </form>
+
+          <div class="list-tools">
+            <label><span class="sr-only">Search tasks</span><input class="task-search" type="search" placeholder="Search tasks…"></label>
+            <label>Label <select class="tag-filter"><option value="">All labels</option></select></label>
+            <label>Sort <select class="task-sort"><option value="newest">Newest</option><option value="due">Due date</option><option value="priority">Priority</option></select></label>
+            <span class="progress-copy" aria-live="polite"></span>
+          </div>
+          <div class="progress-track" aria-hidden="true"><span></span></div>
+          <ul class="task-list" aria-label="Tasks"></ul>
+          <div class="empty-state" hidden><span>✓</span><h4>All clear.</h4><p>Nothing here needs your attention.</p></div>
+          <div class="task-backup"><p>Keep a copy of your tasks on this device.</p><div><button class="export-tasks" type="button">Export backup</button><button class="import-tasks" type="button">Import backup</button><input class="import-file" type="file" accept=".json,application/json" hidden></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="projects-footer"><p>Built with care by Ayodeji.</p><p>Everything works offline after the first visit.</p></footer>
+</body>
+</html>
+
+```

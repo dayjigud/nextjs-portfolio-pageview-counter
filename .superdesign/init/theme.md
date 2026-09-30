@@ -1,0 +1,524 @@
+# Theme
+## Compact tokens
+Portfolio: paper #FFFFFF, ink #0E0E0E, accent #FF3E00, cobalt #2400FF, lemon #FFD02F, line #E4E4E4, mute #6B6B6B. Projects: background #151515, foreground #f7f4ee, orange #ff5c35, cream #f4f0e8. Fonts: Archivo display, Inter body, JetBrains Mono metadata. Display scales: clamp(3rem,9vw,8.5rem), clamp(2.25rem,6vw,5rem), clamp(1.375rem,2.6vw,2.25rem). Mostly square workshop surfaces; custom calendar round day controls. Tailwind default spacing and breakpoints, custom project breakpoint 700px. Donewell shell shadow 0 24px 70px #302b221f. Reduced-motion overrides present. The NEW shop intentionally uses a distinct glass/aurora system.
+
+## Raw sources
+## `tailwind.config.js`
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./projects/index.html",
+    "./src/projects.js",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        paper: '#FFFFFF',
+        ink: '#0E0E0E',
+        accent: '#FF3E00',
+        cobalt: '#2400FF',
+        lemon: '#FFD02F',
+        line: '#E4E4E4',
+        mute: '#6B6B6B',
+      },
+      fontFamily: {
+        display: ['Archivo', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+      },
+      fontSize: {
+        'display-xl': ['clamp(3rem, 9vw, 8.5rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
+        'display-lg': ['clamp(2.25rem, 6vw, 5rem)', { lineHeight: '1', letterSpacing: '-0.02em' }],
+        'display-md': ['clamp(1.375rem, 2.6vw, 2.25rem)', { lineHeight: '1.05', letterSpacing: '-0.01em' }],
+        'meta': ['0.8125rem', { lineHeight: '1.6', letterSpacing: '0.08em' }],
+      },
+    },
+  },
+  plugins: [],
+}
+
+```
+## `src/index.css`
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* The private /projects workshop keeps the portfolio's type, but has its own warmer identity. */
+.projects-page { --project-orange:#ff5c35; --project-cream:#f4f0e8; background:#151515; color:#f7f4ee; }
+.projects-header { height:72px; padding:0 clamp(1.25rem,4vw,4rem); display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #3a3a3a; font:500 .72rem/1 'JetBrains Mono',monospace; letter-spacing:.09em; text-transform:uppercase; }
+.projects-mark { font:900 1.5rem/1 Archivo,sans-serif; }.projects-mark span,.todo-brand span { color:var(--project-orange); }
+.projects-header p { color:#aaa; }.projects-header p span { padding:0 .6rem; color:var(--project-orange); }
+.projects-intro { padding:clamp(5rem,11vw,10rem) clamp(1.25rem,5vw,5rem) 4rem; min-height:calc(100vh - 72px); display:flex; flex-direction:column; justify-content:space-between; }
+.eyebrow { font:500 .7rem/1.5 'JetBrains Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
+.projects-intro h1 { margin:2rem 0; font:900 clamp(3.5rem,10vw,9rem)/.88 Archivo,sans-serif; letter-spacing:-.055em; text-transform:uppercase; }
+.projects-intro h1 em { color:var(--project-orange); font-style:normal; }
+.intro-foot { display:flex; justify-content:space-between; align-items:end; border-top:1px solid #3a3a3a; padding-top:1.25rem; color:#aaa; font-size:.9rem; }
+.intro-foot p { max-width:32rem; }.intro-foot span { font:500 .65rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }
+.project-feature { background:var(--project-cream); color:#171717; padding:clamp(1.25rem,4vw,4rem); }
+.project-meta { display:flex; justify-content:space-between; border-top:2px solid #171717; padding-top:.75rem; font:500 .67rem/1 'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.1em; }
+.project-heading { margin:4rem 0 3rem; display:grid; grid-template-columns:2fr 1fr; gap:3rem; align-items:end; }
+.project-heading h2 { font:900 clamp(4rem,10vw,9rem)/.85 Archivo,sans-serif; letter-spacing:-.06em; }.project-heading>p { color:#5c5a55; line-height:1.7; }
+.todo-shell { min-height:650px; display:grid; grid-template-columns:250px 1fr; border:1px solid #beb9ae; background:#fff; box-shadow:0 24px 70px #302b221f; }
+.todo-sidebar { background:#181818; color:#fff; padding:2rem 1.5rem; display:flex; flex-direction:column; }
+.todo-brand { font:900 1.5rem/1 Archivo,sans-serif; }.todo-date { margin-top:.7rem; color:#858585; font-size:.72rem; }
+.todo-sidebar nav { margin-top:4rem; display:grid; gap:.35rem; }.filter { padding:.85rem 1rem; display:flex; justify-content:space-between; text-align:left; color:#aaa; font-size:.82rem; transition:.2s; }.filter:hover,.filter.active { background:#292929; color:#fff; }.filter.active { box-shadow:inset 2px 0 var(--project-orange); }.filter b { font:500 .65rem/1.5 'JetBrains Mono',monospace; }
+.local-note { margin-top:auto; border-top:1px solid #333; padding-top:1.25rem; display:flex; gap:.7rem; color:#777; font-size:.65rem; line-height:1.5; }.local-note span { color:#62c875; }.local-note strong { display:block; color:#ccc; }
+.todo-workspace { padding:clamp(1.5rem,4vw,3.5rem); min-width:0; }.todo-toolbar { display:flex; justify-content:space-between; align-items:end; }.todo-toolbar h3 { margin-top:.45rem; font:700 clamp(1.8rem,4vw,3rem)/1 Archivo,sans-serif; }.clear-completed,.sample-data { color:#777; font:500 .64rem/1 'JetBrains Mono',monospace; text-transform:uppercase; border-bottom:1px solid; padding-bottom:.25rem; }
+.task-form { margin-top:2.5rem; border:1px solid #ccc6bb; }.task-form>input { width:100%; padding:1.25rem 1.35rem; outline:0; font-size:1.05rem; }.task-form:focus-within { border-color:#171717; box-shadow:0 0 0 1px #171717; }.task-options { border-top:1px solid #e0dcd3; display:flex; align-items:stretch; }.task-options label { display:flex; align-items:center; gap:.6rem; padding:.8rem 1rem; border-right:1px solid #e0dcd3; color:#777; font:500 .63rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.task-options input,.task-options select { color:#171717; background:transparent; }.task-options>button[type=submit] { margin-left:auto; padding:.8rem 1.2rem; background:var(--project-orange); color:#fff; font:600 .73rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }
+.list-tools { margin-top:2.5rem; display:flex; justify-content:space-between; color:#777; font:500 .67rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.task-search { background:transparent; outline:0; text-transform:none; min-width:8rem; }.progress-track { height:2px; margin-top:1rem; background:#e5e1d9; }.progress-track span { display:block; height:100%; background:var(--project-orange); transition:width .3s; }
+.task-list { margin-top:.5rem; }.task-row { display:grid; grid-template-columns:auto 1fr auto; gap:1rem; align-items:center; padding:1.25rem .25rem; border-bottom:1px solid #e5e1d9; }.task-check { width:24px; height:24px; border:1px solid #aaa; display:grid; place-items:center; border-radius:50%; }.task-check span { opacity:0; }.task-row.done .task-check { border-color:var(--project-orange); background:var(--project-orange); color:#fff; }.task-row.done .task-check span { opacity:1; }.task-row.done .task-copy p { text-decoration:line-through; color:#999; }.task-copy p { font-weight:600; }.task-copy div { display:flex; gap:.75rem; margin-top:.45rem; color:#888; font:500 .59rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.priority { color:#666; }.priority.high { color:#d33b1a; }.priority.low { color:#2c7860; }.task-actions { display:flex; align-items:center; gap:.8rem; }.task-edit { color:#666; font:600 .67rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.task-delete { color:#666; font-size:1.4rem; line-height:1; }.task-edit:hover,.task-delete:hover { color:#171717; }
+.task-row.editing { display:block; background:#faf8f4; padding:1rem; }.task-edit-form>input { width:100%; padding:.75rem; border:1px solid #ccc6bb; background:#fff; font-weight:600; }.task-edit-options { display:flex; align-items:end; flex-wrap:wrap; gap:.75rem; margin-top:.75rem; }.task-edit-options label { display:grid; gap:.35rem; color:#666; font:500 .62rem/1.3 'JetBrains Mono',monospace; text-transform:uppercase; }.task-edit-options input,.task-edit-options select { min-height:2.5rem; padding:.4rem .6rem; border:1px solid #ccc6bb; background:#fff; color:#171717; }.task-edit-actions { display:flex; gap:.5rem; margin-left:auto; }.task-edit-actions button { min-height:2.5rem; padding:.5rem .8rem; font:600 .67rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.task-edit-actions button[type=submit] { background:var(--project-orange); color:#fff; }.task-cancel { border:1px solid #ccc6bb; }.task-edit-form :focus-visible,.task-actions button:focus-visible { outline:2px solid #171717; outline-offset:2px; }
+.date-field { position:relative; display:flex; align-items:center; gap:.6rem; min-width:0; }.task-options .date-field { padding:.8rem 1rem; border-right:1px solid #e0dcd3; color:#777; font:500 .63rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.task-edit-options .date-field { display:grid; gap:.35rem; color:#666; font:500 .62rem/1.3 'JetBrains Mono',monospace; text-transform:uppercase; }.date-trigger { display:flex; align-items:center; justify-content:space-between; gap:1.2rem; min-height:2.5rem; padding:.45rem .65rem; border:1px solid #ccc6bb; background:#fff; color:#666; font:500 .72rem/1.2 'JetBrains Mono',monospace; text-align:left; text-transform:none; white-space:nowrap; }.date-trigger.has-date { color:#171717; }.date-trigger[data-invalid=true] { border-color:#b02b16; }.date-trigger span:last-child { font-size:1rem; color:var(--project-orange); }.task-edit-options .date-trigger { width:100%; }
+.date-picker { position:absolute; z-index:30; top:calc(100% + .35rem); left:0; width:min(320px,calc(100vw - 3rem)); padding:1rem; border:1px solid #c9c3b9; background:#fff; color:#171717; box-shadow:0 16px 40px #17171730; text-transform:none; }.date-picker[hidden] { display:none; }.date-picker-header { display:grid; grid-template-columns:2rem minmax(0,1fr) 4.6rem 2rem; gap:.3rem; align-items:center; }.date-picker-header button { height:2rem; font:400 1.5rem/1 Inter,sans-serif; }.date-picker-header select { width:100%; min-width:0; padding:.35rem .15rem; border:0; background:#f6f3ee; color:#171717; font:600 .75rem/1 Inter,sans-serif; }.date-weekdays,.date-days { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:.2rem; text-align:center; }.date-weekdays { margin-top:1rem; color:#777; font:600 .58rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.date-days { margin-top:.35rem; }.date-day { width:100%; aspect-ratio:1; border-radius:50%; font:500 .73rem/1 Inter,sans-serif; }.date-day:hover,.date-day:focus-visible { background:#f4e8df; }.date-day.is-today { box-shadow:inset 0 0 0 1px var(--project-orange); }.date-day.is-selected { background:var(--project-orange); color:#fff; }.date-quick { display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.9rem; padding-top:.8rem; border-top:1px solid #e9e4dc; }.date-quick button { padding:.4rem .5rem; background:#f6f3ee; color:#333; font:600 .58rem/1.2 'JetBrains Mono',monospace; text-transform:uppercase; }.date-quick .date-clear { margin-left:auto; }.date-trigger:focus-visible,.date-picker :focus-visible { outline:2px solid #171717; outline-offset:2px; }
+.task-more { border-top:1px solid #e0dcd3; padding:.85rem 1rem; }.task-more summary { width:max-content; cursor:pointer; color:#555; font:600 .68rem/1.3 'JetBrains Mono',monospace; text-transform:uppercase; }.task-more-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin-top:1rem; }.task-more-fields label { display:grid; gap:.4rem; color:#666; font:500 .62rem/1.4 'JetBrains Mono',monospace; text-transform:uppercase; }.task-more-fields input,.task-more-fields select,.task-more-fields textarea,.task-edit-options textarea { width:100%; padding:.65rem; border:1px solid #ccc6bb; border-radius:0; background:#fff; color:#171717; font:400 .8rem/1.4 Inter,sans-serif; text-transform:none; }.notes-field { width:100%; grid-column:1/-1; }.task-more-fields textarea,.task-edit-options textarea { resize:vertical; }.task-edit-options .notes-field { flex-basis:100%; }.task-edit-options .notes-field textarea { min-height:4rem; }
+.task-notice { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:1.25rem; padding:.8rem 1rem; background:#f3eee5; color:#3f3c37; font-size:.78rem; }.task-notice[hidden],.task-notice button[hidden] { display:none; }.undo-action { color:#a32911; font:700 .68rem/1 'JetBrains Mono',monospace; text-transform:uppercase; }.clear-completed:disabled { opacity:.45; cursor:not-allowed; }
+.list-tools { align-items:center; flex-wrap:wrap; gap:.75rem 1.25rem; }.list-tools label { display:flex; align-items:center; gap:.35rem; }.list-tools select { max-width:9rem; background:transparent; color:#333; font:500 .7rem/1 'JetBrains Mono',monospace; text-transform:none; }.progress-copy { margin-left:auto; }.task-copy { min-width:0; }.task-copy div { flex-wrap:wrap; line-height:1.4; }.task-copy .task-notes { margin-top:.45rem; color:#666; font-size:.77rem; font-weight:400; line-height:1.45; white-space:pre-wrap; overflow-wrap:anywhere; }.task-copy time.overdue { color:#b02b16; font-weight:700; }.task-tag { color:#514480; }.task-repeat { color:#585858; }.task-backup { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-top:2.5rem; padding-top:1rem; border-top:1px solid #e5e1d9; color:#777; font-size:.7rem; }.task-backup>div { display:flex; gap:1rem; }.task-backup button { color:#333; border-bottom:1px solid #999; font:600 .65rem/1.5 'JetBrains Mono',monospace; text-transform:uppercase; }
+.task-more :focus-visible,.list-tools :focus-visible,.task-backup button:focus-visible,.undo-action:focus-visible { outline:2px solid #171717; outline-offset:2px; }
+.empty-state { padding:5rem 1rem; text-align:center; color:#888; }.empty-state span { display:grid; place-items:center; margin:auto; width:3rem; height:3rem; border:1px solid #ccc; border-radius:50%; }.empty-state h4 { margin-top:1rem; color:#222; font:700 1.3rem Archivo,sans-serif; }.empty-state p { margin-top:.35rem; font-size:.8rem; }
+.projects-footer { padding:2rem clamp(1.25rem,4vw,4rem); display:flex; justify-content:space-between; color:#888; font:500 .65rem/1.5 'JetBrains Mono',monospace; text-transform:uppercase; }
+@media(max-width:700px){.projects-header p{display:none}.projects-intro{min-height:75vh}.intro-foot span{display:none}.project-heading{grid-template-columns:1fr}.todo-shell{grid-template-columns:1fr}.todo-sidebar{padding:1.25rem}.todo-sidebar nav{margin-top:1.5rem;grid-template-columns:repeat(2,1fr)}.local-note{display:none}.task-options{flex-wrap:wrap}.task-options label,.task-options .date-field{flex:1}.task-options>button[type=submit]{width:100%;padding:1rem}.task-row{gap:.6rem}.task-actions{gap:.5rem}.task-backup{align-items:start}.projects-footer{gap:2rem}.projects-footer p:last-child{text-align:right}}
+@media(max-width:700px){
+  .task-options .date-field,.task-edit-options .date-field{flex:1 1 100%;width:100%}
+  .task-options .date-field{flex-wrap:wrap;border-right:0;border-bottom:1px solid #e0dcd3}
+  .task-edit-options .date-field{display:flex;flex-direction:column;align-items:stretch}
+  .date-picker{position:static;flex:0 0 100%;width:100%;margin-top:.4rem;padding:.75rem;box-shadow:none}
+  .date-picker-header{grid-template-columns:1.7rem minmax(0,1fr) 1.7rem;grid-template-rows:auto auto}
+  .calendar-prev{grid-column:1;grid-row:1/3}
+  .calendar-month{grid-column:2;grid-row:1}
+  .calendar-year{grid-column:2;grid-row:2}
+  .calendar-next{grid-column:3;grid-row:1/3}
+}
+
+/* ============================================================
+   Swiss / editorial design system — CSS-first with minimal JS.
+   Every animation on this site is pure CSS. Scroll-driven
+   effects are gated behind @supports so browsers without
+   animation-timeline get a fully visible, static page.
+   ============================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Anchors clear the sticky header */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+
+  ::selection {
+    background: theme('colors.lemon');
+    color: theme('colors.ink');
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.cobalt');
+    outline-offset: 3px;
+  }
+
+  /* Native disclosure marker replaced by the animated + glyph */
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-[88rem] px-5 md:px-10;
+  }
+
+  /* Mono "spec sheet" metadata voice */
+  .kicker {
+    @apply font-mono text-meta uppercase tracking-widest text-mute;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[70]
+      focus:bg-cobalt focus:text-paper focus:px-4 focus:py-2 focus:font-mono focus:text-meta focus:uppercase;
+  }
+
+  .btn-ink {
+    @apply inline-flex items-center gap-2 bg-ink text-paper font-mono text-meta uppercase tracking-widest
+      px-6 py-3 transition-colors duration-300 hover:bg-accent focus-visible:bg-accent;
+  }
+
+  .btn-line {
+    @apply inline-flex items-center gap-2 border border-ink text-ink font-mono text-meta uppercase tracking-widest
+      px-6 py-3 transition-colors duration-300 hover:bg-ink hover:text-paper;
+  }
+
+  /* Underline that sweeps in from the left on hover/focus */
+  .link-sweep {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 0.3s ease;
+    padding-bottom: 2px;
+  }
+  .link-sweep:hover,
+  .link-sweep:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+/* ------------------------------------------------------------
+   Header — button-driven mobile menu. CSS owns presentation;
+   navigation.js synchronizes accessible state and closes the
+   panel after navigation, on Escape, or at the desktop breakpoint.
+   ------------------------------------------------------------ */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+.nav-toggle .bar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: theme('colors.ink');
+  transition: transform 0.25s ease;
+}
+#nav-toggle[aria-expanded='true'] .bar-1 {
+  transform: translateY(4px) rotate(45deg);
+}
+#nav-toggle[aria-expanded='true'] .bar-2 {
+  transform: translateY(-4px) rotate(-45deg);
+}
+#nav-toggle:focus-visible {
+  outline: 2px solid theme('colors.cobalt');
+  outline-offset: 3px;
+}
+
+.nav-panel {
+  position: fixed;
+  top: 3.5rem; /* header height */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  flex-direction: column;
+  background: theme('colors.paper');
+  z-index: 40;
+}
+#nav-toggle[aria-expanded='true'] ~ .nav-panel {
+  display: flex;
+}
+/* Lock page scroll while the menu is open */
+body:has(#nav-toggle[aria-expanded='true']) {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------
+   Hero — staggered load-in. Time-based, universal support.
+   ------------------------------------------------------------ */
+.hero-line {
+  display: block;
+  overflow: hidden;
+}
+.hero-line > span {
+  display: block;
+  transform: translateY(110%);
+  animation: reveal-line 0.9s cubic-bezier(0.2, 0.65, 0.2, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 130ms);
+}
+@keyframes reveal-line {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.hero-fade {
+  opacity: 0;
+  animation: fade-up 0.7s ease-out forwards;
+  animation-delay: calc(150ms + var(--i, 0) * 120ms);
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------------------------------------
+   Marquee — duplicated track, translate by half, pause on hover.
+   The only element allowed will-change (only infinite animation).
+   ------------------------------------------------------------ */
+.marquee {
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+.marquee-copy {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding-right: 3rem;
+  flex: none;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ------------------------------------------------------------
+   Projects index — ink wipe rises behind the row on hover/focus
+   and stays while the case study is open.
+   ------------------------------------------------------------ */
+.project-summary {
+  position: relative;
+  cursor: pointer;
+  isolation: isolate;
+}
+.project-summary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: theme('colors.ink');
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.project-summary:hover::before,
+.project-summary:focus-visible::before,
+details[open] > .project-summary::before {
+  transform: scaleY(1);
+}
+.project-summary,
+.project-summary .proj-meta {
+  transition: color 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.project-summary:hover,
+.project-summary:focus-visible,
+details[open] > .project-summary {
+  color: theme('colors.paper');
+}
+.project-summary:hover .proj-meta,
+.project-summary:focus-visible .proj-meta,
+details[open] > .project-summary .proj-meta {
+  color: rgba(255, 255, 255, 0.6);
+}
+.project-summary .proj-arrow {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.project-summary:hover .proj-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* + marker rotates into × when the case study is open */
+.project-summary .marker {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+details[open] > .project-summary .marker {
+  transform: rotate(45deg);
+}
+
+/* Animated <details> expansion — browsers without
+   ::details-content support open instantly, which is fine. */
+.project::details-content {
+  opacity: 0;
+  block-size: 0;
+  overflow-y: clip;
+  transition:
+    content-visibility 0.45s allow-discrete,
+    opacity 0.45s ease,
+    block-size 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.project[open]::details-content {
+  opacity: 1;
+  block-size: auto;
+}
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+/* Case study prose */
+.case h4 {
+  @apply font-mono text-meta uppercase tracking-widest text-mute mb-2;
+}
+.case p,
+.case li {
+  @apply text-[0.95rem] leading-relaxed;
+}
+.case ul {
+  @apply space-y-2 mt-2;
+}
+.case li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+.case li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: theme('colors.accent');
+}
+.case strong {
+  font-weight: 600;
+  background: theme('colors.lemon');
+  padding: 0 0.25em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Experience bullets share the arrow-marker voice */
+.exp-list li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+.exp-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: theme('colors.accent');
+}
+
+/* ------------------------------------------------------------
+   Scroll-driven layer — everything in this block only exists
+   in browsers with CSS scroll-driven animations (Chrome/Edge).
+   Firefox and older Safari render the page fully visible with
+   no scroll effects: the gate IS the fallback.
+   ------------------------------------------------------------ */
+.progress {
+  display: none;
+}
+
+@property --n {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+@supports (animation-timeline: view()) {
+  /* Reveal-on-scroll for rows, cells and columns */
+  .reveal {
+    animation: reveal-up 1ms linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Reading progress bar */
+  .progress {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 60;
+    background: theme('colors.accent');
+    transform-origin: 0 50%;
+    animation: progress-grow 1ms linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes progress-grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Stat counters — the static number is swapped for a CSS
+     counter that ticks up as the stat row enters the viewport. */
+  .stat-num > span {
+    display: none;
+  }
+  .stat-num::after {
+    content: counter(n);
+    counter-reset: n var(--n);
+    animation: count-up 1ms linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
+  @keyframes count-up {
+    from {
+      --n: 0;
+    }
+    to {
+      --n: var(--target, 0);
+    }
+  }
+}
+
+/* ------------------------------------------------------------
+   Reduced motion — everything settles to its end state.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+  .marquee-copy[aria-hidden='true'] {
+    display: none;
+  }
+  .progress {
+    display: none;
+  }
+  /* Scroll-driven animations track scroll regardless of duration —
+     switch them off entirely and restore the static numbers. */
+  .reveal {
+    animation: none;
+  }
+  .stat-num > span {
+    display: inline;
+  }
+  .stat-num::after {
+    content: none;
+    animation: none;
+  }
+}
+
+.todo-toolbar-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:.75rem; max-width:50%; }.sample-data:focus-visible { outline:2px solid #171717; outline-offset:2px; }
+
+```

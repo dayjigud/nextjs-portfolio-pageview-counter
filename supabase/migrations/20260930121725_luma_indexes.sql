@@ -1,0 +1,10 @@
+create index products_category on public.products(category_id);
+create index product_images_product on public.product_images(product_id);
+create index cart_items_variant on public.cart_items(variant_id);
+create index order_items_variant on public.order_items(variant_id);
+create index handoffs_source_cart on luma_private.cart_handoffs(source_cart_id);
+create index handoffs_destination on luma_private.cart_handoffs(redeemed_by);
+alter policy profile_read on public.profiles using(user_id=(select auth.uid()) and coalesce(((select auth.jwt())->>'is_anonymous')::boolean,true)=false);
+alter policy profile_update on public.profiles using(user_id=(select auth.uid()) and coalesce(((select auth.jwt())->>'is_anonymous')::boolean,true)=false) with check(user_id=(select auth.uid()) and coalesce(((select auth.jwt())->>'is_anonymous')::boolean,true)=false);
+alter policy order_read on public.orders using(user_id=(select auth.uid()) and coalesce(((select auth.jwt())->>'is_anonymous')::boolean,true)=false);
+alter policy order_item_read on public.order_items using(exists(select 1 from public.orders o where o.id=order_id and o.user_id=(select auth.uid()) and coalesce(((select auth.jwt())->>'is_anonymous')::boolean,true)=false));

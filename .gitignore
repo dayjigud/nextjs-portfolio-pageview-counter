@@ -4,3 +4,9 @@ node_modules/
 tsconfig.tsbuildinfo
 playwright-report/
 test-results/
+.superpowers/
+.superdesign/tmp/
+supabase/.temp/
+.env
+.env.*
+!.env.example

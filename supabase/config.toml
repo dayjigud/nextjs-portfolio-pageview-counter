@@ -1,0 +1,17 @@
+project_id = "luma-local"
+[auth]
+enable_anonymous_sign_ins = true
+[functions.cart]
+verify_jwt = false
+[functions.cart-handoff]
+verify_jwt = false
+[functions.quote]
+verify_jwt = false
+[functions.checkout]
+verify_jwt = false
+[functions.orders]
+verify_jwt = false
+[functions.email-worker]
+verify_jwt = false
+[functions.guest-cleanup]
+verify_jwt = false

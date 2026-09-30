@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "targets": {
+    "/projects/shop/": {
+      "targetKind": "new-ui",
+      "projectId": "100fe9e1-396a-4f42-b6a0-799396d90f4e",
+      "activeDraftId": "915202d9-2dce-46dc-9f3d-83a65613918d",
+      "designSystemPath": ".superdesign/design-system.md",
+      "contextFiles": [
+        ".superdesign/design-system.md",
+        "projects/index.html",
+        "src/index.css",
+        "tailwind.config.js"
+      ],
+      "fingerprints": {
+        ".superdesign/design-system.md": "e9e96023e2df54d6729de6e0ad403ba658f387ddf28db97b1397563d2241c6b6",
+        "projects/index.html": "ffac2c5dc6ff66443b0df2d7be2089bd76864f5e2a712c9262834fe2ef230bee",
+        "src/index.css": "a11ce31f78afc540fae383d0aaa91fe06973460e43bd8d8621961fc40ba1f380",
+        "tailwind.config.js": "073166d1bdc31f3d93b7746852ec6373e71e02f11a608c99aaf880835218c530"
+      },
+      "referenceIds": [],
+      "components": [],
+      "drafts": {
+        "9839ce06-da57-43cd-9b0c-8385672a5b4a": {
+          "title": "Luma Aurora Flow",
+          "visualDirection": "Pearl glass and flowing aurora light",
+          "currentVersion": 1
+        },
+        "915202d9-2dce-46dc-9f3d-83a65613918d": {
+          "title": "Projects \u2014 Ayodeji Adeniyi & Luma",
+          "visualDirection": "Prism Playground inside the existing cream editorial project section after Donewell",
+          "parentDraftId": "9839ce06-da57-43cd-9b0c-8385672a5b4a",
+          "currentVersion": 2
+        },
+        "d791aa3f-1438-4753-9338-e4935979b950": {
+          "title": "Luma - Midnight Glass",
+          "visualDirection": "Dark glass with chromatic reflections",
+          "parentDraftId": "9839ce06-da57-43cd-9b0c-8385672a5b4a",
+          "currentVersion": 1
+        }
+      },
+      "updatedAt": "2026-09-30T11:28:24.134767+00:00"
+    }
+  }
+}

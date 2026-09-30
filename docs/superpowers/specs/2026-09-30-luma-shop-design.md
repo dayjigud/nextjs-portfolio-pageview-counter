@@ -1,7 +1,7 @@
 # Luma shop design specification
 
 Date: 2026-09-30, Africa/Lagos
-Status: visual direction approved; functional specification awaiting review. Implementation has not started.
+Status: visual direction and updated functional specification approved for implementation planning on 2026-09-30. Implementation has not started.
 
 ## Intent and agreed decisions
 
@@ -9,7 +9,7 @@ Build a portfolio demonstration of an end-to-end tech gadget shop. Luma appears 
 
 The user selected tech gadgets and accessories, a portfolio demo, and simulated checkout without card details. Guests must be able to add, edit, remove, and view cart items without Google sign-in; clicking checkout is the sign-in gate. They approved Prism Playground integrated into the existing projects page. The approved design is [Superdesign draft v2](https://p.superdesign.dev/draft/915202d9-2dce-46dc-9f3d-83a65613918d), on the [project canvas](https://superdesign.dev/teams/bcf6ae71-b64e-4f7b-bb97-9698d780cde5/projects/100fe9e1-396a-4f42-b6a0-799396d90f4e).
 
-The following functional defaults are proposed for review: NGN pricing, a fixed fictional delivery fee of NGN 2,500, no separate tax calculation, fictional delivery details, and no admin interface. These are scope decisions, not claims that the user separately selected them.
+Planning defaults carried forward following specification review: NGN pricing, a fixed fictional delivery fee of NGN 2,500, no separate tax calculation, fictional delivery details, and no admin interface. These are implementation scope defaults carried forward with approval to proceed, rather than individual user selections.
 
 Success means the complete browsing-to-receipt flow works across reloads and devices, another customer cannot access a user's data, and the portfolio and Donewell retain their existing behavior and appearance.
 

@@ -2,7 +2,8 @@
 export default {
   content: [
     "./index.html",
-    "./projects/index.html",
+    "./projects/**/*.html",
+    "./src/shop/**/*.js",
     "./src/projects.js",
   ],
   theme: {
