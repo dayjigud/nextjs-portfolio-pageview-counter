@@ -18,7 +18,8 @@ export async function initShopPage(root, embedded = false) {
  let auth = {}, cart = { revision:0, lines:[], subtotalKobo:0 }, products = [], category = '', query = '', quote, transferReview;
  const mode = embedded ? 'catalog' : root.dataset.shopPage;
  const showError = error => notify(root, error?.message || 'Something went wrong. Please try again.', true);
- const updateBadge = () => { root.querySelectorAll('[data-cart-count]').forEach(el=> el.textContent = String(cart.lines.reduce((n,l)=>n+l.quantity,0))); };
+ let pendingQuantity = 0, addQueue = Promise.resolve(), cartReady = Promise.resolve(false);
+ const updateBadge = () => { root.querySelectorAll('[data-cart-count]').forEach(el=> el.textContent = String(cart.lines.reduce((n,l)=>n+l.quantity,0)+pendingQuantity)); };
  const refreshCart = async () => { cart = await getCart(); updateBadge(); return cart; };
  function signInGate(checkout = false) {
   const dialog = document.createElement('dialog'); dialog.className = 'luma luma-dialog';
@@ -74,6 +75,7 @@ export async function initShopPage(root, embedded = false) {
  async function render() {
   auth = await getAuthState(); root.querySelector('[data-shop-nav]').innerHTML=navHtml(auth);
   if(!isConfigured()){content.innerHTML=(mode==='catalog' ? heroHtml() : '')+unavailableHtml();return;}
+  if(mode==='catalog' || mode==='product') cartReady = refreshCart().then(()=>true,()=>false);
   if(mode==='catalog') await renderCollection();
   else if(mode==='product') await renderProduct();
   else if(mode==='cart') await renderCart();
@@ -81,17 +83,37 @@ export async function initShopPage(root, embedded = false) {
   else if(mode==='confirmation') await renderReceipt();
   else if(mode==='account') await renderAccount();
   else if(mode==='callback'){content.innerHTML=stateHtml('Bringing your bag along.','Finishing Google sign-in. Please keep this page open.','');await completeOAuthCallback();}
-  if(mode==='catalog' || mode==='product') {try {await refreshCart();}catch { /* Catalog browsing remains usable if cart service is offline. */ }}
+  if(mode==='catalog' || mode==='product') await cartReady;
  }
  async function add(variantId, quantity=1) {
-  cart=await addToCart(variantId,quantity);auth=await getAuthState();updateBadge();notify(root,'Added to your bag. Saved and ready when you are.');
+  pendingQuantity += quantity; updateBadge();
+  notify(root,'Saving to your bag…');
+  const operation = addQueue.then(async () => {
+   try {
+    if(!await cartReady) await refreshCart();
+    cart = await addToCart(variantId,quantity,cart);
+    cartReady = Promise.resolve(true);
+   } catch(error) {
+    // Reconcile conflicts and lost responses; never blindly replay an add.
+    try {cart=await getCart();cartReady=Promise.resolve(true);}catch {cartReady=Promise.resolve(false);}
+    throw error;
+   } finally {pendingQuantity -= quantity;updateBadge();}
+  });
+  addQueue = operation.catch(()=>{});
+  await operation;
+  notify(root,pendingQuantity ? 'Saving to your bag…' : 'Added to your bag. Saved and ready when you are.');
  }
  root.addEventListener('click',async event=> {
+  const link=event.target.closest('a');
+  if(link && pendingQuantity && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+   event.preventDefault();await addQueue;location.assign(link.href);return;
+  }
   const button=event.target.closest('button');if(!button)return;
   try {
    if(button.dataset.category!==undefined){category=button.dataset.category;await renderCollection();}
    if(button.dataset.add){button.disabled=true;await add(button.dataset.add);}
    if(button.dataset.remove){button.disabled=true;cart=await updateCart({variantId:button.dataset.remove,quantity:0,expectedRevision:cart.revision});await renderCart();}
+   if(['signin','checkout','signout'].includes(button.dataset.action)) await addQueue;
    if(button.dataset.action==='signin'){if(!isConfigured())notify(root,'The shop is not connected yet.',true);else signInGate();}
    if(button.dataset.action==='checkout'){await refreshCart();if(!cart.lines.length){notify(root,'Your bag is empty.',true);return;}if(auth.user&&!auth.isAnonymous)location.assign(shopPath+'checkout/');else signInGate(true);}
    if(button.dataset.action==='signout'){await signOutShop();location.assign(shopPath);}
