@@ -6,6 +6,8 @@ Selected isolated Supabase project: `xiunfinvgxoquxiqnnyj` (Luma, Main connectio
 
 Verified Mailgun sending configuration: `MAILGUN_DOMAIN=ayodeji.xyz`, `MAILGUN_REGION=US`, sender `Luma Demo <orders@ayodeji.xyz>`. These are Supabase Edge Function secrets; the API key is configured outside this repository. SPF was verified, DKIM active, and the first live confirmation was accepted and delivered on 30 September 2026.
 
+On 1 October 2026, `email-worker` version 11 was deployed with the Luma-branded responsive HTML receipt and a plain-text alternative. Deployment read-back confirmed `ACTIVE`, unchanged `verify_jwt=false`, and source matching the tested local template and existing shared handlers. An unauthenticated POST returned HTTP 401 with `AUTH_REQUIRED`, confirming the scheduler credential remains mandatory. Desktop/mobile previews and receipt tests passed; this deployment check did not send a test email or verify rendering in a recipient's inbox.
+
 Runtime: official Supabase CLI 2.117.0; pinned Deno 2.7.4 via `npx --yes deno@2.7.4`; PostgreSQL driver `npm:postgres@3.4.7`. No Docker runtime is available locally. Server domain tests are real Deno tests; SQL access/constraint fixtures can run in the dedicated Luma project and roll back their identities. Concurrent request/rollback tests still require the configured server database credential; deterministic browser mocks do not prove these.
 
 ## Server secrets (Supabase dashboard → Edge Functions → Secrets)
