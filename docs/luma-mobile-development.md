@@ -49,7 +49,7 @@ Only server-definitive checkout rejections may be explicitly resolved and replac
 
 ## Shared sync activation
 
-Review `20261002141817_luma_realtime.sql` before applying to the verified Luma project `xiunfinvgxoquxiqnnyj`. It adds only missing carts/orders membership to supabase_realtime and preserves existing grants/RLS. No functions, tables, prices or deletion schedules change. Do not run a broad db push if unrelated pending migrations exist. Private outbox stays unpublished.
+Review `20261002152302_luma_realtime.sql` before applying to the verified Luma project `xiunfinvgxoquxiqnnyj`. It adds only missing carts/orders membership to supabase_realtime and preserves existing grants/RLS. No functions, tables, prices or deletion schedules change. Do not run a broad db push if unrelated pending migrations exist. Private outbox stays unpublished.
 
 Both clients subscribe with owner filters and refetch authoritative functions. Subscription is followed by a snapshot; bursts coalesce250ms; active clients refresh on focus/resume and every30seconds as a missed-event fallback. Private owner filters are optimizations; RLS provides authorization. The web checkout preserves draft/focus, marks its quote stale and requires total review. Guest writes and checkout requests are not replayed offline.
 
@@ -87,3 +87,7 @@ Do not report these live/device checks as passed from mocked tests or Flutter Do
 Final release APK: 57.2 MB, application ID `xyz.ayodeji.luma_shop`, version `1.0.0+1`, minimum API24, target/compile API36. `apksigner verify --print-certs` passed using the Luma Shop Demo certificate. Binary inspection confirmed INTERNET, backup disabled, exact OAuth callback and `flutter_deeplinking_enabled=false`. APK SHA256: `fa4d1c632353d0874bedf9f6d5b167b478509a6f0e6477c24ee65738d725a20a`. This proves packaging/signing, not installation or runtime acceptance.
 
 The detailed administrator/phone walkthrough is in `docs/superpowers/plans/2026-10-02-luma-android-flutter.md`, under Google Cloud, Supabase and phone configuration checklist. Final debug build also passed (72.3s).
+
+## Backend deployment update — 2 October 2026
+
+The user authorized deployment and GitHub push. The Main Supabase connection verified Luma project xiunfinvgxoquxiqnnyj as ACTIVE_HEALTHY. Migration luma_realtime applied successfully with remote version 20261002152302; the local filename now matches remote migration history. Post-deployment inspection confirms only public.carts/public.orders in supabase_realtime, and both tables retain RLS. Public Auth settings confirm Google and anonymous login enabled; the custom redirect allowlist and Google console credentials still need live callback verification. No Edge Function source changed, so no function redeployment was needed.
