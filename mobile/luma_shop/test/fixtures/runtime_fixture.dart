@@ -38,7 +38,9 @@ class RuntimeFixture {
     final transport = MockClient((request) async {
       dynamic value;
       final path = request.url.path;
-      if (path.endsWith('/products')) {
+      if (path.endsWith('/logout')) {
+        value = <String, dynamic>{};
+      } else if (path.endsWith('/products')) {
         value = [productJson()];
       } else if (path.endsWith('/cart')) {
         if (request.method == 'POST') {

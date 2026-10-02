@@ -262,3 +262,9 @@ This checklist is prepared for user/admin execution; no Google settings, live mi
 ## Deployment progress — 2 October 2026
 
 User reports provider/public keys configured and authorizes backend/GitHub push. Realtime migration applied to verified Luma via Main connection; local filename synchronized to remote version 20261002152302. Carts/orders publication and retained RLS verified. Google and anonymous providers report enabled. Exact allowlist, Google consent audience, phone callback and live owner sync remain acceptance checks. Earlier instructions to review/authorize migration are now satisfied; pending guest deletion remains excluded.
+
+### Device progress and visible-state refresh fix
+
+Android phone connected (Infinix X6855, Android16); signed release installed. User confirmed live Google login completed, then reported stale startup/account pages. Cached router content was the cause, reproduced by a failing startup-completion test. Direct runtime subscriptions now refresh all routed screens without tab switches, while preserving their State/drafts. Top-right refresh removed; pull-to-refresh retained.37 mobile tests pass,analyzer clean. Device verification of the new signed1.0.1+2 build follows; live sync/concurrency/accessibility checks remain.
+
+Updated signed1.0.1+2 installed successfully. Physical cold launch renders the live catalog automatically, preserved login accesses existing demo orders, and top-right refresh is absent.37 regressions pass. Retest a fresh Google callback and finish bidirectional sync/isolated concurrency/accessibility checks.

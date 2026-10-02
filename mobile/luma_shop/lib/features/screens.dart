@@ -73,21 +73,6 @@ class LumaShell extends StatelessWidget {
                 tooltip: 'Back to collection',
                 onPressed: () => context.go('/'),
               ),
-        actions: [
-          IconButton(
-            tooltip: 'Refresh from the shop',
-            icon: const Icon(Icons.refresh),
-            onPressed: runtime.ready
-                ? () => action(context, () async {
-                    await runtime.catalog?.load(forceRefresh: true);
-                    runtime.catalogGeneration++;
-                    await runtime.sync?.resume();
-                    runtime.ordersGeneration++;
-                    runtime.notifyRefresh();
-                  })
-                : null,
-          ),
-        ],
       ),
       body: Column(
         children: [

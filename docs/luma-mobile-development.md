@@ -84,7 +84,7 @@ Do not report these live/device checks as passed from mocked tests or Flutter Do
 
 ## Release artifact verification
 
-Final release APK: 57.2 MB, application ID `xyz.ayodeji.luma_shop`, version `1.0.0+1`, minimum API24, target/compile API36. `apksigner verify --print-certs` passed using the Luma Shop Demo certificate. Binary inspection confirmed INTERNET, backup disabled, exact OAuth callback and `flutter_deeplinking_enabled=false`. APK SHA256: `fa4d1c632353d0874bedf9f6d5b167b478509a6f0e6477c24ee65738d725a20a`. This proves packaging/signing, not installation or runtime acceptance.
+Initial 1.0.0 release APK: 57.2 MB, application ID `xyz.ayodeji.luma_shop`, version `1.0.0+1`, minimum API24, target/compile API36. `apksigner verify --print-certs` passed using the Luma Shop Demo certificate. Binary inspection confirmed INTERNET, backup disabled, exact OAuth callback and `flutter_deeplinking_enabled=false`. APK SHA256: `fa4d1c632353d0874bedf9f6d5b167b478509a6f0e6477c24ee65738d725a20a`. This proves packaging/signing, not installation or runtime acceptance.
 
 The detailed administrator/phone walkthrough is in `docs/superpowers/plans/2026-10-02-luma-android-flutter.md`, under Google Cloud, Supabase and phone configuration checklist. Final debug build also passed (72.3s).
 
@@ -95,3 +95,9 @@ The user authorized deployment and GitHub push. The Main Supabase connection ver
 GitHub branch codex/luma-android pushed successfully. Remaining release work: merge/deploy web change; connect/install on Android phone (adb currently lists none); verify exact callback/account identity, guest transfer/recovery and bidirectional sync; run isolated transactions/owner websocket checks and native accessibility/performance. User reports keys entered; their correctness is not inferred from that report.
 
 Post-DDL security advisor warnings were reviewed: anonymous owner cart access is intentional for guest bags; cron's policies are username=current_user and authenticated has no cron schema USAGE. Leaked password protection is disabled; this demo's implemented permanent sign-in is Google. No new missing-RLS advisory was returned.
+
+## Physical device acceptance and refresh correction — 2 October 2026
+
+Signed release installed on an authorized Infinix X6855 running Android16/API36. User confirmed Google OAuth returned successfully and exposed a UI defect: startup/account content stayed stale until navigating. Reproduced in a widget regression: notifying AppRuntime did not refresh cached GoRouter pages. Shell and every routed screen now subscribe directly through state-preserving AnimatedBuilder boundaries. Checkout draft/focus regression still passes. Removed the global top-right refresh button as requested; existing pull-to-refresh remains. Version1.0.1+2 includes this correction. Flutter analyzer clean,37 unit/widget regressions pass. Native cold-launch acceptance recorded after installing the update below; a new live Google callback should also be retested by the user.
+
+Signed1.0.1+2 release built successfully (85.5s), signature matches the stable demo certificate, and in-place installation succeeded. Existing login/private order access survived. A second force-stop/launch loaded the live collection automatically without tab switching or refresh; native header has no refresh button. Live Google callback after this fix remains a user retest; startup and sign-in transitions are covered by the new widget regressions.

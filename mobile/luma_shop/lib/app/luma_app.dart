@@ -28,49 +28,58 @@ class _LumaAppState extends ConsumerState<LumaApp> with WidgetsBindingObserver {
     router = GoRouter(
       routes: [
         ShellRoute(
-          builder: (context, state, child) =>
-              LumaShell(runtime: runtime, route: state.uri.path, child: child),
+          builder: (context, state, child) => _live(
+            () => LumaShell(
+              runtime: runtime,
+              route: state.uri.path,
+              child: child,
+            ),
+          ),
           routes: [
             GoRoute(
               path: '/',
-              builder: (context, state) => CatalogScreen(runtime),
+              builder: (context, state) => _live(() => CatalogScreen(runtime)),
             ),
             GoRoute(
               path: '/product/:slug',
-              builder: (context, state) =>
-                  ProductScreen(runtime, state.pathParameters['slug']!),
+              builder: (context, state) => _live(
+                () => ProductScreen(runtime, state.pathParameters['slug']!),
+              ),
             ),
             GoRoute(
               path: '/cart',
-              builder: (context, state) => CartScreen(runtime),
+              builder: (context, state) => _live(() => CartScreen(runtime)),
             ),
             GoRoute(
               path: '/signin',
-              builder: (context, state) => SignInScreen(
-                runtime,
-                returnTo: state.uri.queryParameters['returnTo'] ?? '/account',
+              builder: (context, state) => _live(
+                () => SignInScreen(
+                  runtime,
+                  returnTo: state.uri.queryParameters['returnTo'] ?? '/account',
+                ),
               ),
             ),
             GoRoute(
               path: '/auth/callback',
-              builder: (context, state) => SignInScreen(runtime),
+              builder: (context, state) => _live(() => SignInScreen(runtime)),
             ),
             GoRoute(
               path: '/transfer',
-              builder: (context, state) => TransferScreen(runtime),
+              builder: (context, state) => _live(() => TransferScreen(runtime)),
             ),
             GoRoute(
               path: '/checkout',
-              builder: (context, state) => CheckoutScreen(runtime),
+              builder: (context, state) => _live(() => CheckoutScreen(runtime)),
             ),
             GoRoute(
               path: '/account',
-              builder: (context, state) => OrdersScreen(runtime),
+              builder: (context, state) => _live(() => OrdersScreen(runtime)),
             ),
             GoRoute(
               path: '/receipt/:id',
-              builder: (context, state) =>
-                  ReceiptScreen(runtime, state.pathParameters['id']!),
+              builder: (context, state) => _live(
+                () => ReceiptScreen(runtime, state.pathParameters['id']!),
+              ),
             ),
           ],
         ),
@@ -78,6 +87,11 @@ class _LumaAppState extends ConsumerState<LumaApp> with WidgetsBindingObserver {
     );
     runtime.addListener(_changed);
   }
+
+  // Router-owned pages are cached independently of MaterialApp rebuilds.
+  // Listen at each live boundary while preserving each screen's State/drafts.
+  Widget _live(Widget Function() build) =>
+      AnimatedBuilder(animation: runtime, builder: (context, child) => build());
 
   void _changed() {
     if (!mounted) return;
