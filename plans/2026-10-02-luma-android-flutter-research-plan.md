@@ -1,6 +1,6 @@
 # Luma Shop: Android Flutter research and proposed plan
 
-Research and setup verification date: 2 October 2026, Africa/Lagos. Status: Android implementation authorized and built in the isolated `codex/luma-android` worktree. Flutter and Android tooling are verified. Native app and web synchronization source are implemented; live backend activation and physical-device acceptance remain pending.
+Research and setup verification date: 2 October 2026, Africa/Lagos. Status: Android implementation authorized and built in the isolated `codex/luma-android` worktree. Flutter and Android tooling are verified. Native app and web synchronization source are implemented; Realtime backend activation is now verified; web deployment and physical-device acceptance remain pending.
 
 ## Outcome and scope
 
@@ -208,6 +208,6 @@ The user separately authorized Flutter installation, tooling verification, and c
 
 ## Implementation handover
 
-See `docs/luma-mobile-development.md` for actual package versions, architecture, signing, test commands and pending device/provider checks. The new publication migration is prepared for review and has not been applied to the shared Luma project. No new backend or user database was created.
+See `docs/luma-mobile-development.md` for actual package versions, architecture, signing, test commands and pending device/provider checks. The publication migration was authorized, applied and verified on the shared Luma project on 2 October 2026; carts/orders retain owner RLS. No new backend or user database was created.
 
 Google Cloud/Supabase/Android setup is now documented step by step in the implementation plan’s **Google Cloud, Supabase and phone configuration checklist**. It specifies the two different callback URLs, existing web OAuth client, testing audience, public mobile build values, publication migration, deployment and phone acceptance. Browser-based PKCE reuses the existing web OAuth credential; no Android Google OAuth client or Firebase setup is required for this implementation. See the linked [official SDK flow](https://github.com/supabase/supabase-flutter/blob/main/packages/supabase_flutter/README.md).

@@ -10,13 +10,13 @@
 
 **Spec:** [Luma Android research and scope](/Users/dayjigud/Documents/GitHub/nextjs-portfolio-pageview-counter/plans/2026-10-02-luma-android-flutter-research-plan.md). Read it together with this plan and the current `AGENTS.md` before execution.
 
-**Status:** Implementation authorized on 2 October 2026 and developed in managed worktree `codex/luma-android`. Local native screens, service/recovery controllers, web sync, publication migration, regression and opt-in integration suites are implemented. Initial debug/release builds verified NDK30; plugin projects provisioned NDK28.2/API35/CMake3.22.1 side by side. Live activation, physical-device acceptance and isolated service/database checks remain pending. Composite task checkboxes below retain their original acceptance requirements; they are not blanket-marked complete based on mocks.
+**Status:** Implementation authorized on 2 October 2026 and developed in managed worktree `codex/luma-android`. Local native screens, service/recovery controllers, web sync, publication migration, regression and opt-in integration suites are implemented. Initial debug/release builds verified NDK30; plugin projects provisioned NDK28.2/API35/CMake3.22.1 side by side. Realtime backend activation is verified; merging/deploying the web change, physical-device acceptance and isolated service/database checks remain pending. Composite task checkboxes below retain their original acceptance requirements; they are not blanket-marked complete based on mocks.
 
 | Tasks | Implemented locally | Remaining acceptance |
 | --- | --- | --- |
 | 1–3 | Android scaffold, immutable contracts, API and public catalog | Native rendering/networking on phone |
 | 4–6 | PKCE guest recovery, revisioned cart, encrypted idempotent checkout | Live Google identity/transfer and authorized demo order |
-| 7–8 | Mobile/web invalidation, lifecycle snapshots, draft-preserving web updates, additive migration | Reviewed publication activation, web deployment, isolated owner events |
+| 7–8 | Mobile/web invalidation, lifecycle snapshots, draft-preserving web updates, additive migration | Web deployment and isolated owner events (publication activation verified) |
 | 9 | Regression suites and opt-in native/live fixtures | Physical-device and live two-client matrix |
 | 10 | Stable local demo signing configuration and APK builds | Phone installation/upgrade/performance |
 

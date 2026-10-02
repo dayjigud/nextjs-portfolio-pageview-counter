@@ -91,3 +91,7 @@ The detailed administrator/phone walkthrough is in `docs/superpowers/plans/2026-
 ## Backend deployment update — 2 October 2026
 
 The user authorized deployment and GitHub push. The Main Supabase connection verified Luma project xiunfinvgxoquxiqnnyj as ACTIVE_HEALTHY. Migration luma_realtime applied successfully with remote version 20261002152302; the local filename now matches remote migration history. Post-deployment inspection confirms only public.carts/public.orders in supabase_realtime, and both tables retain RLS. Public Auth settings confirm Google and anonymous login enabled; the custom redirect allowlist and Google console credentials still need live callback verification. No Edge Function source changed, so no function redeployment was needed.
+
+GitHub branch codex/luma-android pushed successfully. Remaining release work: merge/deploy web change; connect/install on Android phone (adb currently lists none); verify exact callback/account identity, guest transfer/recovery and bidirectional sync; run isolated transactions/owner websocket checks and native accessibility/performance. User reports keys entered; their correctness is not inferred from that report.
+
+Post-DDL security advisor warnings were reviewed: anonymous owner cart access is intentional for guest bags; cron's policies are username=current_user and authenticated has no cron schema USAGE. Leaked password protection is disabled; this demo's implemented permanent sign-in is Google. No new missing-RLS advisory was returned.
