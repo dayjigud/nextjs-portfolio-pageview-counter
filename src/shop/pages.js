@@ -1,3 +1,6 @@
+import { requireShopClient } from './client.js';
+import { watchShopChanges } from './sync.js';
+import { createRefreshCoordinator } from './refresh-coordinator.js';
 import { isConfigured, getDisplayAuthState, startCheckout, signInShop, completeOAuthCallback, signOutShop, getTransferReview, reviseGuestTransfer, retryGuestTransfer } from './auth.js';
 import { getCatalog, getProduct } from './catalog.js';
 import { getCart, updateCart, getQuote, placeOrder, getOrder, listOrders, findOrderByRequest } from './api.js';
@@ -19,8 +22,9 @@ export async function initShopPage(root, embedded = false) {
  const mode = embedded ? 'catalog' : root.dataset.shopPage;
  const showError = error => notify(root, error?.message || 'Something went wrong. Please try again.', true);
  let pendingQuantity = 0, addQueue = Promise.resolve(), cartReady = Promise.resolve(false);
+ let syncGeneration=0, stopSync, syncUser, quoteStale=false, pageActive=true, pageReady=false, polling;
  const updateBadge = () => { root.querySelectorAll('[data-cart-count]').forEach(el=> el.textContent = String(cart.lines.reduce((n,l)=>n+l.quantity,0)+pendingQuantity)); };
- const refreshCart = async () => { cart = await getCart(); updateBadge(); return cart; };
+ const refreshCart = async () => { const user=auth.user?.id;const generation=syncGeneration;const next=await getCart();if(user!==auth.user?.id||generation!==syncGeneration)return cart;cart=next;updateBadge();return cart; };
  function signInGate(checkout = false) {
   const dialog = document.createElement('dialog'); dialog.className = 'luma luma-dialog';
   dialog.innerHTML = `<form method="dialog"><button class="luma-dialog-close" aria-label="Close sign-in" type="submit">×</button></form><span class="luma-eyebrow">YOUR BAG IS SAFE</span><h2>${checkout ? 'One last step.' : 'Make yourself at home.'}</h2><p>Continue with Google ${checkout ? 'to review your bag and place a demo order' : 'to save your bag across devices'}. Your guest bag comes with you.</p><p class="luma-small">Portfolio demo. No payment or shipment.</p><button class="luma-button" type="button" data-google>${googleIconHtml()}Continue with Google</button><p role="status" data-login-status></p>`;
@@ -34,8 +38,8 @@ export async function initShopPage(root, embedded = false) {
   content.innerHTML=heroHtml()+collection;
   content.querySelector('[name=query]').value=query;
  }
- async function renderCart() {
-  await refreshCart();
+ async function renderCart({refresh=true}={}) {
+  if(refresh)await refreshCart();
   if (!cart.lines.length) {content.innerHTML=stateHtml('A little room for good things.','Your bag is empty. Find a gadget that makes your everyday a little brighter.');return;}
   content.innerHTML=`<div class="luma-page-heading"><a href="${shopPath}">← Keep exploring</a><p class="luma-eyebrow">YOUR FINDS, ALL TOGETHER</p><h1>Your bag<span>.</span></h1><p>Saved for later. Ready whenever you are.</p></div><div class="luma-two-column"><section class="luma-surface" aria-label="Bag items">${cartLinesHtml(cart)}</section><aside class="luma-surface luma-summary"><h2>Looking good.</h2>${totalsHtml(cart)}<p class="luma-small">The fictional delivery fee is shown at checkout.</p><button class="luma-button" type="button" data-action="checkout">Checkout <span aria-hidden="true">↗</span></button><p class="luma-small">${auth.isAnonymous || !auth.user ? 'Browse and fill your bag freely. Google sign-in is only required at checkout.' : 'Portfolio demo — no payment or shipment.'}</p><p class="luma-small">Guest bags stay linked to this browser. Sign in to save your bag across devices.</p></aside></div>`;
  }
@@ -54,12 +58,12 @@ export async function initShopPage(root, embedded = false) {
   }
   await refreshCart();
   if(!cart.lines.length){content.innerHTML=stateHtml('Your bag is empty.','Choose something from the collection before checking out.');return;}
-  quote=await getQuote();
+  quote=await getQuote();quoteStale=false;
   content.innerHTML=`<div class="luma-page-heading"><a href="${shopPath}cart/">← Your bag</a><p class="luma-eyebrow">JUST A DEMO. STILL A LITTLE DELIGHTFUL.</p><h1>Make it yours<span>.</span></h1><p>No card. No charge. No shipment.</p></div><div class="luma-two-column"><form class="luma-surface luma-delivery" data-checkout-form><h2>Demo delivery details</h2><p>Use fictional delivery details. Nothing will be shipped.</p><label>Recipient name<input name="recipientName" autocomplete="off" required minlength="2" maxlength="100" value="${escapeHtml(auth.user.user_metadata?.full_name || '')}"></label><label>City<input name="city" autocomplete="off" required minlength="2" maxlength="100" placeholder="e.g. Demo City"></label><label>Fictional address<textarea name="address" autocomplete="off" rows="3" required minlength="5" maxlength="300" placeholder="e.g. 12 Example Street"></textarea></label><div class="luma-receipt-email"><span>Confirmation email</span><strong>${escapeHtml(auth.user.email)}</strong><p>Sent to your Google account email.</p></div><label class="luma-consent"><input name="demoConsent" type="checkbox" required><span>I understand this is a demo order with no payment or shipment.</span></label><button class="luma-button" type="submit">Place demo order <span aria-hidden="true">↗</span></button></form><aside class="luma-surface luma-summary"><h2>Your good things.</h2>${cartLinesHtml(cart,false)}${totalsHtml(quote)}<p class="luma-small">All totals are fictional. No money is collected.</p></aside></div>`;
  }
  async function renderReceipt() {
   if(!auth.user || auth.isAnonymous){content.innerHTML=stateHtml('Your receipt is private.','Sign in with Google to view your demo order.', '<button class="luma-button" data-action="signin">Sign in with Google</button>');return;}
-  const order=await getOrder(new URLSearchParams(location.search).get('order') || '');
+  const owner=auth.user.id,generation=syncGeneration;const order=await getOrder(new URLSearchParams(location.search).get('order') || '');if(owner!==auth.user?.id||generation!==syncGeneration)return;
   const emailCopy={pending:'Confirmation email queued.',processing:'Confirmation email being requested.',accepted:'Confirmation email requested. Provider acceptance does not guarantee inbox delivery.',retrying:'Confirmation email is being retried.',failed:'Your order is saved. The confirmation email could not be sent.'};
   content.innerHTML=`<div class="luma-receipt-heading"><span class="luma-success" aria-hidden="true">✓</span><p class="luma-eyebrow">DEMO ORDER CONFIRMED</p><h1>Good things,<br><em>all wrapped up.</em></h1><p>No payment was collected. No shipment will occur.</p></div><section class="luma-surface luma-receipt"><div class="luma-receipt-meta"><h2>${escapeHtml(order.reference)}</h2><time>${escapeHtml(new Date(order.createdAt).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}))}</time></div>${cartLinesHtml({lines:order.items.map(item=>({...item,productName:item.productName || item.name,variantLabel:item.variantLabel || item.variant,priceKobo:item.priceKobo ?? item.unitPriceKobo}))},false)}${totalsHtml(order)}<p class="luma-email-status">${emailCopy[order.emailStatus] || 'Confirmation email status unavailable.'}</p><div class="luma-receipt-actions"><a class="luma-button" href="${shopPath}">Back to the good stuff</a><a href="${shopPath}account/">View your orders ↗</a></div></section>`;
  }
@@ -69,7 +73,7 @@ export async function initShopPage(root, embedded = false) {
  }
  async function renderAccount() {
   if(!auth.user || auth.isAnonymous){content.innerHTML=stateHtml('A space for your good things.','Sign in to find your saved bag and demo order history.', '<button class="luma-button" data-action="signin">Sign in with Google</button>');return;}
-  const orders=await listOrders();
+  const owner=auth.user.id,generation=syncGeneration;const orders=await listOrders();if(owner!==auth.user?.id||generation!==syncGeneration)return;
   content.innerHTML=`<div class="luma-page-heading"><p class="luma-eyebrow">MAKE YOURSELF AT HOME</p><h1>Hello, ${escapeHtml(auth.user.user_metadata?.full_name?.split(' ')[0] || 'you')}<span>.</span></h1><p>${escapeHtml(auth.user.email)}</p><button class="luma-text-link" type="button" data-action="signout">Sign out</button></div><section class="luma-surface"><h2>Your demo orders</h2>${orders.length ? orders.map(order=>`<a class="luma-order-row" href="${shopPath}confirmation/?order=${encodeURIComponent(order.id)}"><div><strong>${escapeHtml(order.reference)}</strong><p>${escapeHtml(new Date(order.createdAt).toLocaleDateString())} · Demo confirmed</p></div><span>${formatMoney(order.totalKobo)} ↗</span></a>`).join('') : '<p class="luma-empty">No demo orders yet. Your next favorite is waiting in the collection.</p>'}</section>`;
  }
  async function render() {
@@ -87,6 +91,37 @@ export async function initShopPage(root, embedded = false) {
   else if(mode==='callback'){content.innerHTML=stateHtml('Bringing your bag along.','Finishing Google sign-in. Please keep this page open.','');await completeOAuthCallback();}
   if(mode==='catalog' || mode==='product') await cartReady;
  }
+ function invalidateCheckout() {
+  const form=content.querySelector('[data-checkout-form]');if(!form)return;
+  quoteStale=true;form.querySelector('button[type=submit],button:not([type])').disabled=true;
+  if(content.querySelector('[data-review-quote]'))return;
+  const panel=document.createElement('div');panel.className='luma-surface';panel.dataset.reviewQuote='';
+  const status=document.createElement('p');status.setAttribute('role','status');status.textContent='Your bag or prices changed. Review the updated total before placing your demo order.';
+  const review=document.createElement('button');review.type='button';review.className='luma-button';review.textContent='Review updated total';
+  review.addEventListener('click',async()=>{review.disabled=true;const generation=syncGeneration;try{await addQueue;await refreshCart();const updated=await getQuote();if(generation!==syncGeneration)return;quote=updated;quoteStale=false;const summary=content.querySelector('.luma-summary');if(summary)summary.innerHTML=`<h2>Your good things.</h2>${cartLinesHtml(cart,false)}${totalsHtml(quote)}<p class="luma-small">All totals are fictional. No money is collected.</p>`;form.querySelector('button[type=submit],button:not([type])').disabled=false;panel.remove();}catch(error){showError(error);}finally{review.disabled=false;}});
+  panel.append(status,review);form.after(panel);
+ }
+ async function refreshVisible() {
+  if(!pageActive||!pageReady||!isConfigured()||mode==='callback')return;
+  const current=await getDisplayAuthState();const changed=current.user?.id!==auth.user?.id;
+  if(changed){syncGeneration++;auth=current;cart={revision:0,lines:[],subtotalKobo:0};quote=undefined;quoteStale=true;updateBadge();root.querySelector('[data-shop-nav]').innerHTML=navHtml(auth);ensureSync();if(['account','checkout','confirmation','cart'].includes(mode)){await render();return;}}
+  if(!auth.user)return;
+  const revision=cart.revision;await refreshCart();
+  if(mode==='cart'&&cart.revision!==revision){await renderCart({refresh:false});}
+  else if(mode==='checkout'&&quote&&cart.revision!==quote.cartRevision){invalidateCheckout();}
+  else if(mode==='account'){await renderAccount();}
+ }
+ const coordinator=createRefreshCoordinator({refresh:refreshVisible,waitForWrites:()=>addQueue});
+ if(isConfigured())requireShopClient().auth.onAuthStateChange((_event,session)=>{if(!pageReady)return;if(session?.user?.id!==auth.user?.id){syncGeneration++;stopSync?.();stopSync=null;cart={revision:0,lines:[],subtotalKobo:0};quote=undefined;quoteStale=true;updateBadge();if(['account','checkout','confirmation','cart'].includes(mode))content.innerHTML=loadingHtml(mode);}coordinator.invalidate();});
+ function ensureSync(){
+  const user=auth.user?.id;if(syncUser===user&&stopSync)return;stopSync?.();stopSync=null;syncUser=user;
+  if(user&&pageActive&&mode!=='callback'){const generation=syncGeneration;stopSync=watchShopChanges({client:requireShopClient(),userId:user,onInvalidate:()=>{if(generation===syncGeneration)coordinator.invalidate();},onSubscribed:()=>{if(generation===syncGeneration)coordinator.invalidate();},onError:()=>{if(generation===syncGeneration)coordinator.invalidate();}});}
+ }
+ const resume=()=>{if(document.visibilityState==='hidden')return;pageActive=true;ensureSync();coordinator.invalidate();};
+ window.addEventListener('focus',resume);document.addEventListener('visibilitychange',resume);
+ window.addEventListener('pagehide',()=>{pageActive=false;syncGeneration++;stopSync?.();stopSync=null;clearInterval(polling);});
+ window.addEventListener('pageshow',event=>{if(event.persisted){pageActive=true;ensureSync();coordinator.invalidate();startPolling();}});
+ function startPolling(){clearInterval(polling);polling=setInterval(()=>{if(pageActive&&document.visibilityState==='visible')coordinator.invalidate();},30000);}
  async function add(variantId, quantity=1) {
   pendingQuantity += quantity; updateBadge();
   notify(root,'Saving to your bag…');
@@ -95,6 +130,7 @@ export async function initShopPage(root, embedded = false) {
     if(!await cartReady) await refreshCart();
     cart = await addToCart(variantId,quantity,cart);
     cartReady = Promise.resolve(true);
+    auth=await getDisplayAuthState();ensureSync();
    } catch(error) {
     // Reconcile conflicts and lost responses; never blindly replay an add.
     try {cart=await getCart();cartReady=Promise.resolve(true);}catch {cartReady=Promise.resolve(false);}
@@ -134,14 +170,15 @@ export async function initShopPage(root, embedded = false) {
    if(form.matches('[data-shop-search]')){query=String(data.get('query') || '');await renderCollection();content.querySelector('[name=query]').focus();}
    if(form.matches('[data-product-form]'))await add(String(data.get('variant')),Number(data.get('quantity')));
    if(form.matches('[data-checkout-form]')) {
+    if(quoteStale){notify(root,'Review the updated total before placing your demo order.',true);return;}
     const key=orderRequestKey(sessionStorage,auth.user.id,quote.cartRevision);
     const order=await placeOrder({idempotencyKey:key,cartRevision:quote.cartRevision,quoteFingerprint:quote.fingerprint,delivery:{recipientName:String(data.get('recipientName')).trim(),city:String(data.get('city')).trim(),address:String(data.get('address')).trim()}});
     clearOrderKey(sessionStorage);location.assign(shopPath+'confirmation/?order='+encodeURIComponent(order.id));
    }
-  }catch(error){showError(error);if(error.code==='QUOTE_CHANGED'||error.code==='CART_CONFLICT'){await renderCheckout();notify(root,'Your bag or prices changed. Review the updated total before placing your demo order.',true);}}
-  finally{if(button)button.disabled=false;}
+  }catch(error){showError(error);if(error.code==='QUOTE_CHANGED'||error.code==='CART_CONFLICT'){invalidateCheckout();notify(root,'Your bag or prices changed. Review the updated total before placing your demo order.',true);}}
+  finally{if(button)button.disabled=form.matches('[data-checkout-form]')&&quoteStale;}
  });
- try {await render();}catch(error){
+ try {await render();pageReady=true;ensureSync();startPolling();}catch(error){
   if(mode==='callback'&&['MERGE_CONFLICT','CART_CONFLICT'].includes(error.code)){try{await renderTransferReview();showError(error);return;}catch(reviewError){error=reviewError;}}
   content.innerHTML=stateHtml('A little pause.','We could not load this part of the shop. Check your connection and try again.', `<button class="luma-button" type="button" data-retry>Try again</button><a class="luma-text-link" href="${shopPath}cart/">Back to your bag</a>`);showError(error);content.querySelector('[data-retry]').addEventListener('click',()=>location.reload());}
 }

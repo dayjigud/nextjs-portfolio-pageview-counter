@@ -10,3 +10,9 @@ supabase/.temp/
 .env
 .env.*
 !.env.example
+
+# Mobile private configuration and signing
+mobile/**/config/*.local.json
+mobile/**/android/key.properties
+*.jks
+*.keystore
