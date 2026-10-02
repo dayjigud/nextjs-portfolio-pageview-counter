@@ -15,7 +15,7 @@ try {
   run(npm, ['exec', '--', 'playwright', 'test', 'tests/portfolio.spec.js', 'tests/shop.spec.js'], disconnected);
   const configured = { ...process.env, VITE_SUPABASE_URL: 'https://luma-test.supabase.co', VITE_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_browser_fixture' };
   run(npm, ['run', 'build'], configured);
-  run(npm, ['exec', '--', 'playwright', 'test', 'tests/shop-auth.spec.js', 'tests/shop-checkout.spec.js'], configured);
+  run(npm, ['exec', '--', 'playwright', 'test', 'tests/shop-auth.spec.js', 'tests/shop-checkout.spec.js', 'tests/shop-sync.spec.js'], configured);
 } catch (error) {
   failure = error;
 } finally {

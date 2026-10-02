@@ -118,7 +118,24 @@ export async function shopFixture(page, { account = false, filled = false, loseF
     }
     return json(route, { error: { message: `Unmocked endpoint: ${path}` } }, 500);
   });
-  return { state, carts, guestId, accountId };
+  const sockets=[];
+  await page.routeWebSocket(/wss:\/\/[^/]+\/realtime\/v1\/websocket/, socket=>{
+    socket.onMessage(message=>{
+      const [joinRef,ref,topic,event,payload]=JSON.parse(String(message));
+      if(event==='phx_join'){
+        const changes=(payload.config?.postgres_changes??[]).map((binding,index)=>({...binding,id:index+1}));
+        sockets.push({socket,topic,joinRef,changes});
+        socket.send(JSON.stringify([joinRef,ref,topic,'phx_reply',{status:'ok',response:{postgres_changes:changes}}]));
+      } else if(event==='heartbeat'||event==='phx_leave') socket.send(JSON.stringify([joinRef,ref,topic,'phx_reply',{status:'ok',response:{}}]));
+    });
+  });
+  const emit=(table,type='UPDATE')=>{
+    for(const {socket,topic,joinRef,changes} of sockets){
+      const ids=changes.filter(change=>change.table===table&&(change.event===type||change.event==='*')).map(change=>change.id);
+      if(ids.length)socket.send(JSON.stringify([joinRef,null,topic,'postgres_changes',{ids,data:{schema:'public',table,type,columns:[{name:'user_id',type:'uuid'}],record:{user_id:accountId},old_record:{},errors:null,commit_timestamp:new Date().toISOString()}}]));
+    }
+  };
+  return { state, carts, guestId, accountId, sockets, emit, remoteCart(quantity){putLine(carts.get(accountId),quantity);emit('carts');} };
 }
 
 export async function fillCheckout(page) {
