@@ -339,3 +339,70 @@ test.describe('private projects page', () => {
     await expect(task).toBeVisible();
   });
 });
+
+test.describe('portfolio product showcase', () => {
+  test('featured case links open the matching disclosure, including direct URLs', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    for (const slug of ['waybl', 'ara', 'safetrip']) {
+      await page.locator(`.feature-${slug} .feature-actions a`).click();
+      await expect(page.locator(`#case-${slug}`)).toHaveAttribute('open', '');
+      await expect(page.locator(`#case-${slug} .case-visual`)).toBeVisible();
+    }
+    await page.goto('/#case-ara');
+    await expect(page.locator('#case-ara')).toHaveAttribute('open', '');
+  });
+
+  test('walkthroughs support manual steps, replay, Escape and focus return', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    const dialog = page.getByRole('dialog');
+    for (const slug of ['waybl', 'ara', 'safetrip']) {
+      const opener = page.locator(`[data-demo="${slug}"]`);
+      await opener.click();
+      await expect(dialog).toBeVisible();
+      await expect(page.locator('#demo-count')).toContainText('Step 1');
+      await expect(page.locator('#demo-play')).toHaveText('Play');
+      await expect(page.locator('#demo-previous')).toBeDisabled();
+      const buttons = dialog.locator('.demo-step-list button');
+      const count = await buttons.count();
+      for (let i = 1; i < count; i += 1) await page.getByRole('button', { name: 'Next →', exact: true }).click();
+      await expect(page.locator('#demo-next')).toBeDisabled();
+      await expect(page.locator('#demo-play')).toHaveText('Replay');
+      await page.locator('#demo-play').click();
+      await expect(page.locator('#demo-count')).toContainText('Step 1');
+      await page.locator('#demo-play').click();
+      await page.keyboard.press('Escape');
+      await expect(dialog).not.toBeVisible();
+      await expect(opener).toBeFocused();
+    }
+  });
+
+  test('autoplay can be paused and reduced motion stops it', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('[data-demo="waybl"]').click();
+    await expect(page.locator('#demo-play')).toHaveText('Pause');
+    await expect(page.locator('#demo-count')).toHaveText('Step 2 / 4', { timeout: 6500 });
+    await page.locator('#demo-play').click();
+    await expect(page.locator('#demo-play')).toHaveText('Play');
+    await page.locator('#demo-play').click();
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await expect(page.locator('#demo-play')).toHaveText('Play');
+    await expect(page.locator('#demo-status')).toContainText('Reduced motion');
+  });
+
+  test('narrow layouts and the walkthrough have no overflow or serious accessibility issues', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.setViewportSize({ width: 320, height: 740 });
+    await page.goto('/');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.locator('[data-demo="safetrip"]').click();
+    await page.locator('#demo-next').click();
+    await page.locator('#demo-next').click();
+    await expect(page.locator('.demo-seats .selected')).toHaveText('06');
+    const modal = page.locator('#product-walkthrough');
+    expect(await modal.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
+    const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    expect(result.violations.filter(({ impact }) => impact === 'serious' || impact === 'critical')).toEqual([]);
+  });
+});

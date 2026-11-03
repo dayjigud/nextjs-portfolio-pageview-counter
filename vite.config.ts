@@ -5,6 +5,7 @@ import { navHtml, loadingHtml } from './src/shop/render.js';
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './', // Use relative paths for assets
+  server: { allowedHosts: ['terminal.local'] }, // Managed development preview only
   plugins: [{
     name: 'luma-initial-layout',
     transformIndexHtml(html) {
