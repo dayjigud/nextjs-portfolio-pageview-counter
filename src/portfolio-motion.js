@@ -1,32 +1,30 @@
-// Portfolio-only enhancements. All case studies remain readable without JavaScript.
+// Portfolio-only enhancements. All case studies and source links remain readable without JavaScript.
 const dialog = document.querySelector('#product-walkthrough');
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 const walkthroughs = {
   waybl: {
-    name: 'Waybl', title: 'A parcel journey, with trust built in.',
+    name: 'Waybl', title: 'Waybl / inside the live website',
     steps: [
-      { title: 'Find someone already going.', description: 'Match the parcel journey with a Carrier travelling along the same route.', label: 'Match', eyebrow: '01 / A shared direction', headline: 'Lagos → Abuja', lines: ['Sender: a parcel to send', 'Carrier: space on a planned trip'], result: 'Start with the route, not an empty vehicle.' },
-      { title: 'Confirm before funding.', description: 'Acceptance is a clear checkpoint. Funding follows confirmation so the customer understands the commitment.', label: 'Confirm', eyebrow: '02 / Make the agreement clear', headline: 'Trip accepted', lines: ['Route and parcel details reviewed', 'Funding comes after acceptance'], result: 'One clear agreement between both sides.' },
-      { title: 'Verify the handover.', description: 'A four-digit code adds a shared checkpoint when the Sender hands the parcel to the Carrier.', label: 'Hand over', eyebrow: '03 / A secure exchange', headline: '••••', lines: ['Four-digit handover code', 'Verify the exchange before continuing'], result: 'A deliberate checkpoint, not a guess.' },
-      { title: 'Close the loop.', description: 'Delivery confirmation completes the journey, with support and dispute paths available when needed.', label: 'Complete', eyebrow: '04 / The final checkpoint', headline: 'Delivery confirmed', lines: ['Journey completion recorded', 'Recovery paths for exceptions'], result: 'Design the happy path and the unhappy ones.' },
+      { title: 'The public website.', description: 'The actual Waybl homepage, with its marketplace preview and introduction to parcel delivery with travellers.', label: 'Homepage', image: 'waybl.jpg', alt: 'Waybl homepage with the marketplace phone preview', source: 'https://waybl.app/' },
+      { title: 'The delivery journey.', description: 'The live how-it-works section explains posting a parcel or trip, confirming a match, and verifying handover.', label: 'How it works', image: 'waybl-journey.jpg', alt: 'Waybl how-it-works section with three delivery stages', source: 'https://waybl.app/#how-it-works' },
+      { title: 'Making escrow understandable.', description: 'The real escrow section explains how funding, handover and delivery connect to payment release.', label: 'Escrow', image: 'waybl-escrow.jpg', alt: 'Waybl live escrow section and wallet preview', source: 'https://waybl.app/#escrow' },
     ],
   },
   ara: {
-    name: 'Àrà', title: 'From a rough idea to a useful brief.',
+    name: 'Àrà', title: 'Àrà / the studio and its tools',
     steps: [
-      { title: 'Start with the business problem.', description: 'The idea-to-spec tool starts with what the person wants to solve, before jumping to a feature list.', label: 'Describe', eyebrow: '01 / An example brief', headline: 'Make booking simpler.', lines: ['Example: a small service business', 'Problem: requests scattered across chats'], result: 'Sample input · no data is sent to an AI service.' },
-      { title: 'Give the idea a shape.', description: 'A structured brief makes the users, problem and intended outcome easier to discuss.', label: 'Structure', eyebrow: '02 / Illustrative output', headline: 'A clearer starting point.', lines: ['Who: customers and the business owner', 'Goal: one place to manage requests'], result: 'Turn a vague request into a conversation starter.' },
-      { title: 'Keep the first version focused.', description: 'A bounded scope gives the build a practical starting point. The actual AI tools are available on the studio website.', label: 'Scope', eyebrow: '03 / An example first version', headline: 'Small enough to ship.', lines: ['Booking request and status', 'Simple owner dashboard'], result: 'Illustration only · the live tool generates its own output.' },
+      { title: 'A studio with its own identity.', description: 'The actual Àrà homepage, with its Nigerian textile-inspired patterns and studio positioning.', label: 'Homepage', image: 'ara.jpg', alt: 'Àrà homepage with indigo patterns and gold typography', source: 'https://ara.ayodeji.xyz/' },
+      { title: 'The real AI tool interface.', description: 'The live tools section with the idea-spec tab selected. This capture shows the interface; no AI request was submitted.', label: 'AI tools', image: 'ara-tools.jpg', alt: 'Àrà live AI tools interface with the Spec my idea tab selected', source: 'https://ara.ayodeji.xyz/#ai-tools' },
+      { title: 'A design system you can explore.', description: 'The public Design Lab shows interactive Adire patterns and Aso-oke weaving alongside the studio’s motion experiments.', label: 'Design Lab', image: 'ara-lab.jpg', alt: 'Àrà Design Lab with Adire pattern and Aso-oke weave controls', source: 'https://ara.ayodeji.xyz/#lab' },
     ],
   },
   safetrip: {
-    name: 'SafeTrip', title: 'From choosing a route to choosing a seat.',
+    name: 'SafeTrip', title: 'SafeTrip / transport on the live site',
     steps: [
-      { title: 'Choose the journey.', description: 'Start with origin and destination. These cities illustrate the flow and do not represent current availability.', label: 'Search', eyebrow: '01 / Example route', headline: 'Lagos → Abuja', lines: ['Origin: Lagos', 'Destination: Abuja'], result: 'A clear entry point for interstate travel.' },
-      { title: 'Compare the options.', description: 'Schedules and availability help travellers choose a departure. No live schedules or prices are loaded here.', label: 'Compare', eyebrow: '02 / Illustrative schedules', headline: 'Find a departure.', lines: ['Review the travel date', 'Compare available schedules'], result: 'Keep the choice understandable before booking.' },
-      { title: 'Make the seat choice visible.', description: 'Seat selection makes the booking concrete. This illustration uses sample seats and reserves nothing.', label: 'Choose a seat', eyebrow: '03 / Sample seat selection', headline: 'Your place on board.', lines: ['Seat 06 highlighted as an example', 'Availability checked by the live service'], result: 'A visible choice, with an explicit review step.' },
-      { title: 'Review before continuing.', description: 'Bring the route, schedule and seat together before the traveller continues in the live product.', label: 'Review', eyebrow: '04 / Example booking summary', headline: 'The journey, in one place.', lines: ['Route and schedule together', 'Selected seat ready for review'], result: 'Concept complete · no booking has been made.' },
+      { title: 'The real transport website.', description: 'The SafeTrip homepage uses its own fleet photography and connects city transport, interstate travel and logistics.', label: 'Homepage', image: 'safetrip.jpg', alt: 'SafeTrip homepage with fleet photography and Within Lagos Across Nigeria heading', source: 'https://www.safetripbuses.com/' },
+      { title: 'The booking interface.', description: 'The actual public interstate booking page. Travellers can choose route, date and passenger count; no reservation was submitted for this capture.', label: 'Interstate', image: 'safetrip-booking.jpg', alt: 'SafeTrip public interstate page with route date and passenger controls', source: 'https://www.safetripbuses.com/book' },
+      { title: 'The fleet behind the service.', description: 'The live fleet page shows SafeTrip’s vehicle photographs and the services each vehicle supports.', label: 'Fleet', image: 'safetrip-fleet.jpg', alt: 'SafeTrip fleet page with vehicle photographs', source: 'https://www.safetripbuses.com/fleet' },
     ],
   },
 };
@@ -53,7 +51,6 @@ if (dialog && typeof dialog.showModal === 'function') {
   let timer;
   let playing = false;
   let opener;
-  const screen = document.querySelector('#demo-screen');
   const list = dialog.querySelector('.demo-step-list');
   const status = document.querySelector('#demo-status');
   const play = document.querySelector('#demo-play');
@@ -68,42 +65,15 @@ if (dialog && typeof dialog.showModal === 'function') {
 
   function render() {
     const step = active.steps[stepIndex];
-    document.querySelector('#demo-count').textContent = `Step ${stepIndex + 1} / ${active.steps.length}`;
+    document.querySelector('#demo-count').textContent = `Screen ${stepIndex + 1} / ${active.steps.length}`;
     document.querySelector('#demo-step-title').textContent = step.title;
     document.querySelector('#demo-step-description').textContent = step.description;
-    // All content is authored locally, never user input or remote HTML.
-    screen.replaceChildren();
-    const eyebrow = document.createElement('p');
-    eyebrow.className = 'demo-eyebrow';
-    eyebrow.textContent = step.eyebrow;
-    const heading = document.createElement('p');
-    heading.className = 'demo-headline';
-    heading.textContent = step.headline;
-    const lines = document.createElement('ul');
-    for (const text of step.lines) {
-      const line = document.createElement('li');
-      line.textContent = text;
-      lines.append(line);
-    }
-    // A visible seat map is an illustration, not a misleading reservable control.
-    if (active === walkthroughs.safetrip && stepIndex === 2) {
-      const seats = document.createElement('div');
-      seats.className = 'demo-seats';
-      seats.setAttribute('aria-hidden', 'true');
-      for (let i = 1; i <= 12; i += 1) {
-        const seat = document.createElement('span');
-        seat.textContent = String(i).padStart(2, '0');
-        if (i === 6) seat.className = 'selected';
-        seats.append(seat);
-      }
-      const seatRow = document.createElement('li');
-      seatRow.append(seats);
-      lines.append(seatRow);
-    }
-    const result = document.createElement('p');
-    result.className = 'demo-result';
-    result.textContent = step.result;
-    screen.append(eyebrow, heading, lines, result);
+    const image = document.querySelector('#demo-screen-image');
+    const imagePath = `images/portfolio/${step.image}`;
+    image.src = imagePath;
+    image.alt = step.alt;
+    document.querySelector('#demo-image-link').href = imagePath;
+    document.querySelector('#demo-source-link').href = step.source;
     list.replaceChildren();
     active.steps.forEach((item, index) => {
       const li = document.createElement('li');
@@ -119,7 +89,7 @@ if (dialog && typeof dialog.showModal === 'function') {
     previous.disabled = stepIndex === 0;
     next.disabled = stepIndex === active.steps.length - 1;
     play.textContent = playing ? 'Pause' : stepIndex === active.steps.length - 1 ? 'Replay' : 'Play';
-    status.textContent = `${stepIndex + 1} of ${active.steps.length}: ${step.title}${motionPreference.matches ? ' Reduced motion: use the step controls to continue.' : ''}`;
+    status.textContent = `${stepIndex + 1} of ${active.steps.length}: ${step.title}${motionPreference.matches ? ' Reduced motion: use the screen controls to continue.' : ''}`;
   }
 
   function schedule() {

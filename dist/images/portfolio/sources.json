@@ -1,0 +1,72 @@
+{
+  "captured_on": "2026-11-03",
+  "method": "Unmodified browser viewport captures of public product pages; no synthetic interfaces.",
+  "captures": [
+    {
+      "file": "waybl.jpg",
+      "url": "https://waybl.app/"
+    },
+    {
+      "file": "waybl-journey.jpg",
+      "url": "https://waybl.app/#how-it-works"
+    },
+    {
+      "file": "waybl-escrow.jpg",
+      "url": "https://waybl.app/#escrow"
+    },
+    {
+      "file": "ara.jpg",
+      "url": "https://ara.ayodeji.xyz/"
+    },
+    {
+      "file": "ara-tools.jpg",
+      "url": "https://ara.ayodeji.xyz/#ai-tools",
+      "state": "Spec my idea tab selected; no input submitted"
+    },
+    {
+      "file": "ara-lab.jpg",
+      "url": "https://ara.ayodeji.xyz/#lab"
+    },
+    {
+      "file": "safetrip.jpg",
+      "url": "https://www.safetripbuses.com/"
+    },
+    {
+      "file": "safetrip-booking.jpg",
+      "url": "https://www.safetripbuses.com/book",
+      "state": "Public booking form; no booking submitted"
+    },
+    {
+      "file": "safetrip-fleet.jpg",
+      "url": "https://www.safetripbuses.com/fleet"
+    },
+    {
+      "file": "healthtrack.jpg",
+      "url": "https://healthtrack-ng-connect.vercel.app/"
+    },
+    {
+      "file": "subtleflow.jpg",
+      "url": "https://clay-subs-joy.vercel.app/",
+      "repository": "dayjigud/new-subtleflow",
+      "replaces_unreachable_url": "https://www.subtleflow.xyz/"
+    },
+    {
+      "file": "brightyield.jpg",
+      "url": "https://transport-red.vercel.app/",
+      "repository": "dayjigud/Brightyield-Loans",
+      "replaces_unreachable_url": "https://www.brightyield.co/"
+    }
+  ],
+  "unavailable": [
+    {
+      "product": "TechiesMatch",
+      "url": "https://www.techies.love/",
+      "result": "Connection failed on initial visit and one reload. No matching repository found in installed repositories or account-scoped code search. Role retained only in Experience; excluded from Work."
+    },
+    {
+      "product": "Jentech AI",
+      "url": "https://www.jentech.ai/",
+      "result": "Connection failed on initial visit and one reload. No matching repository found in installed repositories or account-scoped code search. Role retained only in Experience; excluded from Work."
+    }
+  ]
+}
