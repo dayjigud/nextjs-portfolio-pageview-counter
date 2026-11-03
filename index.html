@@ -14,6 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <script type="module" src="./src/navigation.js"></script>
+    <script type="module" src="./src/portfolio-motion.js"></script>
 </head>
 
 <body>
@@ -66,35 +67,31 @@
 
     <main id="main">
         <!-- ================= 01 / HERO ================= -->
-        <section id="home" class="wrap pb-12 pt-14 md:pb-16 md:pt-24">
-            <p class="kicker hero-fade" style="--i:0">
-                Portfolio — 2026&ensp;&middot;&ensp;<span class="text-accent"
-                    aria-hidden="true">&#9679;</span> Available for work
-            </p>
-
-            <h1 class="mt-8 font-display text-display-xl font-black uppercase">
-                <span class="hero-line"><span style="--i:0">Product</span></span>
-                <span class="hero-line"><span style="--i:1">Engineer <span class="text-accent">&amp;</span></span></span>
-                <span class="hero-line"><span style="--i:2">Product Manager</span></span>
-            </h1>
-
-            <div class="mt-10 grid grid-cols-12 items-end gap-x-4">
-                <p class="col-span-12 max-w-xl text-lg leading-relaxed md:col-span-7 hero-fade" style="--i:3">
-                    I build products twice — first as a strategist, then as an engineer.
-                    I ship AI-powered software across African markets: health platforms,
-                    logistics, fintech, mobility and matchmaking — most of it live and linked below.
-                </p>
-                <div class="col-span-12 mt-8 flex flex-wrap gap-4 md:col-span-5 md:mt-0 md:justify-end hero-fade"
-                    style="--i:4">
-                    <a href="#projects" class="btn-ink">View Work <span aria-hidden="true">&rarr;</span></a>
-                    <a href="mailto:dayjigud@gmail.com" class="btn-line">Email Me</a>
+        <section id="home" class="wrap portfolio-hero">
+            <p class="kicker hero-fade" style="--i:0">Portfolio — 2026 &nbsp;·&nbsp; <span class="availability-dot" aria-hidden="true"></span> Available for work</p>
+            <div class="hero-composition">
+                <div class="hero-copy">
+                    <h1 class="font-display font-black uppercase">
+                        <span class="hero-line"><span style="--i:0">Product</span></span>
+                        <span class="hero-line"><span style="--i:1">Engineer <span class="text-accent">&amp;</span></span></span>
+                        <span class="hero-line"><span style="--i:2">Product Manager</span></span>
+                    </h1>
+                    <p class="hero-description hero-fade" style="--i:3">I build products twice — first as a strategist, then as an engineer. AI-powered software for African markets, from the first question to the working product.</p>
+                    <div class="hero-actions hero-fade" style="--i:4">
+                        <a href="#projects" class="btn-ink">Explore my work <span aria-hidden="true">↗</span></a>
+                        <a href="mailto:dayjigud@gmail.com" class="btn-line">Let's talk</a>
+                    </div>
                 </div>
+                <figure class="hero-showcase" aria-label="Screenshots from three live product websites">
+                    <div class="showcase-grid" aria-hidden="true"></div>
+                    <img class="showcase-screen screen-back" src="images/portfolio/safetrip.jpg" alt="SafeTrip live website homepage" width="1348" height="926">
+                    <img class="showcase-screen screen-middle" src="images/portfolio/ara.jpg" alt="Àrà live website homepage" width="1348" height="926">
+                    <img class="showcase-screen screen-front" src="images/portfolio/waybl.jpg" alt="Waybl live website homepage" width="1348" height="926">
+                    <span class="showcase-note" aria-hidden="true">Strategy meets software <span>↗</span></span>
+                    <figcaption>Selected products / live websites</figcaption>
+                </figure>
             </div>
-
-            <p class="hero-fade mt-12 inline-block bg-cobalt px-4 py-3 font-mono text-meta uppercase tracking-widest text-paper"
-                style="--i:5">
-                CSS-first by design — with only a tiny accessibility helper
-            </p>
+            <div class="hero-foot"><span class="kicker">Abuja, Nigeria · Building for African markets</span><a class="link-sweep kicker" href="#projects">Scroll to explore ↓</a></div>
         </section>
 
         <!-- Marquee -->
@@ -128,9 +125,9 @@
             </header>
 
             <div class="mt-14 grid grid-cols-12 gap-x-6 gap-y-12">
-                <figure class="reveal col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
-                    <img src="images/profile.webp" alt="Portrait of Ayodeji Adeniyi"
-                        class="w-full border border-line grayscale transition-[filter] duration-500 hover:grayscale-0">
+                <figure class="portrait-figure reveal col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
+                    <div class="portrait-frame"><span class="portrait-location">Abuja, Nigeria ↗</span><img src="images/profile.webp" alt="Portrait of Ayodeji Adeniyi"
+                        class="w-full border border-line grayscale transition-[filter] duration-500 hover:grayscale-0" width="512" height="512"></div>
                     <figcaption class="kicker mt-3">Fig. 01 — A. Adeniyi</figcaption>
                 </figure>
 
@@ -144,15 +141,15 @@
                     <p class="reveal">
                         I work across the whole stack of product-making. On one side: user research,
                         roadmaps, A/B tests and go-to-market. On the other: React, TypeScript and
-                        Supabase. This page is part of the argument — designed, written and animated
-                        by hand, with a tiny accessibility-focused JavaScript helper.
+                        Supabase. This portfolio brings both sides together: product thinking, working software,
+                        and purposeful motion that makes the work easier to explore.
                     </p>
                 </div>
 
                 <dl class="reveal col-span-12 space-y-4 font-mono text-meta uppercase tracking-widest md:col-span-3">
                     <div class="border-b border-line pb-3">
-                        <dt class="text-mute">Portfolio</dt>
-                        <dd>8 Products</dd>
+                        <dt class="text-mute">Selected work</dt>
+                        <dd>6 Products</dd>
                     </div>
                     <div class="border-b border-line pb-3">
                         <dt class="text-mute">Focus</dt>
@@ -192,9 +189,9 @@
                 </div>
                 <div class="bg-paper p-6 md:p-8">
                     <p class="font-display text-5xl font-black md:text-6xl">
-                        <span>&lt;1</span><span class="text-accent">KB</span>
+                        <span>2</span><span class="text-accent">↗</span>
                     </p>
-                    <p class="kicker mt-2">JavaScript, Gzipped</p>
+                    <p class="kicker mt-2">Disciplines. One builder.</p>
                 </div>
             </div>
         </section>
@@ -209,9 +206,33 @@
                 <h2 class="font-display text-display-lg font-black uppercase">Work</h2>
             </header>
 
+
+            <div class="featured-heading"><p class="kicker">A closer look / 3 selected projects</p><p>From the problem to the product.</p></div>
+            <div class="featured-grid">
+                <article class="featured-card reveal feature-waybl">
+                    <a class="feature-image-link" href="#case-waybl" aria-label="Explore the Waybl case study"><img loading="lazy" src="images/portfolio/waybl.jpg" width="1348" height="926" alt="Screenshot of the live Waybl website"><span class="feature-image-caption">Live website <span aria-hidden="true">↗</span></span></a>
+                    <div class="feature-copy"><p class="kicker">01 / Logistics / Marketplace</p><h3>Waybl</h3><p class="feature-tagline">Trust, at every handover.</p><p class="feature-role">Product Manager</p><p class="feature-outcome">Shaped the delivery journey, from carrier matching to secure handover and payment.</p>
+                        <div class="feature-actions"><a class="link-sweep" href="#case-waybl">Case study <span aria-hidden="true">↗</span></a><button type="button" data-demo="waybl" hidden>View Waybl screens <span aria-hidden="true">▷</span></button><a href="https://waybl.app/" target="_blank" rel="noopener" class="feature-live-link">Visit website <span aria-hidden="true">↗</span></a></div>
+                    </div>
+                </article>
+                <article class="featured-card reveal feature-ara">
+                    <a class="feature-image-link" href="#case-ara" aria-label="Explore the Àrà case study"><img loading="lazy" src="images/portfolio/ara.jpg" width="1348" height="926" alt="Screenshot of the live Àrà website"><span class="feature-image-caption">Live website <span aria-hidden="true">↗</span></span></a>
+                    <div class="feature-copy"><p class="kicker">02 / AI / Product studio</p><h3>Àrà</h3><p class="feature-tagline">An idea. A plan. A product.</p><p class="feature-role">Product Engineer</p><p class="feature-outcome">Built an independent studio with two live AI tools, from positioning to code.</p>
+                        <div class="feature-actions"><a class="link-sweep" href="#case-ara">Case study <span aria-hidden="true">↗</span></a><button type="button" data-demo="ara" hidden>View Àrà screens <span aria-hidden="true">▷</span></button><a href="https://ara.ayodeji.xyz/" target="_blank" rel="noopener" class="feature-live-link">Visit website <span aria-hidden="true">↗</span></a></div>
+                    </div>
+                </article>
+                <article class="featured-card reveal feature-safetrip">
+                    <a class="feature-image-link" href="#case-safetrip" aria-label="Explore the SafeTrip case study"><img loading="lazy" src="images/portfolio/safetrip.jpg" width="1348" height="926" alt="Screenshot of the live SafeTrip website"><span class="feature-image-caption">Live website <span aria-hidden="true">↗</span></span></a>
+                    <div class="feature-copy"><p class="kicker">03 / Transport / Booking</p><h3>SafeTrip</h3><p class="feature-tagline">A better way to get there.</p><p class="feature-role">Product Strategist &amp; IT Consultant</p><p class="feature-outcome">Delivered booking journeys and an operations dashboard for bus travel.</p>
+                        <div class="feature-actions"><a class="link-sweep" href="#case-safetrip">Case study <span aria-hidden="true">↗</span></a><button type="button" data-demo="safetrip" hidden>View SafeTrip screens <span aria-hidden="true">▷</span></button><a href="https://www.safetripbuses.com/" target="_blank" rel="noopener" class="feature-live-link">Visit website <span aria-hidden="true">↗</span></a></div>
+                    </div>
+                </article>
+            </div>
+            <p class="capture-disclosure">A look at the real products. Open a screen gallery or visit the live website from each case study.</p>
+            <div class="work-index-label"><p class="kicker">Full project index</p><p class="kicker">Open a row to explore the decisions behind it ↓</p></div>
             <div class="mt-14 border-t border-line">
                 <!-- P.01 Waybl -->
-                <details class="project reveal border-b border-line">
+                <details id="case-waybl" class="project reveal border-b border-line">
                     <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
                         <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.01</span>
                         <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
@@ -226,10 +247,8 @@
                     </summary>
                     <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
                         <figure class="col-span-12 md:col-span-4">
-                            <div class="border border-line bg-cobalt p-6 py-24 text-paper">
-                                <p class="font-display text-display-lg font-black uppercase">Waybl</p>
-                                <p class="kicker mt-3 text-paper">Send it with someone already going</p>
-                            </div>
+                            <a class="case-image-link" href="images/portfolio/waybl.jpg" target="_blank" rel="noopener" aria-label="Open full-size product screenshot"><img loading="lazy" src="images/portfolio/waybl.jpg" width="1348" height="926" alt="Screenshot of the live Waybl website" class="case-visual"></a>
+                            <p class="case-visual-note">Live website capture · November 2026</p>
                             <figcaption class="kicker mt-3"><a class="link-sweep" aria-label="Visit the Waybl website" href="https://waybl.app" target="_blank" rel="noopener">waybl.app &nearr;</a> · Public MVP in development</figcaption>
                         </figure>
                         <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
@@ -258,14 +277,15 @@
                                     <li><strong>Clarified the money model.</strong> Defined a one-time Waybl fee and
                                         aligned deposits, refunds, Carrier earnings and withdrawals so customers and
                                         the team can see how money moves.</li>
-                                    <li><strong>Turned the review into delivery work.</strong> Added 22 missing
-                                        roadmap items and mapped dependencies across design, backend and frontend in
-                                        Linear, keeping the launch focused on complete customer journeys.</li>
+                                    <li><strong>Aligned product delivery across teams.</strong> Prioritized customer
+                                        journeys and mapped dependencies across design, backend and frontend in Linear
+                                        to support a coordinated public launch.</li>
                                     <li><strong>Kept launch public.</strong> Reframed Phase 6 as a public MVP and
                                         added readiness checks for mobile use, security, payment recovery and support
                                         operations.</li>
                                 </ul>
                             </div>
+                            <div class="journey-annotation reveal"><h4>From discovery to delivery</h4><ol class="case-journey"><li><span>01</span><strong>Match</strong><p>Connect a Sender with a Carrier already travelling.</p></li><li><span>02</span><strong>Confirm</strong><p>Agree the trip and make the payment rules clear.</p></li><li><span>03</span><strong>Hand over</strong><p>Use a four-digit code to verify the exchange.</p></li><li><span>04</span><strong>Complete</strong><p>Confirm delivery, with recovery paths when things go wrong.</p></li></ol></div>
                             <div>
                                 <h4>Current Status</h4>
                                 <p>The service foundation covers matching, journey tracking, secure handover,
@@ -277,7 +297,7 @@
                 </details>
 
                 <!-- P.02 Àrà -->
-                <details class="project reveal border-b border-line">
+                <details id="case-ara" class="project reveal border-b border-line">
                     <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
                         <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.02</span>
                         <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
@@ -292,8 +312,7 @@
                     </summary>
                     <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
                         <figure class="col-span-12 md:col-span-4">
-                            <img loading="lazy" src="images/Ara Logo.webp" alt="Àrà logo"
-                                class="w-full border border-line">
+                            <a class="case-image-link" href="images/portfolio/ara.jpg" target="_blank" rel="noopener" aria-label="Open full-size product screenshot"><img loading="lazy" src="images/portfolio/ara.jpg" width="1348" height="926" alt="Screenshot of the live Àrà website" class="case-visual"></a><p class="case-visual-note">Live website capture · November 2026</p>
                             <figcaption class="kicker mt-3"><a class="link-sweep" href="https://ara.ayodeji.xyz" target="_blank" rel="noopener" aria-label="Visit the Àrà website">ara.ayodeji.xyz &nearr;</a></figcaption>
                         </figure>
                         <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
@@ -350,7 +369,7 @@
                 </details>
 
                 <!-- P.03 SafeTrip -->
-                <details class="project reveal border-b border-line">
+                <details id="case-safetrip" class="project reveal border-b border-line">
                     <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
                         <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.03</span>
                         <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
@@ -365,8 +384,7 @@
                     </summary>
                     <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
                         <figure class="col-span-12 md:col-span-4">
-                            <img loading="lazy" src="images/SafeTrip Logo.webp" alt="SafeTrip logo"
-                                class="w-full border border-line">
+                            <a class="case-image-link" href="images/portfolio/safetrip.jpg" target="_blank" rel="noopener" aria-label="Open full-size product screenshot"><img loading="lazy" src="images/portfolio/safetrip.jpg" width="1348" height="926" alt="Screenshot of the live SafeTrip website" class="case-visual"></a><p class="case-visual-note">Live website capture · November 2026</p>
                             <figcaption class="kicker mt-3"><a class="link-sweep" href="https://www.safetripbuses.com" target="_blank" rel="noopener" aria-label="Visit the SafeTrip website">safetripbuses.com &nearr;</a></figcaption>
                         </figure>
                         <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
@@ -410,65 +428,10 @@
                     </div>
                 </details>
 
-                <!-- P.04 TechiesMatch -->
+                <!-- P.04 HealthTrackNG -->
                 <details class="project reveal border-b border-line">
                     <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
                         <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.04</span>
-                        <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
-                            <span class="proj-arrow" aria-hidden="true">&nearr;</span>
-                            <span class="marker" aria-hidden="true">+</span>
-                        </span>
-                        <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
-                            TechiesMatch</h3>
-                        <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
-                            AI-powered dating for tech professionals, matched by ML</p>
-                        <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">AI / ML</span>
-                    </summary>
-                    <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
-                        <figure class="col-span-12 md:col-span-4">
-                            <img loading="lazy" src="images/Social media Logo 3.webp" alt="TechiesMatch logo"
-                                class="w-full border border-line">
-                            <figcaption class="kicker mt-3"><a class="link-sweep" href="https://www.techies.love" target="_blank" rel="noopener" aria-label="Visit the TechiesMatch website">techies.love &nearr;</a></figcaption>
-                        </figure>
-                        <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
-                            <div>
-                                <h4>My Role</h4>
-                                <p>Product Manager — contract role on a small founding team,
-                                    Jan – Apr 2025.</p>
-                            </div>
-                            <div>
-                                <h4>The Challenge</h4>
-                                <p>The online dating market is saturated, but the team identified a gap for tech
-                                    professionals who seek partners with similar interests and career paths.
-                                    Mainstream apps often failed to capture the nuances of this demographic,
-                                    leading to low-quality matches and user fatigue.</p>
-                            </div>
-                            <div>
-                                <h4>The Process &amp; Solution</h4>
-                                <p>The core innovation was a machine learning algorithm that went beyond simple
-                                    profile data. It analyzed users' interests, communication styles, and in-app
-                                    behavior to predict compatibility — matches users rated as
-                                    <strong>meaningfully better than swipe-based alternatives</strong>. I also
-                                    designed and ran an A/B testing program on the onboarding flow, shipping the
-                                    variant that <strong>measurably cut sign-up drop-off</strong>.</p>
-                            </div>
-                            <div>
-                                <h4>The Impact</h4>
-                                <ul>
-                                    <li>Early cohorts <strong>returned at a markedly higher rate</strong> than
-                                        the pre-ML baseline, validating the compatibility model.</li>
-                                    <li>ML-driven match recommendations became the app's most-used feature and
-                                        the core of its retention loop.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- P.05 HealthTrackNG -->
-                <details class="project reveal border-b border-line">
-                    <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
-                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.05</span>
                         <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
                             <span class="proj-arrow" aria-hidden="true">&nearr;</span>
                             <span class="marker" aria-hidden="true">+</span>
@@ -481,8 +444,7 @@
                     </summary>
                     <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
                         <figure class="col-span-12 md:col-span-4">
-                            <img loading="lazy" src="images/HealthTrack Logo.webp" alt="HealthTrackNG logo"
-                                class="w-full border border-line">
+                            <a class="case-image-link" href="images/portfolio/healthtrack.jpg" target="_blank" rel="noopener" aria-label="Open full-size product screenshot"><img loading="lazy" src="images/portfolio/healthtrack.jpg" width="1348" height="926" alt="Screenshot of the HealthTrackNG website" class="case-visual"></a>
                             <figcaption class="kicker mt-3"><a class="link-sweep" href="https://healthtrack-ng-connect.vercel.app/" target="_blank" rel="noopener" aria-label="Visit the HealthTrackNG website">healthtrack-ng-connect.vercel.app &nearr;</a></figcaption>
                         </figure>
                         <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
@@ -520,10 +482,10 @@
                     </div>
                 </details>
 
-                <!-- P.06 Subtleflow -->
+                <!-- P.05 Subtleflow -->
                 <details class="project reveal border-b border-line">
                     <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
-                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.06</span>
+                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.05</span>
                         <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
                             <span class="proj-arrow" aria-hidden="true">&nearr;</span>
                             <span class="marker" aria-hidden="true">+</span>
@@ -536,9 +498,8 @@
                     </summary>
                     <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
                         <figure class="col-span-12 md:col-span-4">
-                            <img loading="lazy" src="images/Subtleflow Logo.webp" alt="Subtleflow logo"
-                                class="w-full border border-line">
-                            <figcaption class="kicker mt-3"><a class="link-sweep" href="https://www.subtleflow.xyz" target="_blank" rel="noopener" aria-label="Visit the Subtleflow website">subtleflow.xyz &nearr;</a></figcaption>
+                            <a class="case-image-link" href="images/portfolio/subtleflow.jpg" target="_blank" rel="noopener" aria-label="Open full-size product screenshot"><img loading="lazy" src="images/portfolio/subtleflow.jpg" width="1348" height="926" alt="Screenshot of the Subtleflow website" class="case-visual"></a>
+                            <figcaption class="kicker mt-3"><a class="link-sweep" href="https://clay-subs-joy.vercel.app/" target="_blank" rel="noopener" aria-label="Visit the Subtleflow website">View Subtleflow &nearr;</a></figcaption>
                         </figure>
                         <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
                             <div>
@@ -580,10 +541,10 @@
                     </div>
                 </details>
 
-                <!-- P.07 Brightyield -->
+                <!-- P.06 Brightyield -->
                 <details class="project reveal border-b border-line">
                     <summary class="project-summary grid grid-cols-12 items-baseline gap-x-4 gap-y-2 px-3 py-6 md:px-5 md:py-8">
-                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.07</span>
+                        <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.06</span>
                         <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
                             <span class="proj-arrow" aria-hidden="true">&nearr;</span>
                             <span class="marker" aria-hidden="true">+</span>
@@ -596,9 +557,8 @@
                     </summary>
                     <div class="case grid grid-cols-12 gap-x-6 gap-y-8 px-3 pb-12 pt-8 md:px-5">
                         <figure class="col-span-12 md:col-span-4">
-                            <img loading="lazy" src="images/Brightyield Logo.jpg" alt="Brightyield logo"
-                                class="w-full border border-line">
-                            <figcaption class="kicker mt-3"><a class="link-sweep" href="https://www.brightyield.co" target="_blank" rel="noopener" aria-label="Visit the Brightyield website">brightyield.co &nearr;</a></figcaption>
+                            <a class="case-image-link" href="images/portfolio/brightyield.jpg" target="_blank" rel="noopener" aria-label="Open full-size product screenshot"><img loading="lazy" src="images/portfolio/brightyield.jpg" width="1348" height="926" alt="Screenshot of the Brightyield website" class="case-visual"></a>
+                            <figcaption class="kicker mt-3"><a class="link-sweep" href="https://transport-red.vercel.app/" target="_blank" rel="noopener" aria-label="Visit the Brightyield website">View Brightyield &nearr;</a></figcaption>
                         </figure>
                         <div class="col-span-12 space-y-6 md:col-span-7 md:col-start-6">
                             <div>
@@ -638,19 +598,18 @@
                     </div>
                 </details>
 
-                <!-- P.08 Jentech AI (no case study — external link only) -->
-                <div class="project-summary reveal grid grid-cols-12 items-baseline gap-x-4 gap-y-2 border-b border-line px-3 py-6 md:px-5 md:py-8">
-                    <span class="proj-meta kicker col-span-6 md:col-span-1 md:order-1">P.08</span>
-                    <span class="col-span-6 flex items-center justify-end gap-5 font-mono text-lg md:order-5 md:col-span-1">
-                        <a href="https://www.jentech.ai" target="_blank" rel="noopener"
-                            class="proj-arrow relative z-10" aria-label="Visit the Jentech AI website">&nearr;</a>
-                    </span>
-                    <h3 class="col-span-12 font-display text-display-md font-bold uppercase md:order-2 md:col-span-4">
-                        Jentech AI</h3>
-                    <p class="proj-meta col-span-12 text-sm text-mute md:order-3 md:col-span-4">
-                        Research &amp; development driving strategic product direction</p>
-                    <span class="proj-meta kicker hidden md:order-4 md:col-span-2 md:block">AI / Research</span>
-                </div>
+            </div>
+        </section>
+
+        <section id="process" class="process-section">
+            <div class="wrap">
+                <header class="process-heading reveal"><div><p class="kicker">The approach / Strategy × Engineering</p><h2>I build products twice.</h2></div><p>First, understand what matters.<br>Then, make it work.</p></header>
+                <ol class="process-track">
+                    <li class="reveal"><span class="process-number">01</span><h3>Understand</h3><p>Talk to users. Map the journey. Find the problem worth solving.</p><span class="process-output">Research / Problem framing</span></li>
+                    <li class="reveal"><span class="process-number">02</span><h3>Decide</h3><p>Make the tradeoffs explicit. Set the scope and define what success means.</p><span class="process-output">Priorities / Product direction</span></li>
+                    <li class="reveal"><span class="process-number">03</span><h3>Build</h3><p>Connect design and engineering. Turn the plan into something people can use.</p><span class="process-output">Prototypes / Working software</span></li>
+                    <li class="reveal"><span class="process-number">04</span><h3>Learn</h3><p>Watch what happens. Use feedback and evidence to choose the next improvement.</p><span class="process-output">Feedback / Iteration</span></li>
+                </ol>
             </div>
         </section>
 
@@ -677,8 +636,8 @@
                     <ul class="exp-list col-span-12 space-y-2 text-sm leading-relaxed md:col-span-5">
                         <li>Own product strategy and phased public-MVP delivery for a peer-to-peer logistics
                             marketplace connecting Senders with Carriers.</li>
-                        <li>Audited end-to-end journeys and added 22 missing roadmap items covering payments,
-                            identity verification, cancellations, disputes and parcel recovery.</li>
+                        <li>Designed clear customer journeys covering identity verification, payments,
+                            cancellations, disputes and parcel recovery.</li>
                         <li>Clarified fee, refund, deposit, earnings and withdrawal rules, then mapped
                             cross-team dependencies and launch-readiness checks in Linear.</li>
                     </ul>
@@ -873,17 +832,17 @@
                     <p class="mt-1 text-sm text-mute">A/B tests &amp; funnel optimization</p>
                 </div>
                 <div class="bg-paper p-6">
-                    <span class="kicker">P.05</span>
+                    <span class="kicker">P.04</span>
                     <h4 class="mt-8 font-display text-lg font-bold uppercase">Agile &amp; Scrum</h4>
                     <p class="mt-1 text-sm text-mute">Sprint planning &amp; delivery</p>
                 </div>
                 <div class="bg-paper p-6">
-                    <span class="kicker">P.06</span>
+                    <span class="kicker">P.05</span>
                     <h4 class="mt-8 font-display text-lg font-bold uppercase">Stakeholder Mgmt</h4>
                     <p class="mt-1 text-sm text-mute">Communication &amp; alignment</p>
                 </div>
                 <div class="bg-paper p-6">
-                    <span class="kicker">P.07</span>
+                    <span class="kicker">P.06</span>
                     <h4 class="mt-8 font-display text-lg font-bold uppercase">Go-to-Market</h4>
                     <p class="mt-1 text-sm text-mute">Launch strategy</p>
                 </div>
@@ -1005,16 +964,28 @@
                 </div>
             </div>
 
+            <div class="wrap"><p class="technical-note">Built with semantic HTML, CSS-first motion and lightweight JavaScript. Motion respects your device preferences.</p></div>
             <!-- Footer / colophon -->
             <footer class="border-t border-paper/15">
                 <div class="wrap flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 py-8 font-mono text-meta uppercase tracking-widest text-paper/50">
                     <span>&copy; 2026 Ayodeji Adeniyi</span>
-                    <span>Designed &amp; built by hand</span>
+                    <span>Strategy, design &amp; code</span>
                     <span>Type: Archivo / Inter / JetBrains Mono</span>
                 </div>
             </footer>
         </section>
     </main>
+
+    <dialog class="walkthrough-dialog" id="product-walkthrough" aria-labelledby="walkthrough-title" aria-describedby="walkthrough-description">
+        <div class="walkthrough-top"><span class="kicker">Inside the product / Screen gallery</span><button type="button" class="walkthrough-close" aria-label="Close gallery" autofocus>×</button></div>
+        <h2 id="walkthrough-title"></h2>
+        <p id="walkthrough-description">Screenshots captured from the actual website. Open the source page to explore the live product.</p>
+        <div class="walkthrough-layout"><figure class="demo-stage" data-stage="0"><div class="demo-topline"><span id="demo-product-name"></span><span>Live website capture</span></div><div class="demo-screen" id="demo-screen"><a id="demo-image-link" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img id="demo-screen-image" src="images/portfolio/waybl.jpg" width="1348" height="926" alt="Waybl homepage screenshot"></a></div><figcaption class="gallery-source"><a id="demo-source-link" class="link-sweep" target="_blank" rel="noopener">Open source page ↗</a><span>Captured November 2026</span></figcaption></figure>
+            <div class="walkthrough-narrative"><p class="kicker" id="demo-count"></p><h3 id="demo-step-title"></h3><p id="demo-step-description"></p><ol class="demo-step-list" aria-label="Gallery screens"></ol></div>
+        </div>
+        <div class="walkthrough-controls"><button type="button" id="demo-previous">← Previous</button><button type="button" id="demo-play">Play</button><button type="button" id="demo-next">Next →</button></div>
+        <p class="walkthrough-status" id="demo-status" role="status" aria-live="polite"></p>
+    </dialog>
 </body>
 
 </html>

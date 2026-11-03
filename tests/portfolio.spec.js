@@ -339,3 +339,86 @@ test.describe('private projects page', () => {
     await expect(task).toBeVisible();
   });
 });
+
+test.describe('portfolio product showcase', () => {
+  test('featured case links open the matching disclosure, including direct URLs', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    for (const slug of ['waybl', 'ara', 'safetrip']) {
+      await page.locator(`.feature-${slug} .feature-actions a[href^="#case-"]`).click();
+      await expect(page.locator(`#case-${slug}`)).toHaveAttribute('open', '');
+      await expect(page.locator(`#case-${slug} .case-visual`)).toBeVisible();
+    }
+    await page.goto('/#case-ara');
+    await expect(page.locator('#case-ara')).toHaveAttribute('open', '');
+  });
+
+  test('screen galleries support manual navigation, replay, Escape and focus return', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    const dialog = page.getByRole('dialog');
+    for (const slug of ['waybl', 'ara', 'safetrip']) {
+      const opener = page.locator(`[data-demo="${slug}"]`);
+      await opener.click();
+      await expect(dialog).toBeVisible();
+      await expect(page.locator('#demo-count')).toContainText('Screen 1');
+      await expect(page.locator('#demo-play')).toHaveText('Play');
+      await expect(page.locator('#demo-previous')).toBeDisabled();
+      const buttons = dialog.locator('.demo-step-list button');
+      const count = await buttons.count();
+      for (let i = 1; i < count; i += 1) await page.getByRole('button', { name: 'Next →', exact: true }).click();
+      await expect(page.locator('#demo-next')).toBeDisabled();
+      await expect(page.locator('#demo-play')).toHaveText('Replay');
+      await page.locator('#demo-play').click();
+      await expect(page.locator('#demo-count')).toContainText('Screen 1');
+      await page.locator('#demo-play').click();
+      await page.keyboard.press('Escape');
+      await expect(dialog).not.toBeVisible();
+      await expect(opener).toBeFocused();
+    }
+  });
+
+  test('gallery autoplay can be paused and reduced motion stops it', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('[data-demo="waybl"]').click();
+    await expect(page.locator('#demo-play')).toHaveText('Pause');
+    await expect(page.locator('#demo-count')).toHaveText('Screen 2 / 3', { timeout: 6500 });
+    await page.locator('#demo-play').click();
+    await expect(page.locator('#demo-play')).toHaveText('Play');
+    await page.locator('#demo-play').click();
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await expect(page.locator('#demo-play')).toHaveText('Play');
+    await expect(page.locator('#demo-status')).toContainText('Reduced motion');
+  });
+
+  test('narrow layouts and the screen gallery have no overflow or serious accessibility issues', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.setViewportSize({ width: 320, height: 740 });
+    await page.goto('/');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.locator('[data-demo="safetrip"]').click();
+    await page.locator('#demo-next').click();
+    await page.locator('#demo-next').click();
+    await expect(page.locator('#demo-screen-image')).toHaveAttribute('src', 'images/portfolio/safetrip-fleet.jpg');
+    await expect(page.locator('#demo-source-link')).toHaveAttribute('href', 'https://www.safetripbuses.com/fleet');
+    const modal = page.locator('#product-walkthrough');
+    expect(await modal.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
+    const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    expect(result.violations.filter(({ impact }) => impact === 'serious' || impact === 'critical')).toEqual([]);
+  });
+});
+
+test('Work shows real captured products and keeps products without images in Experience', async ({ page }) => {
+  await page.goto('/');
+  const work = page.locator('#projects');
+  await expect(work.locator('details.project')).toHaveCount(6);
+  await expect(work.locator('.case-visual')).toHaveCount(6);
+  await expect(work).not.toContainText('TechiesMatch');
+  await expect(work).not.toContainText('Jentech AI');
+  await expect(page.locator('#experience')).toContainText('TechiesMatch');
+  await expect(page.locator('#experience')).toContainText('Jentech AI');
+  const sources = await work.locator('img').evaluateAll(images => images.map(image => image.getAttribute('src')));
+  expect(sources.every(source => source.startsWith('images/portfolio/') && source.endsWith('.jpg'))).toBe(true);
+  await expect(work.getByRole('link', { name: 'Visit the Subtleflow website' })).toHaveAttribute('href', 'https://clay-subs-joy.vercel.app/');
+  await expect(work.getByRole('link', { name: 'Visit the Brightyield website' })).toHaveAttribute('href', 'https://transport-red.vercel.app/');
+});
